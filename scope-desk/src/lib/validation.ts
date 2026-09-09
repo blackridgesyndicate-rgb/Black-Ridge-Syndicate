@@ -1,0 +1,175 @@
+import { z } from "zod";
+
+export const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1),
+});
+
+export const createClaimSchema = z.object({
+  homeownerName: z.string().min(1, "Homeowner name is required"),
+  phone: z.string().optional(),
+  email: z.string().email().optional().or(z.literal("")),
+  addressLine1: z.string().min(1, "Address is required"),
+  addressLine2: z.string().optional(),
+  city: z.string().min(1, "City is required"),
+  state: z.string().min(1, "State is required"),
+  zip: z.string().min(1, "ZIP is required"),
+  insuranceCarrier: z.string().optional(),
+  claimNumber: z.string().optional(),
+  policyNumber: z.string().optional(),
+  dateOfLoss: z.string().optional(),
+  estimator: z.string().optional(),
+  inspectionDate: z.string().optional(),
+});
+
+export const updateClaimSchema = createClaimSchema.partial().extend({
+  status: z.string().optional(),
+});
+
+const optionalNumber = z.union([z.number(), z.null()]).optional();
+
+export const pitchAreaSchema = z.object({ pitch: z.string(), areaSqFt: z.number() });
+
+export const measurementSchema = z.object({
+  roofAreaSqFt: optionalNumber,
+  measuredSquares: optionalNumber,
+  facets: optionalNumber,
+  predominantPitch: z.string().nullable().optional(),
+  pitchAreas: z.array(pitchAreaSchema).optional(),
+  eaves: optionalNumber,
+  rakes: optionalNumber,
+  ridges: optionalNumber,
+  hips: optionalNumber,
+  valleys: optionalNumber,
+  starterLength: optionalNumber,
+  dripEdgeLength: optionalNumber,
+  flashingLength: optionalNumber,
+  stepFlashingLength: optionalNumber,
+  apronFlashingLength: optionalNumber,
+  leakBarrierLength: optionalNumber,
+  twoStoryAreaSqFt: optionalNumber,
+  steepSlopeAreaSqFt: optionalNumber,
+  wastePercent: optionalNumber,
+  membraneWidthFeet: optionalNumber,
+  fieldOverrides: z.record(z.string(), z.boolean()).optional(),
+});
+
+export const accessorySchema = z.object({
+  type: z.string().min(1),
+  label: z.string().optional(),
+  quantity: z.number().min(0),
+  unit: z.string().min(1),
+  notes: z.string().optional(),
+});
+
+export const findingSchema = z.object({
+  category: z.string().min(1),
+  location: z.string().optional(),
+  damageType: z.string().min(1),
+  description: z.string().min(1),
+  notes: z.string().optional(),
+});
+
+export const photoMetaSchema = z.object({
+  caption: z.string().optional(),
+  damageClassification: z.string().optional(),
+});
+
+export const lineItemSchema = z.object({
+  category: z.string().min(1),
+  description: z.string().min(1),
+  unit: z.string().min(1),
+  quantity: z.number(),
+  unitPrice: z.number(),
+  taxable: z.boolean().optional(),
+  taxableMaterialAmount: z.number().nullable().optional(),
+  taxRatePercent: z.number().optional(),
+  depreciationPercent: z.number().optional(),
+  notes: z.string().optional(),
+  codeCitation: z.string().optional(),
+  included: z.boolean().optional(),
+  sortOrder: z.number().optional(),
+});
+
+export const lineItemUpdateSchema = lineItemSchema.partial();
+
+export const revisionSettingsSchema = z.object({
+  label: z.string().optional(),
+  status: z.string().optional(),
+  wastePercent: z.number().optional(),
+  taxRatePercent: z.number().optional(),
+  defaultDepreciationPercent: z.number().optional(),
+  deductible: z.number().optional(),
+  priorPayments: z.number().optional(),
+});
+
+export const codeReportSchema = z.object({
+  authorityHavingJurisdiction: z.string().optional(),
+  departmentContact: z.string().optional(),
+  adoptedCodeEdition: z.string().optional(),
+  localAmendments: z.string().optional(),
+  permitRequirements: z.string().optional(),
+  permitFees: z.string().optional(),
+  iceBarrierRequirement: z.string().optional(),
+  dripEdgeRequirement: z.string().optional(),
+  valleyLiningRequirement: z.string().optional(),
+  underlaymentRequirement: z.string().optional(),
+  ventilationRequirement: z.string().optional(),
+  chimneyCricketRequirement: z.string().optional(),
+  reRoofLayerLimitation: z.string().optional(),
+  deckingRequirement: z.string().optional(),
+  sourceUrl: z.string().optional(),
+  verified: z.boolean().optional(),
+  verificationDate: z.string().nullable().optional(),
+  notes: z.string().optional(),
+});
+
+export const weatherEventSchema = z.object({
+  eventDate: z.string().min(1),
+  eventType: z.string().min(1),
+  hailSizeInches: z.number().nullable().optional(),
+  windSpeedMph: z.number().nullable().optional(),
+  distanceFromPropertyMiles: z.number().nullable().optional(),
+  evidenceLevel: z.string().min(1),
+  source: z.string().min(1),
+  sourceUrl: z.string().optional(),
+  confidenceLevel: z.string().min(1),
+  notes: z.string().optional(),
+});
+
+export const supplementSchema = z.object({
+  label: z.string().min(1),
+  revisionId: z.string().optional(),
+});
+
+export const carrierItemSchema = z.object({
+  description: z.string().min(1),
+  quantity: z.number(),
+  unit: z.string().min(1),
+  unitPrice: z.number(),
+});
+
+export const supplementMatchSchema = z.object({
+  contractorLineItemId: z.string().optional(),
+  contractorDescription: z.string().min(1),
+  contractorQuantity: z.number(),
+  contractorUnit: z.string().min(1),
+  contractorUnitPrice: z.number(),
+  carrierItemId: z.string().optional(),
+  reasonForSupplement: z.string().optional(),
+  supportingCodeOrPhoto: z.string().optional(),
+});
+
+export const priceListItemSchema = z.object({
+  category: z.string().min(1),
+  code: z.string().min(1),
+  description: z.string().min(1),
+  unit: z.string().min(1),
+  defaultUnitPrice: z.number(),
+  taxable: z.boolean().optional(),
+  defaultDepreciationPercent: z.number().optional(),
+  codeCitation: z.string().optional(),
+  calcRule: z.string().nullable().optional(),
+  sortOrder: z.number().optional(),
+  active: z.boolean().optional(),
+});

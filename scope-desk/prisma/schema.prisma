@@ -1,0 +1,437 @@
+// Black Ridge Scope Desk — data model.
+// Dev/default uses SQLite (zero-config, file-based). To run on managed
+// Postgres, change `provider` below to "postgresql" and set DATABASE_URL
+// to a Postgres connection string — the schema itself is portable.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Auth / users
+// ---------------------------------------------------------------------------
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("estimator") // estimator | admin
+  createdAt    DateTime @default(now())
+
+  claimsCreated Claim[] @relation("ClaimCreatedBy")
+}
+
+// ---------------------------------------------------------------------------
+// Customers / properties / claims
+// ---------------------------------------------------------------------------
+
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String?
+  email     String?
+  createdAt DateTime @default(now())
+
+  properties Property[]
+}
+
+model Property {
+  id         String   @id @default(cuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  addressLine1 String
+  addressLine2 String?
+  city         String
+  state        String
+  zip          String
+
+  createdAt DateTime @default(now())
+  claims    Claim[]
+}
+
+model Claim {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  insuranceCarrier String?
+  claimNumber      String?
+  policyNumber     String?
+  dateOfLoss       DateTime?
+  estimator        String?
+  inspectionDate   DateTime?
+  status           String    @default("open") // open | estimating | submitted | supplementing | closed
+
+  createdById String?
+  createdBy   User?   @relation("ClaimCreatedBy", fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  files              UploadedFile[]
+  measurementReports MeasurementReport[]
+  measurement        Measurement?
+  accessories        Accessory[]
+  findings           InspectionFinding[]
+  photos             Photo[]
+  revisions          EstimateRevision[]
+  codeReport         CodeReport?
+  weatherEvents      WeatherEvent[]
+  supplements        Supplement[]
+  generatedDocuments GeneratedDocument[]
+}
+
+// ---------------------------------------------------------------------------
+// Files
+// ---------------------------------------------------------------------------
+
+model UploadedFile {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  kind       String // measurement_report | carrier_estimate | photo | other
+  filename   String
+  storageKey String
+  mimeType   String
+  size       Int
+  uploadedAt DateTime @default(now())
+
+  measurementReport MeasurementReport?
+  photo             Photo?
+}
+
+// ---------------------------------------------------------------------------
+// Measurement extraction
+// ---------------------------------------------------------------------------
+
+model MeasurementReport {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  sourceFileId String       @unique
+  sourceFile   UploadedFile @relation(fields: [sourceFileId], references: [id], onDelete: Cascade)
+
+  parserType   String // gaf_quickmeasure | eagleview | roofr | generic_pdf | csv | xml | manual
+  status       String // processing | extracted | needs_review | failed
+  rawText      String? // extracted raw text/content, for audit
+  extracted    String? // JSON blob: field -> {value, confidence}
+  errorMessage String?
+
+  createdAt DateTime @default(now())
+}
+
+model Measurement {
+  id      String @id @default(cuid())
+  claimId String @unique
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  // Core measurements
+  roofAreaSqFt     Float?
+  measuredSquares  Float?
+  facets           Int?
+  predominantPitch String?
+  pitchAreasJson   String? // JSON array [{pitch:"6/12", areaSqFt: 849}, ...]
+
+  eaves   Float?
+  rakes   Float?
+  ridges  Float?
+  hips    Float?
+  valleys Float?
+
+  starterLength       Float?
+  dripEdgeLength      Float?
+  flashingLength      Float?
+  stepFlashingLength  Float?
+  apronFlashingLength Float?
+  leakBarrierLength   Float?
+
+  twoStoryAreaSqFt   Float?
+  steepSlopeAreaSqFt Float?
+
+  wastePercent Float? @default(12)
+
+  // Field-level provenance: JSON map fieldName -> "extracted" | "manual" | "needs_review"
+  fieldSourceJson    String?
+  // Field-level original extracted values preserved even after manual override
+  originalValuesJson String?
+
+  membraneWidthFeet Float? @default(3) // ice & water / valley membrane roll width used in calcs
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Accessories / inspection / photos
+// ---------------------------------------------------------------------------
+
+model Accessory {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  type     String // pipe_jack | turtle_box_vent | ridge_vent | powered_vent | chimney | chimney_flashing |
+  // chimney_cricket | skylight | satellite_dish | kickout_diverter | wall_flashing |
+  // counterflashing | apron_flashing | exhaust_vent | gutter | downspout | detached_garage |
+  // low_slope_roofing | decking_replacement | additional_layer | interior_damage | other
+  label    String? // used when type = other
+  quantity Float   @default(1)
+  unit     String  @default("ea")
+  notes    String?
+
+  createdAt DateTime @default(now())
+}
+
+model InspectionFinding {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  category    String // slopes | flashings | ventilation | gutters | interior | structural | other
+  location    String?
+  damageType  String // hail | wind | mechanical | wear | improper_installation | interior_water | other
+  description String
+  notes       String?
+
+  createdAt DateTime @default(now())
+}
+
+model Photo {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  fileId String       @unique
+  file   UploadedFile @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  caption              String?
+  damageClassification String? // hail | wind | mechanical | wear | improper_installation | interior_water | other
+
+  createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Price list
+// ---------------------------------------------------------------------------
+
+model PriceListItem {
+  id                         String  @id @default(cuid())
+  category                   String
+  code                       String  @unique // stable key used by the calc engine, e.g. "tear_off_laminated"
+  description                String
+  unit                       String
+  defaultUnitPrice           Float
+  taxable                    Boolean @default(true)
+  defaultDepreciationPercent Float   @default(0)
+  codeCitation               String?
+  calcRule                   String? // key into the calc-rule registry, e.g. "removal_squares"
+  sortOrder                  Int     @default(0)
+  active                     Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Estimate revisions / line items
+// ---------------------------------------------------------------------------
+
+model EstimateRevision {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  revisionNumber Int
+  label          String?
+  status         String  @default("draft") // draft | final
+
+  wastePercent               Float @default(12)
+  taxRatePercent             Float @default(8.5)
+  defaultDepreciationPercent Float @default(0)
+  deductible                 Float @default(0)
+  priorPayments              Float @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lineItems EstimateLineItem[]
+
+  @@unique([claimId, revisionNumber])
+}
+
+model EstimateLineItem {
+  id         String           @id @default(cuid())
+  revisionId String
+  revision   EstimateRevision @relation(fields: [revisionId], references: [id], onDelete: Cascade)
+
+  category           String
+  description        String
+  unit               String
+  quantity           Float
+  calculatedQuantity Float? // original system-calculated quantity, preserved when overridden
+  quantityOverridden Boolean @default(false)
+
+  unitPrice             Float
+  taxable               Boolean @default(true)
+  taxableMaterialAmount Float   @default(0)
+  taxRatePercent        Float   @default(0)
+  taxAmount             Float   @default(0)
+
+  rcv Float @default(0)
+
+  depreciationPercent Float @default(0)
+  depreciationAmount  Float @default(0)
+  acv                 Float @default(0)
+
+  notes        String?
+  codeCitation String?
+  included     Boolean @default(true)
+  sortOrder    Int     @default(0)
+
+  priceListItemCode String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Code enforcement report
+// ---------------------------------------------------------------------------
+
+model CodeReport {
+  id      String @id @default(cuid())
+  claimId String @unique
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  authorityHavingJurisdiction String?
+  departmentContact           String?
+  adoptedCodeEdition          String?
+  localAmendments             String?
+  permitRequirements          String?
+  permitFees                  String?
+  iceBarrierRequirement       String?
+  dripEdgeRequirement         String?
+  valleyLiningRequirement     String?
+  underlaymentRequirement     String?
+  ventilationRequirement      String?
+  chimneyCricketRequirement   String?
+  reRoofLayerLimitation       String?
+  deckingRequirement          String?
+
+  sourceUrl        String?
+  verified         Boolean   @default(false)
+  verificationDate DateTime?
+  notes            String?
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Weather
+// ---------------------------------------------------------------------------
+
+model WeatherEvent {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  eventDate                 DateTime
+  eventType                 String // hail | wind | tornado | thunderstorm | other
+  hailSizeInches            Float?
+  windSpeedMph              Float?
+  distanceFromPropertyMiles Float?
+
+  // one of: area_reported | radar_indicated | verified_report_at_coordinate | confirmed_property_damage
+  evidenceLevel String
+
+  source          String // e.g. "NOAA NCEI Storm Events Database", "NWS Local Storm Report"
+  sourceUrl       String?
+  confidenceLevel String // low | medium | high
+  notes           String?
+
+  createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Supplement comparison
+// ---------------------------------------------------------------------------
+
+model Supplement {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  revisionId String?
+  label      String
+  status     String  @default("draft") // draft | submitted
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  carrierItems CarrierEstimateItem[]
+  matches      SupplementMatch[]
+}
+
+model CarrierEstimateItem {
+  id           String     @id @default(cuid())
+  supplementId String
+  supplement   Supplement @relation(fields: [supplementId], references: [id], onDelete: Cascade)
+
+  description String
+  quantity    Float
+  unit        String
+  unitPrice   Float
+
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  matches SupplementMatch[]
+}
+
+// Links a contractor line item (by id, stored as plain string reference since
+// it may point at any revision's line item) to a carrier item for comparison.
+model SupplementMatch {
+  id           String     @id @default(cuid())
+  supplementId String
+  supplement   Supplement @relation(fields: [supplementId], references: [id], onDelete: Cascade)
+
+  contractorLineItemId  String?
+  contractorDescription String
+  contractorQuantity    Float
+  contractorUnit        String
+  contractorUnitPrice   Float
+
+  carrierItemId String?
+  carrierItem   CarrierEstimateItem? @relation(fields: [carrierItemId], references: [id])
+
+  reasonForSupplement   String?
+  supportingCodeOrPhoto String?
+
+  createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Generated documents
+// ---------------------------------------------------------------------------
+
+model GeneratedDocument {
+  id      String @id @default(cuid())
+  claimId String
+  claim   Claim  @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  type        String // insurance_estimate | measurement_summary | code_report | weather_report |
+  // supplement_request | homeowner_proposal | material_order | invoice
+  revisionId  String?
+  storageKey  String
+  filename    String
+  generatedAt DateTime @default(now())
+}
