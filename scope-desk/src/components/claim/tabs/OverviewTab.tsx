@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { WhiteLabelProfile } from "@prisma/client";
 import type { ClaimDetail } from "@/lib/types";
-import { apiPatch } from "@/lib/apiClient";
+import { apiGet, apiPatch } from "@/lib/apiClient";
 import { Field, TextInput, Select } from "@/components/ui/Field";
 import { dateInputValue, dateStr } from "@/lib/format";
 
@@ -28,6 +29,13 @@ export function OverviewTab({ claim, onChanged }: { claim: ClaimDetail; onChange
   });
   const [saving, setSaving] = useState(false);
   const [savedAt, setSavedAt] = useState<number | null>(null);
+  const [profiles, setProfiles] = useState<WhiteLabelProfile[]>([]);
+  const [whiteLabelProfileId, setWhiteLabelProfileId] = useState(claim.whiteLabelProfileId ?? "");
+  const [savingBrand, setSavingBrand] = useState(false);
+
+  useEffect(() => {
+    apiGet("/api/white-label-profiles").then((data) => setProfiles(data.profiles.filter((p: WhiteLabelProfile) => p.active)));
+  }, []);
 
   function set<K extends keyof typeof form>(k: K, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
@@ -41,6 +49,16 @@ export function OverviewTab({ claim, onChanged }: { claim: ClaimDetail; onChange
       setSavedAt(Date.now());
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function saveBrand() {
+    setSavingBrand(true);
+    try {
+      await apiPatch(`/api/claims/${claim.id}`, { whiteLabelProfileId: whiteLabelProfileId || null });
+      await onChanged();
+    } finally {
+      setSavingBrand(false);
     }
   }
 
@@ -103,6 +121,20 @@ export function OverviewTab({ claim, onChanged }: { claim: ClaimDetail; onChange
       </div>
 
       <div className="space-y-4">
+        <div className="brd-card rounded-sm p-5">
+          <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide mb-3">Report Branding</h2>
+          <Field label="White-Label Profile">
+            <Select value={whiteLabelProfileId} onChange={(e) => setWhiteLabelProfileId(e.target.value)}>
+              <option value="">Black Ridge Roofing (default)</option>
+              {profiles.map((p) => (
+                <option key={p.id} value={p.id}>{p.name}</option>
+              ))}
+            </Select>
+          </Field>
+          <button onClick={saveBrand} disabled={savingBrand} className="brd-btn-ghost rounded-sm px-3 py-1.5 text-xs mt-3">
+            {savingBrand ? "Saving…" : "Save Branding"}
+          </button>
+        </div>
         <div className="brd-card rounded-sm p-5">
           <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide mb-3">Job Timeline</h2>
           <dl className="text-sm space-y-2">

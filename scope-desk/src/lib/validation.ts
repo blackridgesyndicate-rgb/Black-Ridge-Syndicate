@@ -39,6 +39,7 @@ export const createClaimSchema = z.object({
 
 export const updateClaimSchema = createClaimSchema.partial().extend({
   status: z.string().optional(),
+  whiteLabelProfileId: z.string().nullable().optional(),
 });
 
 const optionalNumber = z.union([z.number(), z.null()]).optional();
@@ -179,6 +180,26 @@ export const qcChecklistUpdateSchema = z.object({
 export const qcExceptionSchema = z.object({
   reason: z.string().min(1, "An exception reason is required"),
 });
+
+export const whiteLabelProfileSchema = z.object({
+  name: z.string().min(1),
+  businessName: z.string().min(1),
+  addressLine1: z.string().optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  zip: z.string().optional(),
+  phone: z.string().optional(),
+  email: z.string().optional(),
+  website: z.string().optional(),
+  licenseNumber: z.string().optional(),
+  salesRepName: z.string().optional(),
+  workmanshipWarrantyText: z.string().optional(),
+  brandPrimaryColor: z.string().optional(),
+  brandAccentColor: z.string().optional(),
+  active: z.boolean().optional(),
+});
+
+export const whiteLabelProfileUpdateSchema = whiteLabelProfileSchema.partial();
 
 export const weatherEventSchema = z.object({
   eventDate: z.string().min(1),

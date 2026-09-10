@@ -76,6 +76,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
           ? { inspectionDate: data.inspectionDate ? new Date(data.inspectionDate) : null }
           : {}),
         ...(data.status !== undefined ? { status: data.status } : {}),
+        ...(data.whiteLabelProfileId !== undefined ? { whiteLabelProfileId: data.whiteLabelProfileId || null } : {}),
       },
       include: { property: { include: { customer: true } } },
     });

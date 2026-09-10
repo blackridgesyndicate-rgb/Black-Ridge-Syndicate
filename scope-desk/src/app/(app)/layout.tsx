@@ -23,6 +23,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <Link href="/price-list" className="hover:text-brd-gold-bright transition-colors">
               Price List
             </Link>
+            <Link href="/white-label" className="hover:text-brd-gold-bright transition-colors">
+              White-Label
+            </Link>
           </nav>
           <div className="flex items-center gap-3">
             {user && <span className="hidden sm:inline text-xs text-brd-text-dim">{user.name}</span>}
