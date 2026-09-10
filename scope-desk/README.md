@@ -69,7 +69,33 @@ Environment variables (`.env`, already populated for local dev):
 DATABASE_URL="file:./dev.db"
 AUTH_SECRET="<random 32+ char secret>"   # change this for any real deployment
 STORAGE_ROOT="./storage_private"
+STRIPE_SECRET_KEY="sk_test_..."          # from the Stripe Dashboard — required to accept payment
+STRIPE_WEBHOOK_SECRET="whsec_..."        # from the webhook endpoint's settings in the Stripe Dashboard
+APP_BASE_URL="http://localhost:3000"     # used to build Stripe Checkout's success/cancel URLs
 ```
+
+### Payment (Stripe)
+
+The public order flow at `/get-estimate` (no login required) is a real Stripe Checkout
+integration — not a stub. Without valid Stripe keys, everything else in the app works normally;
+only the "Continue to Payment" step will fail, with a clear error rather than a silent failure.
+
+To wire up a real Stripe account:
+
+1. Create a [Stripe](https://dashboard.stripe.com) account (test mode is fine for development) and
+   copy the **Secret key** into `STRIPE_SECRET_KEY`.
+2. Add a webhook endpoint pointing at `<your-deployed-url>/api/public/stripe-webhook` subscribed to
+   the `checkout.session.completed` event, and copy its **Signing secret** into
+   `STRIPE_WEBHOOK_SECRET`. For local development, the [Stripe CLI](https://stripe.com/docs/stripe-cli)
+   (`stripe listen --forward-to localhost:3000/api/public/stripe-webhook`) prints a webhook secret
+   you can use directly.
+3. Set `APP_BASE_URL` to the URL Stripe should redirect back to after checkout.
+
+Once a customer completes payment, the webhook (`src/app/api/public/stripe-webhook/route.ts`) marks
+the order paid and calls `fulfillPaidOrder()` (`src/lib/orderFulfillment.ts`), which
+finds-or-creates the Customer, creates the Property and Claim (with `reportType` and the
+customer's intake answers already populated), and shows up immediately on the staff **Orders**
+page (`/orders`) with a link to the new job.
 
 ## Deployment
 

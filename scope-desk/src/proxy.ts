@@ -3,12 +3,16 @@ import type { NextRequest } from "next/server";
 import { verifySessionToken, SESSION_COOKIE_NAME } from "@/lib/auth";
 
 const PUBLIC_PATHS = ["/login", "/api/auth/login"];
+// Prefix-matched public paths: the customer-facing order flow (report-type
+// selection, payment, confirmation) and the Stripe webhook need no session.
+const PUBLIC_PREFIXES = ["/get-estimate", "/api/public/"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (
     PUBLIC_PATHS.includes(pathname) ||
+    PUBLIC_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(prefix)) ||
     pathname.startsWith("/_next") ||
     pathname === "/favicon.ico"
   ) {
