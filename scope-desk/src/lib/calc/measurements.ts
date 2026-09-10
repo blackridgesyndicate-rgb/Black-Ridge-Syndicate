@@ -22,6 +22,11 @@ export interface DerivedQuantities {
   steepSlopeSquares: number;
   eaveIceBarrierSquares: number;
   valleyMembraneSquares: number;
+  /** Combined eave + valley ice/water barrier coverage in square feet — the
+   * unit convention used by real insurance-estimate price lists (e.g.
+   * Xactimate). eaveIceBarrierSquares/valleyMembraneSquares (above) express
+   * the same coverage in "squares" (SF/100) for callers that need that. */
+  iceWaterBarrierSqFt: number;
   remainingUnderlaymentSquares: number;
   starterLengthFt: number;
   gutterApronLengthFt: number;
@@ -71,6 +76,7 @@ export function computeDerivedQuantities(m: Measurement): DerivedQuantities {
     steepSlopeSquares,
     eaveIceBarrierSquares,
     valleyMembraneSquares,
+    iceWaterBarrierSqFt: eaveIceBarrierSqFt + valleyMembraneSqFt,
     remainingUnderlaymentSquares,
     starterLengthFt,
     gutterApronLengthFt,

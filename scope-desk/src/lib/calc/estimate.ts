@@ -62,6 +62,10 @@ export function calculateQuantityForRule(
       return round2(d.steepSlopeSquares);
     case "ice_water_barrier_squares":
       return round2(d.eaveIceBarrierSquares + d.valleyMembraneSquares);
+    case "ice_water_barrier_sf":
+      // SF is the unit convention real insurance price lists (e.g.
+      // Xactimate) use for ice & water barrier, rather than "squares".
+      return round2(d.iceWaterBarrierSqFt);
     case "underlayment_remaining_squares":
       return round2(d.remainingUnderlaymentSquares);
     case "starter_lf":
