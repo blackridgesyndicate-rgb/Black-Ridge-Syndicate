@@ -1,15 +1,41 @@
 import { View, Text } from "@react-pdf/renderer";
-import { DocShell, tableStyles, DISCLAIMER_ESTIMATE } from "@/lib/pdf/DocShell";
+import type { PriceListItem } from "@prisma/client";
+import { DocShellV2 } from "@/lib/pdf/DocShellV2";
+import { tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail, RevisionDetail } from "@/lib/types";
 import { computeInsuranceSummary } from "@/lib/calc/estimate";
 import { money, num, dateStr } from "@/lib/format";
 import { BarChart } from "@/lib/pdf/diagrams/BarChart";
 import { pdfTheme } from "@/lib/pdf/theme";
+import { ExistingToProposedTable, WhyMaterialsSection } from "@/lib/pdf/documents/SystemComparison";
+import { PitchExplanationSection } from "@/lib/pdf/documents/PitchExplanation";
 
-export function InsuranceEstimateDoc({ claim, revision }: { claim: ClaimDetail; revision: RevisionDetail }) {
+const DISCLAIMER =
+  "This document is a contractor-prepared estimate and supporting property report. It is not an insurer-issued estimate, coverage determination, public-adjuster opinion, engineering report, or guarantee of claim approval. Coverage and payment decisions remain subject to the insurance policy and carrier review.";
+
+const SECTIONS = [
+  "Property Overview",
+  "Roof Geometry & Pitch",
+  "Existing Conditions",
+  "Why These Materials Were Selected",
+  "Detailed Estimate",
+  "Financial Summary",
+];
+
+export function InsuranceEstimateDoc({
+  claim,
+  revision,
+  priceListByCode,
+  coverPhoto,
+}: {
+  claim: ClaimDetail;
+  revision: RevisionDetail;
+  priceListByCode: Map<string, PriceListItem>;
+  coverPhoto: Buffer | null;
+}) {
   const items = [...revision.lineItems].sort((a, b) => a.sortOrder - b.sortOrder);
   const included = items.filter((i) => i.included);
-  const summary = computeInsuranceSummary(items, revision.deductible, revision.priorPayments);
+  const summary = computeInsuranceSummary(items, revision.deductible, revision.priorPayments, revision.overheadProfitPercent, revision.roundingMode as "nearest_cent" | "nearest_dollar");
 
   const categoryTotals = new Map<string, number>();
   for (const li of included) {
@@ -24,10 +50,15 @@ export function InsuranceEstimateDoc({ claim, revision }: { claim: ClaimDetail; 
     }));
 
   return (
-    <DocShell
+    <DocShellV2
+      claim={claim}
       docTitle="Contractor-Prepared Insurance Restoration Estimate"
       docSubtitle={`Revision ${revision.revisionNumber}${revision.label ? ` — ${revision.label}` : ""}`}
-      disclaimer={DISCLAIMER_ESTIMATE}
+      revisionLabel={`Revision ${revision.revisionNumber}`}
+      sections={SECTIONS}
+      disclaimer={DISCLAIMER}
+      preparedBy={claim.estimator}
+      coverPhoto={coverPhoto}
       infoLeft={[
         { label: "Property", value: `${claim.property.addressLine1}, ${claim.property.city}, ${claim.property.state} ${claim.property.zip}` },
         { label: "Homeowner", value: claim.property.customer.name },
@@ -40,7 +71,16 @@ export function InsuranceEstimateDoc({ claim, revision }: { claim: ClaimDetail; 
         { label: "Date of Loss", value: dateStr(claim.dateOfLoss) },
       ]}
     >
-      <Text style={tableStyles.sectionHeading}>Line Items</Text>
+      <Text style={tableStyles.sectionHeading}>Roof Geometry &amp; Pitch</Text>
+      <PitchExplanationSection measurement={claim.measurement} steepSlopePitchThreshold={revision.steepSlopePitchThreshold} />
+
+      <Text style={tableStyles.sectionHeading}>Existing-to-Proposed System Comparison</Text>
+      <ExistingToProposedTable items={items} findings={claim.findings} />
+
+      <Text style={tableStyles.sectionHeading}>Why These Materials Were Selected</Text>
+      <WhyMaterialsSection items={items} priceListByCode={priceListByCode} />
+
+      <Text style={tableStyles.sectionHeading}>Detailed Estimate — Line Items</Text>
       <View style={tableStyles.table}>
         <View style={tableStyles.headRow}>
           <Text style={[tableStyles.headCell, { width: "26%" }]}>Description</Text>
@@ -76,9 +116,11 @@ export function InsuranceEstimateDoc({ claim, revision }: { claim: ClaimDetail; 
         </>
       )}
 
+      <Text style={tableStyles.sectionHeading}>Financial Summary</Text>
       <View style={tableStyles.summaryBox}>
         <SummaryRow label="Line-Item Subtotal" value={money(summary.lineItemSubtotal)} />
         <SummaryRow label="Material Sales Tax" value={money(summary.materialSalesTax)} />
+        {summary.overheadProfit > 0 && <SummaryRow label="Overhead &amp; Profit" value={money(summary.overheadProfit)} />}
         <SummaryRow label="Replacement Cost Value (RCV)" value={money(summary.rcv)} bold />
         <SummaryRow label="Depreciation" value={money(summary.depreciation)} />
         <SummaryRow label="Actual Cash Value (ACV)" value={money(summary.acv)} bold />
@@ -88,7 +130,7 @@ export function InsuranceEstimateDoc({ claim, revision }: { claim: ClaimDetail; 
         <SummaryRow label="Recoverable Depreciation" value={money(summary.recoverableDepreciation)} />
         <SummaryRow label="Remaining Balance" value={money(summary.remainingBalance)} />
       </View>
-    </DocShell>
+    </DocShellV2>
   );
 }
 

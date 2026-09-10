@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
+import { DocShellV2 } from "@/lib/pdf/DocShellV2";
+import { tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail } from "@/lib/types";
 import { dateStr } from "@/lib/format";
 import { BarChart } from "@/lib/pdf/diagrams/BarChart";
@@ -56,8 +57,11 @@ export function WeatherReportDoc({ claim }: { claim: ClaimDetail }) {
   }));
 
   return (
-    <DocShell
+    <DocShellV2
+      claim={claim}
       docTitle="Weather-History Report"
+      sections={["Hail Size by Event", "Wind Speed by Event", "Event Log"]}
+      preparedBy={claim.estimator}
       disclaimer="Sourced from NOAA / NWS / NCEI records as available. A nearby reported weather event does not, by itself, establish that damage occurred at this property; see the evidence level noted for each entry."
       infoLeft={[
         { label: "Property", value: `${claim.property.addressLine1}, ${claim.property.city}, ${claim.property.state} ${claim.property.zip}` },
@@ -124,6 +128,6 @@ export function WeatherReportDoc({ claim }: { claim: ClaimDetail }) {
         </View>
         </>
       )}
-    </DocShell>
+    </DocShellV2>
   );
 }

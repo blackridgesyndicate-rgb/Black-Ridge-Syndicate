@@ -21,3 +21,12 @@ export function dateInputValue(d: string | Date | null | undefined): string {
   if (Number.isNaN(date.getTime())) return "";
   return date.toISOString().slice(0, 10);
 }
+
+/** Deterministic human-facing report number derived from the claim id and
+ * creation year — stable across regenerations without needing a database
+ * counter (SQLite autoincrement can't attach to a non-id column). */
+export function reportNumber(claimId: string, createdAt: string | Date): string {
+  const year = (typeof createdAt === "string" ? new Date(createdAt) : createdAt).getFullYear();
+  const suffix = claimId.slice(-6).toUpperCase();
+  return `BRS-${year}-${suffix}`;
+}

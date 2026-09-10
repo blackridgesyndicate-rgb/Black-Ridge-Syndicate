@@ -1,19 +1,27 @@
 import { View, Text } from "@react-pdf/renderer";
-import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
+import { DocShellV2 } from "@/lib/pdf/DocShellV2";
+import { tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail, RevisionDetail } from "@/lib/types";
-import { computeInsuranceSummary } from "@/lib/calc/estimate";
+import { computeInsuranceSummary, computeRetailSummary } from "@/lib/calc/estimate";
 import { money, dateStr } from "@/lib/format";
 
 export function InvoiceDoc({ claim, revision }: { claim: ClaimDetail; revision: RevisionDetail }) {
   const items = revision.lineItems.filter((i) => i.included).sort((a, b) => a.sortOrder - b.sortOrder);
-  const summary = computeInsuranceSummary(revision.lineItems, revision.deductible, revision.priorPayments);
+  const isRetail = claim.reportType === "retail";
+  const total = isRetail
+    ? computeRetailSummary(revision.lineItems, { overheadProfitPercent: revision.overheadProfitPercent }).totalContractPrice
+    : computeInsuranceSummary(revision.lineItems, revision.deductible, revision.priorPayments, revision.overheadProfitPercent).rcv;
+  const priorPayments = isRetail ? 0 : revision.priorPayments;
   const invoiceNumber = `INV-${claim.id.slice(0, 6).toUpperCase()}-R${revision.revisionNumber}`;
 
   return (
-    <DocShell
+    <DocShellV2
+      claim={claim}
       docTitle="Invoice"
       docSubtitle={invoiceNumber}
-      disclaimer="Payable to Black Ridge Roofing. Please remit payment per the terms agreed in your signed contract. Contact our office with any billing questions."
+      sections={["Work Performed", "Balance Due"]}
+      preparedBy={claim.estimator}
+      disclaimer="Please remit payment per the terms agreed in your signed contract. Contact our office with any billing questions."
       infoLeft={[
         { label: "Bill To", value: claim.property.customer.name },
         { label: "Property", value: `${claim.property.addressLine1}, ${claim.property.city}, ${claim.property.state} ${claim.property.zip}` },
@@ -43,18 +51,20 @@ export function InvoiceDoc({ claim, revision }: { claim: ClaimDetail; revision: 
 
       <View style={tableStyles.summaryBox}>
         <View style={tableStyles.summaryRow}>
-          <Text style={tableStyles.summaryLabel}>Total (RCV)</Text>
-          <Text style={tableStyles.summaryValue}>{money(summary.rcv)}</Text>
+          <Text style={tableStyles.summaryLabel}>{isRetail ? "Total Contract Price" : "Total (RCV)"}</Text>
+          <Text style={tableStyles.summaryValue}>{money(total)}</Text>
         </View>
-        <View style={tableStyles.summaryRow}>
-          <Text style={tableStyles.summaryLabel}>Prior Payments Received</Text>
-          <Text style={tableStyles.summaryValue}>{money(summary.priorPayments)}</Text>
-        </View>
+        {!isRetail && (
+          <View style={tableStyles.summaryRow}>
+            <Text style={tableStyles.summaryLabel}>Prior Payments Received</Text>
+            <Text style={tableStyles.summaryValue}>{money(priorPayments)}</Text>
+          </View>
+        )}
         <View style={tableStyles.summaryRow}>
           <Text style={tableStyles.summaryLabel}>Balance Due</Text>
-          <Text style={tableStyles.summaryValueBold}>{money(summary.rcv - summary.priorPayments)}</Text>
+          <Text style={tableStyles.summaryValueBold}>{money(total - priorPayments)}</Text>
         </View>
       </View>
-    </DocShell>
+    </DocShellV2>
   );
 }

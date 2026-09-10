@@ -1,5 +1,6 @@
 import { View, Text } from "@react-pdf/renderer";
-import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
+import { DocShellV2 } from "@/lib/pdf/DocShellV2";
+import { tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail } from "@/lib/types";
 import { computeDerivedQuantities } from "@/lib/calc/measurements";
 import { num, dateStr } from "@/lib/format";
@@ -23,9 +24,12 @@ export function MeasurementSummaryDoc({ claim, photoAssets }: { claim: ClaimDeta
   const pitchAreas: { pitch: string; areaSqFt: number }[] = m?.pitchAreasJson ? JSON.parse(m.pitchAreasJson) : [];
 
   return (
-    <DocShell
+    <DocShellV2
+      claim={claim}
       docTitle="Roof Measurement Summary"
-      disclaimer="Measurements are derived from the uploaded measurement report and/or field verification, subject to contractor review. This report is prepared by Black Ridge Roofing for internal estimating and homeowner reference."
+      sections={["Roof Diagram", "Roof Summary", "Pitch Breakdown", "Linear Measurements", "Material Quantities", "Inspection Photographs"]}
+      preparedBy={claim.estimator}
+      disclaimer="Measurements are derived from the uploaded measurement report and/or field verification, subject to contractor review. This report is prepared for internal estimating and homeowner reference."
       infoLeft={[
         { label: "Property", value: `${claim.property.addressLine1}, ${claim.property.city}, ${claim.property.state} ${claim.property.zip}` },
         { label: "Homeowner", value: claim.property.customer.name },
@@ -116,6 +120,6 @@ export function MeasurementSummaryDoc({ claim, photoAssets }: { claim: ClaimDeta
           )}
         </>
       )}
-    </DocShell>
+    </DocShellV2>
   );
 }

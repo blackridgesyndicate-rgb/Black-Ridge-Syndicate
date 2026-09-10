@@ -1,5 +1,6 @@
 import { View, Text } from "@react-pdf/renderer";
-import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
+import { DocShellV2 } from "@/lib/pdf/DocShellV2";
+import { tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail, SupplementDetail } from "@/lib/types";
 import { money, dateStr } from "@/lib/format";
 
@@ -15,9 +16,12 @@ export function SupplementRequestDoc({ claim, supplement }: { claim: ClaimDetail
   const total = rows.reduce((s, r) => s + r.diff, 0);
 
   return (
-    <DocShell
+    <DocShellV2
+      claim={claim}
       docTitle="Supplement Request"
       docSubtitle={supplement.label}
+      sections={["Missing / Underpaid Items", "Supporting Basis"]}
+      preparedBy={claim.estimator}
       disclaimer="This supplement request itemizes work supported by the contractor's estimate, applicable code requirements, and/or photo documentation that was omitted or underpaid in the carrier's original estimate."
       infoLeft={[
         { label: "Property", value: `${claim.property.addressLine1}, ${claim.property.city}, ${claim.property.state} ${claim.property.zip}` },
@@ -59,6 +63,6 @@ export function SupplementRequestDoc({ claim, supplement }: { claim: ClaimDetail
           <Text style={tableStyles.summaryValueBold}>{money(total)}</Text>
         </View>
       </View>
-    </DocShell>
+    </DocShellV2>
   );
 }

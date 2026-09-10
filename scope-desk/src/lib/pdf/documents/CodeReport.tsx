@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
+import { DocShellV2 } from "@/lib/pdf/DocShellV2";
+import { tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail } from "@/lib/types";
 import { dateStr } from "@/lib/format";
 import { ConstructionDetail } from "@/lib/pdf/diagrams/ConstructionDetail";
@@ -69,10 +70,13 @@ export function CodeReportDoc({ claim }: { claim: ClaimDetail }) {
   const citations = claim.codeCitations;
 
   return (
-    <DocShell
+    <DocShellV2
+      claim={claim}
       docTitle="Code-Enforcement Report"
       docSubtitle={cr?.verified ? "Citations Verified" : "Citations Unverified — Confirm Before Submission"}
-      disclaimer="Code citations must be confirmed against the official municipal, county, state, or ICC source before being relied upon in an insurance submission. Fields marked 'Verification required' have not been confirmed."
+      sections={["Sourced Jurisdiction Citations", "Jurisdiction & Permitting", "Roofing Code Requirements", "Construction Detail Reference"]}
+      preparedBy={claim.estimator}
+      disclaimer="Code citations must be confirmed against the official municipal, county, state, or ICC source before being relied upon in a claim or contract submission. Fields marked 'Verification required' have not been confirmed."
       infoLeft={[
         { label: "Property", value: `${claim.property.addressLine1}, ${claim.property.city}, ${claim.property.state} ${claim.property.zip}` },
         { label: "Authority Having Jurisdiction", value: cr?.authorityHavingJurisdiction ?? "" },
@@ -135,6 +139,6 @@ export function CodeReportDoc({ claim }: { claim: ClaimDetail }) {
           )}
         </>
       )}
-    </DocShell>
+    </DocShellV2>
   );
 }

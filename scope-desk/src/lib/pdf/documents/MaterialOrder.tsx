@@ -1,5 +1,6 @@
 import { View, Text } from "@react-pdf/renderer";
-import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
+import { DocShellV2 } from "@/lib/pdf/DocShellV2";
+import { tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail, RevisionDetail } from "@/lib/types";
 import { num, dateStr } from "@/lib/format";
 
@@ -7,9 +8,12 @@ export function MaterialOrderDoc({ claim, revision }: { claim: ClaimDetail; revi
   const items = revision.lineItems.filter((i) => i.included).sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (
-    <DocShell
+    <DocShellV2
+      claim={claim}
       docTitle="Material Order"
       docSubtitle={`Revision ${revision.revisionNumber}`}
+      sections={["Materials & Quantities"]}
+      preparedBy={claim.estimator}
       disclaimer="Internal material order for supplier purchasing. Quantities reflect the current approved estimate revision and include contractor waste factors where applicable."
       infoLeft={[
         { label: "Job Site", value: `${claim.property.addressLine1}, ${claim.property.city}, ${claim.property.state} ${claim.property.zip}` },
@@ -36,6 +40,6 @@ export function MaterialOrderDoc({ claim, revision }: { claim: ClaimDetail; revi
           </View>
         ))}
       </View>
-    </DocShell>
+    </DocShellV2>
   );
 }

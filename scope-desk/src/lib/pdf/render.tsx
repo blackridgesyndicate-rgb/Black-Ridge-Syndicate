@@ -10,6 +10,25 @@ import { HomeownerProposalDoc } from "@/lib/pdf/documents/HomeownerProposal";
 import { MaterialOrderDoc } from "@/lib/pdf/documents/MaterialOrder";
 import { InvoiceDoc } from "@/lib/pdf/documents/Invoice";
 import { loadPhotoAssets } from "@/lib/pdf/photoAssets";
+import { db } from "@/lib/db";
+
+/** Loads the price-list rows referenced by a revision's line items, keyed
+ * by code, so document components can pull manufacturer/technical-function/
+ * reason-selected metadata without each doing its own DB round trip. */
+async function loadPriceListByCode(revision: RevisionDetail) {
+  const codes = [...new Set(revision.lineItems.map((li) => li.priceListItemCode).filter((c): c is string => !!c))];
+  if (codes.length === 0) return new Map();
+  const rows = await db.priceListItem.findMany({ where: { code: { in: codes } } });
+  return new Map(rows.map((r) => [r.code, r]));
+}
+
+/** First embeddable claim photo, for the cover page — best-effort, null if
+ * none exist or the only ones on file aren't a renderable format. */
+async function loadCoverPhoto(claim: ClaimDetail) {
+  if (claim.photos.length === 0) return null;
+  const assets = await loadPhotoAssets(claim.photos.slice(0, 1));
+  return assets[0]?.buffer ?? null;
+}
 
 export const DOCUMENT_TYPES = [
   "insurance_estimate",
@@ -61,9 +80,16 @@ export async function renderDocument(
   opts: { revision?: RevisionDetail; supplement?: SupplementDetail }
 ): Promise<Buffer> {
   switch (type) {
-    case "insurance_estimate":
+    case "insurance_estimate": {
       if (!opts.revision) throw new Error("A revision is required to generate an insurance estimate.");
-      return renderToBuffer(<InsuranceEstimateDoc claim={claim} revision={opts.revision} />);
+      const [priceListByCode, coverPhoto] = await Promise.all([
+        loadPriceListByCode(opts.revision),
+        loadCoverPhoto(claim),
+      ]);
+      return renderToBuffer(
+        <InsuranceEstimateDoc claim={claim} revision={opts.revision} priceListByCode={priceListByCode} coverPhoto={coverPhoto} />
+      );
+    }
     case "measurement_summary": {
       const photoAssets = await loadPhotoAssets(claim.photos);
       return renderToBuffer(<MeasurementSummaryDoc claim={claim} photoAssets={photoAssets} />);
@@ -77,8 +103,20 @@ export async function renderDocument(
       return renderToBuffer(<SupplementRequestDoc claim={claim} supplement={opts.supplement} />);
     case "homeowner_proposal": {
       if (!opts.revision) throw new Error("A revision is required to generate a homeowner proposal.");
-      const photoAssets = await loadPhotoAssets(claim.photos);
-      return renderToBuffer(<HomeownerProposalDoc claim={claim} revision={opts.revision} photoAssets={photoAssets} />);
+      const [photoAssets, priceListByCode, coverPhoto] = await Promise.all([
+        loadPhotoAssets(claim.photos),
+        loadPriceListByCode(opts.revision),
+        loadCoverPhoto(claim),
+      ]);
+      return renderToBuffer(
+        <HomeownerProposalDoc
+          claim={claim}
+          revision={opts.revision}
+          photoAssets={photoAssets}
+          priceListByCode={priceListByCode}
+          coverPhoto={coverPhoto}
+        />
+      );
     }
     case "material_order":
       if (!opts.revision) throw new Error("A revision is required to generate a material order.");
