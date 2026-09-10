@@ -2,8 +2,18 @@ import { View, Text } from "@react-pdf/renderer";
 import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail, RevisionDetail } from "@/lib/types";
 import { money, dateStr } from "@/lib/format";
+import { PhotoGallery } from "@/lib/pdf/diagrams/PhotoGallery";
+import type { PhotoAsset } from "@/lib/pdf/photoAssets";
 
-export function HomeownerProposalDoc({ claim, revision }: { claim: ClaimDetail; revision: RevisionDetail }) {
+export function HomeownerProposalDoc({
+  claim,
+  revision,
+  photoAssets,
+}: {
+  claim: ClaimDetail;
+  revision: RevisionDetail;
+  photoAssets: PhotoAsset[];
+}) {
   const items = revision.lineItems.filter((i) => i.included).sort((a, b) => a.sortOrder - b.sortOrder);
   const byCategory = new Map<string, typeof items>();
   for (const item of items) {
@@ -31,6 +41,13 @@ export function HomeownerProposalDoc({ claim, revision }: { claim: ClaimDetail; 
         Thank you for the opportunity to present this proposal. Black Ridge Roofing will complete the following
         scope of work at your property using quality materials and licensed, insured crews.
       </Text>
+
+      {photoAssets.length > 0 && (
+        <>
+          <Text style={tableStyles.sectionHeading}>Documented Conditions</Text>
+          <PhotoGallery assets={photoAssets} />
+        </>
+      )}
 
       {[...byCategory.entries()].map(([category, catItems]) => (
         <View key={category}>

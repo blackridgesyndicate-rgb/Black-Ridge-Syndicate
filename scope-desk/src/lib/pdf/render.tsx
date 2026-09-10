@@ -9,6 +9,7 @@ import { SupplementRequestDoc } from "@/lib/pdf/documents/SupplementRequest";
 import { HomeownerProposalDoc } from "@/lib/pdf/documents/HomeownerProposal";
 import { MaterialOrderDoc } from "@/lib/pdf/documents/MaterialOrder";
 import { InvoiceDoc } from "@/lib/pdf/documents/Invoice";
+import { loadPhotoAssets } from "@/lib/pdf/photoAssets";
 
 export const DOCUMENT_TYPES = [
   "insurance_estimate",
@@ -53,8 +54,10 @@ export async function renderDocument(
     case "insurance_estimate":
       if (!opts.revision) throw new Error("A revision is required to generate an insurance estimate.");
       return renderToBuffer(<InsuranceEstimateDoc claim={claim} revision={opts.revision} />);
-    case "measurement_summary":
-      return renderToBuffer(<MeasurementSummaryDoc claim={claim} />);
+    case "measurement_summary": {
+      const photoAssets = await loadPhotoAssets(claim.photos);
+      return renderToBuffer(<MeasurementSummaryDoc claim={claim} photoAssets={photoAssets} />);
+    }
     case "code_report":
       return renderToBuffer(<CodeReportDoc claim={claim} />);
     case "weather_report":
@@ -62,9 +65,11 @@ export async function renderDocument(
     case "supplement_request":
       if (!opts.supplement) throw new Error("A supplement is required to generate a supplement request.");
       return renderToBuffer(<SupplementRequestDoc claim={claim} supplement={opts.supplement} />);
-    case "homeowner_proposal":
+    case "homeowner_proposal": {
       if (!opts.revision) throw new Error("A revision is required to generate a homeowner proposal.");
-      return renderToBuffer(<HomeownerProposalDoc claim={claim} revision={opts.revision} />);
+      const photoAssets = await loadPhotoAssets(claim.photos);
+      return renderToBuffer(<HomeownerProposalDoc claim={claim} revision={opts.revision} photoAssets={photoAssets} />);
+    }
     case "material_order":
       if (!opts.revision) throw new Error("A revision is required to generate a material order.");
       return renderToBuffer(<MaterialOrderDoc claim={claim} revision={opts.revision} />);

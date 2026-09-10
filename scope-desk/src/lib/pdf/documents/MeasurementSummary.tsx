@@ -3,6 +3,10 @@ import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail } from "@/lib/types";
 import { computeDerivedQuantities } from "@/lib/calc/measurements";
 import { num, dateStr } from "@/lib/format";
+import { RoofDiagram } from "@/lib/pdf/diagrams/RoofDiagram";
+import { BarChart } from "@/lib/pdf/diagrams/BarChart";
+import { PhotoGallery } from "@/lib/pdf/diagrams/PhotoGallery";
+import type { PhotoAsset } from "@/lib/pdf/photoAssets";
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
@@ -13,10 +17,10 @@ function Row({ label, value }: { label: string; value: string }) {
   );
 }
 
-export function MeasurementSummaryDoc({ claim }: { claim: ClaimDetail }) {
+export function MeasurementSummaryDoc({ claim, photoAssets }: { claim: ClaimDetail; photoAssets: PhotoAsset[] }) {
   const m = claim.measurement;
   const derived = m ? computeDerivedQuantities(m) : null;
-  const pitchAreas = m?.pitchAreasJson ? JSON.parse(m.pitchAreasJson) : [];
+  const pitchAreas: { pitch: string; areaSqFt: number }[] = m?.pitchAreasJson ? JSON.parse(m.pitchAreasJson) : [];
 
   return (
     <DocShell
@@ -35,6 +39,18 @@ export function MeasurementSummaryDoc({ claim }: { claim: ClaimDetail }) {
         <Text style={tableStyles.cell}>No measurement data has been entered for this job yet.</Text>
       ) : (
         <>
+          <Text style={tableStyles.sectionHeading}>Roof Diagram</Text>
+          <RoofDiagram
+            m={{
+              eaves: m.eaves,
+              rakes: m.rakes,
+              ridges: m.ridges,
+              hips: m.hips,
+              valleys: m.valleys,
+              predominantPitch: m.predominantPitch,
+            }}
+          />
+
           <Text style={tableStyles.sectionHeading}>Roof Summary</Text>
           <View style={tableStyles.table}>
             <Row label="Total Roof Area" value={`${num(m.roofAreaSqFt)} sq ft`} />
@@ -46,11 +62,13 @@ export function MeasurementSummaryDoc({ claim }: { claim: ClaimDetail }) {
           {pitchAreas.length > 0 && (
             <>
               <Text style={tableStyles.sectionHeading}>Pitch Breakdown</Text>
-              <View style={tableStyles.table}>
-                {pitchAreas.map((p: { pitch: string; areaSqFt: number }, i: number) => (
-                  <Row key={i} label={`${p.pitch} pitch`} value={`${num(p.areaSqFt)} sq ft`} />
-                ))}
-              </View>
+              <BarChart
+                data={pitchAreas.map((p) => ({
+                  label: `${p.pitch} pitch`,
+                  value: p.areaSqFt,
+                  displayValue: `${num(p.areaSqFt)} sq ft`,
+                }))}
+              />
             </>
           )}
 
@@ -79,7 +97,7 @@ export function MeasurementSummaryDoc({ claim }: { claim: ClaimDetail }) {
                 <Row label="High-Roof Removal (Squares)" value={num(derived.highRoofRemovalSquares)} />
                 <Row label="High-Roof Installation (Squares)" value={num(derived.highRoofInstallSquares)} />
                 <Row label="Steep-Slope (Squares)" value={num(derived.steepSlopeSquares)} />
-                <Row label="Eave Ice &amp; Water Coverage (Squares)" value={num(derived.eaveIceBarrierSquares)} />
+                <Row label="Eave &amp; Water Coverage (Squares)" value={num(derived.eaveIceBarrierSquares)} />
                 <Row label="Valley Membrane Coverage (Squares)" value={num(derived.valleyMembraneSquares)} />
                 <Row label="Remaining Underlayment (Squares)" value={num(derived.remainingUnderlaymentSquares)} />
                 <Row label="Starter Quantity (LF)" value={num(derived.starterLengthFt)} />
@@ -87,6 +105,13 @@ export function MeasurementSummaryDoc({ claim }: { claim: ClaimDetail }) {
                 <Row label="Rake Drip Edge (LF)" value={num(derived.rakeDripEdgeLengthFt)} />
                 <Row label="Ridge Cap (LF)" value={num(derived.ridgeCapLengthFt)} />
               </View>
+            </>
+          )}
+
+          {photoAssets.length > 0 && (
+            <>
+              <Text style={tableStyles.sectionHeading}>Inspection Photos</Text>
+              <PhotoGallery assets={photoAssets} />
             </>
           )}
         </>

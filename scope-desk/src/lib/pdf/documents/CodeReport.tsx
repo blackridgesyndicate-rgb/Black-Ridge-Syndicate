@@ -1,7 +1,12 @@
-import { View, Text } from "@react-pdf/renderer";
+import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail } from "@/lib/types";
 import { dateStr } from "@/lib/format";
+import { ConstructionDetail } from "@/lib/pdf/diagrams/ConstructionDetail";
+
+const styles = StyleSheet.create({
+  detailGrid: { flexDirection: "column", gap: 6, marginTop: 4 },
+});
 
 function Row({ label, value }: { label: string; value: string | null | undefined }) {
   const warnStyle = !value ? { color: "#8a3b3b" } : {};
@@ -54,6 +59,14 @@ export function CodeReportDoc({ claim }: { claim: ClaimDetail }) {
             <Row label="Chimney-Cricket Requirement" value={cr.chimneyCricketRequirement} />
             <Row label="Re-Roofing / Layer Limitations" value={cr.reRoofLayerLimitation} />
             <Row label="Decking Requirement" value={cr.deckingRequirement} />
+          </View>
+
+          <Text style={tableStyles.sectionHeading}>Construction Detail Reference</Text>
+          <View style={styles.detailGrid}>
+            <ConstructionDetail type="ice_barrier" />
+            <ConstructionDetail type="drip_edge" />
+            <ConstructionDetail type="valley" />
+            <ConstructionDetail type="cricket" />
           </View>
 
           {cr.notes && (

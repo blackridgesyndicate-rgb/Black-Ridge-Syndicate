@@ -3,11 +3,25 @@ import { DocShell, tableStyles, DISCLAIMER_ESTIMATE } from "@/lib/pdf/DocShell";
 import type { ClaimDetail, RevisionDetail } from "@/lib/types";
 import { computeInsuranceSummary } from "@/lib/calc/estimate";
 import { money, num, dateStr } from "@/lib/format";
+import { BarChart } from "@/lib/pdf/diagrams/BarChart";
+import { pdfTheme } from "@/lib/pdf/theme";
 
 export function InsuranceEstimateDoc({ claim, revision }: { claim: ClaimDetail; revision: RevisionDetail }) {
   const items = [...revision.lineItems].sort((a, b) => a.sortOrder - b.sortOrder);
   const included = items.filter((i) => i.included);
   const summary = computeInsuranceSummary(items, revision.deductible, revision.priorPayments);
+
+  const categoryTotals = new Map<string, number>();
+  for (const li of included) {
+    categoryTotals.set(li.category, (categoryTotals.get(li.category) ?? 0) + li.rcv);
+  }
+  const categoryChartData = [...categoryTotals.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([category, total]) => ({
+      label: category,
+      value: total,
+      displayValue: `${money(total)} (${summary.rcv > 0 ? Math.round((total / summary.rcv) * 100) : 0}%)`,
+    }));
 
   return (
     <DocShell
@@ -54,6 +68,13 @@ export function InsuranceEstimateDoc({ claim, revision }: { claim: ClaimDetail; 
           </View>
         ))}
       </View>
+
+      {categoryChartData.length > 1 && (
+        <>
+          <Text style={tableStyles.sectionHeading}>Cost Breakdown by Category</Text>
+          <BarChart data={categoryChartData} barColor={pdfTheme.gold} />
+        </>
+      )}
 
       <View style={tableStyles.summaryBox}>
         <SummaryRow label="Line-Item Subtotal" value={money(summary.lineItemSubtotal)} />

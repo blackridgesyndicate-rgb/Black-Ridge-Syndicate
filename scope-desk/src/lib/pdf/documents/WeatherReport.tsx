@@ -1,7 +1,9 @@
-import { View, Text } from "@react-pdf/renderer";
+import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail } from "@/lib/types";
 import { dateStr } from "@/lib/format";
+import { BarChart } from "@/lib/pdf/diagrams/BarChart";
+import { pdfTheme } from "@/lib/pdf/theme";
 
 const EVIDENCE_LABELS: Record<string, string> = {
   area_reported: "Event reported in the area",
@@ -10,8 +12,48 @@ const EVIDENCE_LABELS: Record<string, string> = {
   confirmed_property_damage: "Confirmed physical damage to this property",
 };
 
+const CONFIDENCE_COLORS: Record<string, string> = {
+  high: "#3f7d4f",
+  medium: "#c07a2e",
+  low: "#8a3b3b",
+};
+
+const badgeStyles = StyleSheet.create({
+  badge: { alignSelf: "flex-start", borderRadius: 3, paddingVertical: 2, paddingHorizontal: 5 },
+  badgeText: { fontSize: 7, color: "#ffffff", textTransform: "capitalize" },
+});
+
+const styles = StyleSheet.create({
+  chartNote: { fontSize: 6.5, color: pdfTheme.textDim, fontStyle: "italic", marginTop: -2, marginBottom: 4 },
+});
+
+function ConfidenceBadge({ level }: { level: string }) {
+  const color = CONFIDENCE_COLORS[level] ?? pdfTheme.textDim;
+  return (
+    <View style={[badgeStyles.badge, { backgroundColor: color }]}>
+      <Text style={badgeStyles.badgeText}>{level}</Text>
+    </View>
+  );
+}
+
 export function WeatherReportDoc({ claim }: { claim: ClaimDetail }) {
   const events = [...claim.weatherEvents].sort((a, b) => +new Date(b.eventDate) - +new Date(a.eventDate));
+
+  const MAX_CHART_ROWS = 10;
+
+  const hailEvents = events.filter((ev) => ev.hailSizeInches != null).sort((a, b) => (b.hailSizeInches ?? 0) - (a.hailSizeInches ?? 0));
+  const hailChartData = hailEvents.slice(0, MAX_CHART_ROWS).map((ev) => ({
+    label: dateStr(ev.eventDate),
+    value: ev.hailSizeInches ?? 0,
+    displayValue: `${ev.hailSizeInches}" hail`,
+  }));
+
+  const windEvents = events.filter((ev) => ev.windSpeedMph != null).sort((a, b) => (b.windSpeedMph ?? 0) - (a.windSpeedMph ?? 0));
+  const windChartData = windEvents.slice(0, MAX_CHART_ROWS).map((ev) => ({
+    label: dateStr(ev.eventDate),
+    value: ev.windSpeedMph ?? 0,
+    displayValue: `${ev.windSpeedMph} mph`,
+  }));
 
   return (
     <DocShell
@@ -26,6 +68,32 @@ export function WeatherReportDoc({ claim }: { claim: ClaimDetail }) {
       {events.length === 0 ? (
         <Text style={tableStyles.cell}>No weather events have been recorded for this job yet.</Text>
       ) : (
+        <>
+          {hailChartData.length > 0 && (
+            <>
+              <Text style={tableStyles.sectionHeading}>Hail Size by Event</Text>
+              <BarChart data={hailChartData} barColor="#2f5f8a" />
+              {hailEvents.length > MAX_CHART_ROWS && (
+                <Text style={styles.chartNote}>
+                  Showing the {MAX_CHART_ROWS} largest of {hailEvents.length} recorded hail events; see the full event
+                  log below.
+                </Text>
+              )}
+            </>
+          )}
+          {windChartData.length > 0 && (
+            <>
+              <Text style={tableStyles.sectionHeading}>Wind Speed by Event</Text>
+              <BarChart data={windChartData} barColor={pdfTheme.gold} />
+              {windEvents.length > MAX_CHART_ROWS && (
+                <Text style={styles.chartNote}>
+                  Showing the {MAX_CHART_ROWS} highest of {windEvents.length} recorded wind events; see the full
+                  event log below.
+                </Text>
+              )}
+            </>
+          )}
+          <Text style={tableStyles.sectionHeading}>Event Log</Text>
         <View style={tableStyles.table}>
           <View style={tableStyles.headRow}>
             <Text style={[tableStyles.headCell, { width: "12%" }]}>Date</Text>
@@ -44,7 +112,9 @@ export function WeatherReportDoc({ claim }: { claim: ClaimDetail }) {
                 {ev.windSpeedMph ? ` ${ev.windSpeedMph} mph` : ""}
               </Text>
               <Text style={[tableStyles.cell, { width: "24%" }]}>{EVIDENCE_LABELS[ev.evidenceLevel] ?? ev.evidenceLevel}</Text>
-              <Text style={[tableStyles.cell, { width: "10%" }]}>{ev.confidenceLevel}</Text>
+              <View style={{ width: "10%" }}>
+                <ConfidenceBadge level={ev.confidenceLevel} />
+              </View>
               <View style={{ width: "28%" }}>
                 <Text style={tableStyles.cell}>{ev.source}</Text>
                 {ev.sourceUrl && <Text style={tableStyles.cellDim}>{ev.sourceUrl}</Text>}
@@ -52,6 +122,7 @@ export function WeatherReportDoc({ claim }: { claim: ClaimDetail }) {
             </View>
           ))}
         </View>
+        </>
       )}
     </DocShell>
   );
