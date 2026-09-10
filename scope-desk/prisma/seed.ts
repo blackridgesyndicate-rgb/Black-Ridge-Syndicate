@@ -241,12 +241,18 @@ async function main() {
   });
   console.log(`User ready: ${user.email} (password: BlackRidge2024!)`);
 
+  // Nullable columns can't be used in Prisma's compound-unique upsert
+  // shorthand (NULL never equals NULL in SQL), so resolve state-scoped
+  // uniqueness manually instead.
   for (const item of PRICE_LIST) {
-    await db.priceListItem.upsert({
-      where: { code: item.code },
-      update: item,
-      create: item,
+    const existing = await db.priceListItem.findFirst({
+      where: { code: item.code, state: (item as { state?: string }).state ?? null },
     });
+    if (existing) {
+      await db.priceListItem.update({ where: { id: existing.id }, data: item });
+    } else {
+      await db.priceListItem.create({ data: item });
+    }
   }
   console.log(`Price list seeded: ${PRICE_LIST.length} items.`);
 
