@@ -11,6 +11,7 @@ import { CodeReportTab } from "@/components/claim/tabs/CodeReportTab";
 import { WeatherTab } from "@/components/claim/tabs/WeatherTab";
 import { SupplementTab } from "@/components/claim/tabs/SupplementTab";
 import { DocumentsTab } from "@/components/claim/tabs/DocumentsTab";
+import { QCTab } from "@/components/claim/tabs/QCTab";
 
 const TABS = [
   { key: "overview", label: "Overview" },
@@ -20,6 +21,7 @@ const TABS = [
   { key: "code", label: "Code Report" },
   { key: "weather", label: "Weather" },
   { key: "supplement", label: "Supplement" },
+  { key: "qc", label: "Quality Control" },
   { key: "documents", label: "Documents" },
 ] as const;
 
@@ -99,6 +101,7 @@ export function ClaimWorkspace({ initialClaim }: { initialClaim: ClaimDetail }) 
       {tab === "code" && <CodeReportTab key={dataVersion} claim={claim} onChanged={refresh} />}
       {tab === "weather" && <WeatherTab key={dataVersion} claim={claim} onChanged={refresh} />}
       {tab === "supplement" && <SupplementTab key={dataVersion} claim={claim} onChanged={refresh} />}
+      {tab === "qc" && <QCTab key={dataVersion} claim={claim} />}
       {tab === "documents" && <DocumentsTab key={dataVersion} claim={claim} onChanged={refresh} />}
     </div>
   );

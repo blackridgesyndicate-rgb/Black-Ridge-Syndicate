@@ -6,6 +6,8 @@ import { apiPost } from "@/lib/apiClient";
 import { Select } from "@/components/ui/Field";
 import { dateStr } from "@/lib/format";
 
+type GeneratedDocumentDetail = ClaimDetail["generatedDocuments"][number];
+
 const DOCUMENT_OPTIONS: {
   type: string;
   label: string;
@@ -105,29 +107,79 @@ export function DocumentsTab({ claim, onChanged }: { claim: ClaimDetail; onChang
 
       <div className="brd-card rounded-sm p-6">
         <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide mb-4">Generated Documents</h2>
+        <p className="text-xs text-brd-text-dim mb-4">
+          &ldquo;Download&rdquo; is for internal review. &ldquo;Secure Link&rdquo; produces a signed, expiring
+          customer-facing URL — blocked until Quality Control is complete or an administrator records an exception.
+        </p>
         {claim.generatedDocuments.length === 0 ? (
           <p className="text-sm text-brd-text-dim">No documents generated yet.</p>
         ) : (
           <ul className="text-sm space-y-2">
             {claim.generatedDocuments.map((d) => (
-              <li key={d.id} className="flex items-center justify-between gap-3 border-b border-brd-border/60 pb-2">
-                <div>
-                  <p>{DOCUMENT_OPTIONS.find((o) => o.type === d.type)?.label ?? d.type}</p>
-                  <p className="text-xs text-brd-text-dim">{dateStr(d.generatedAt)}</p>
-                </div>
-                <a
-                  href={`/api/documents/${d.id}/download`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="brd-btn-ghost rounded-sm px-3 py-1.5 text-xs"
-                >
-                  Download
-                </a>
-              </li>
+              <GeneratedDocumentRow key={d.id} doc={d} />
             ))}
           </ul>
         )}
       </div>
     </div>
+  );
+}
+
+function GeneratedDocumentRow({ doc }: { doc: GeneratedDocumentDetail }) {
+  const [linkUrl, setLinkUrl] = useState<string | null>(null);
+  const [generating, setGenerating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function generateLink() {
+    setGenerating(true);
+    setError(null);
+    setLinkUrl(null);
+    try {
+      const result = await apiPost(`/api/documents/${doc.id}/deliver`);
+      setLinkUrl(result.url);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setGenerating(false);
+    }
+  }
+
+  return (
+    <li className="border-b border-brd-border/60 pb-3">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p>{DOCUMENT_OPTIONS.find((o) => o.type === doc.type)?.label ?? doc.type}</p>
+          <p className="text-xs text-brd-text-dim">
+            {dateStr(doc.generatedAt)}
+            {doc.deliveredAt && <span className="text-brd-success"> · delivered {dateStr(doc.deliveredAt)}</span>}
+          </p>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <a
+            href={`/api/documents/${doc.id}/download`}
+            target="_blank"
+            rel="noreferrer"
+            className="brd-btn-ghost rounded-sm px-3 py-1.5 text-xs"
+          >
+            Download
+          </a>
+          <button onClick={generateLink} disabled={generating} className="brd-btn-gold rounded-sm px-3 py-1.5 text-xs">
+            {generating ? "Generating…" : "Secure Link"}
+          </button>
+        </div>
+      </div>
+      {error && <p className="text-xs text-brd-danger mt-2">{error}</p>}
+      {linkUrl && (
+        <div className="mt-2 flex items-center gap-2">
+          <input readOnly value={linkUrl} className="brd-input flex-1 rounded-sm px-2 py-1.5 text-xs" onFocus={(e) => e.target.select()} />
+          <button
+            onClick={() => navigator.clipboard.writeText(linkUrl)}
+            className="brd-btn-ghost rounded-sm px-2 py-1.5 text-xs"
+          >
+            Copy
+          </button>
+        </div>
+      )}
+    </li>
   );
 }

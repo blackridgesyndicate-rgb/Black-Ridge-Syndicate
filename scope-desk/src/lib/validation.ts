@@ -172,6 +172,14 @@ export const codeCitationSchema = z.object({
 
 export const codeCitationUpdateSchema = codeCitationSchema.partial();
 
+export const qcChecklistUpdateSchema = z.object({
+  items: z.record(z.string(), z.boolean()),
+});
+
+export const qcExceptionSchema = z.object({
+  reason: z.string().min(1, "An exception reason is required"),
+});
+
 export const weatherEventSchema = z.object({
   eventDate: z.string().min(1),
   eventType: z.string().min(1),
