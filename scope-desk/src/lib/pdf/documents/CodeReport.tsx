@@ -3,10 +3,34 @@ import { DocShell, tableStyles } from "@/lib/pdf/DocShell";
 import type { ClaimDetail } from "@/lib/types";
 import { dateStr } from "@/lib/format";
 import { ConstructionDetail } from "@/lib/pdf/diagrams/ConstructionDetail";
+import { pdfTheme } from "@/lib/pdf/theme";
 
 const styles = StyleSheet.create({
   detailGrid: { flexDirection: "column", gap: 6, marginTop: 4 },
+  citationRow: { borderTopWidth: 1, borderTopColor: pdfTheme.border, paddingVertical: 6 },
+  citationHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" },
+  citationLabel: { fontSize: 9, fontFamily: "Helvetica-Bold", color: pdfTheme.text, width: "60%" },
+  badge: { fontSize: 6.5, color: "#ffffff", paddingHorizontal: 5, paddingVertical: 2, borderRadius: 3 },
+  citationMeta: { fontSize: 7.5, color: pdfTheme.textDim, marginTop: 2 },
+  citationText: { fontSize: 8, color: pdfTheme.text, marginTop: 3 },
 });
+
+const REQUIREMENT_KEY_LABELS: Record<string, string> = {
+  ice_barrier: "Ice Barrier",
+  drip_edge: "Drip Edge",
+  valley_lining: "Valley Lining",
+  underlayment: "Underlayment",
+  ventilation: "Ventilation",
+  layer_limitation: "Re-Roofing / Layer Limitation",
+  decking: "Decking",
+  fire_classification: "Fire Classification",
+  wind: "Wind Requirements",
+  energy_code: "Energy Code",
+  permit: "Permit Requirements",
+  sales_tax: "Sales Tax Rate",
+  permit_fee: "Permit Fee",
+  other: "Other",
+};
 
 function Row({ label, value }: { label: string; value: string | null | undefined }) {
   const warnStyle = !value ? { color: "#8a3b3b" } : {};
@@ -18,8 +42,31 @@ function Row({ label, value }: { label: string; value: string | null | undefined
   );
 }
 
+function CodeCitationRow({ citation }: { citation: ClaimDetail["codeCitations"][number] }) {
+  const verified = citation.verificationStatus === "verified";
+  return (
+    <View style={styles.citationRow} wrap={false}>
+      <View style={styles.citationHeader}>
+        <Text style={styles.citationLabel}>
+          {REQUIREMENT_KEY_LABELS[citation.requirementKey] ?? citation.requirementKey}
+        </Text>
+        <Text style={[styles.badge, { backgroundColor: verified ? "#3f7d4f" : "#8a3b3b" }]}>
+          {verified ? `VERIFIED ${dateStr(citation.verifiedDate)}` : "JURISDICTION VERIFICATION REQUIRED"}
+        </Text>
+      </View>
+      {citation.requirementText && <Text style={styles.citationText}>{citation.requirementText}</Text>}
+      <Text style={styles.citationMeta}>
+        Source: {citation.sourceName ?? "Not recorded"}
+        {citation.codeSection ? ` — ${citation.codeSection}` : ""}
+        {citation.sourceUrl ? ` — ${citation.sourceUrl}` : ""}
+      </Text>
+    </View>
+  );
+}
+
 export function CodeReportDoc({ claim }: { claim: ClaimDetail }) {
   const cr = claim.codeReport;
+  const citations = claim.codeCitations;
 
   return (
     <DocShell
@@ -35,6 +82,17 @@ export function CodeReportDoc({ claim }: { claim: ClaimDetail }) {
         { label: "Source URL", value: cr?.sourceUrl ?? "" },
       ]}
     >
+      {citations.length > 0 && (
+        <>
+          <Text style={tableStyles.sectionHeading}>Sourced Jurisdiction Citations</Text>
+          <View style={tableStyles.table}>
+            {citations.map((c) => (
+              <CodeCitationRow key={c.id} citation={c} />
+            ))}
+          </View>
+        </>
+      )}
+
       {!cr ? (
         <Text style={tableStyles.cell}>No code-enforcement data has been entered for this job yet.</Text>
       ) : (

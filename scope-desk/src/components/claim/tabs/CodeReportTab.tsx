@@ -1,10 +1,27 @@
 "use client";
 
 import { useRef, useState } from "react";
-import type { ClaimDetail } from "@/lib/types";
-import { apiPatch, apiUpload } from "@/lib/apiClient";
-import { Field, TextInput, TextArea } from "@/components/ui/Field";
+import type { ClaimDetail, CodeCitationDetail } from "@/lib/types";
+import { apiPatch, apiPost, apiDelete, apiUpload } from "@/lib/apiClient";
+import { Field, TextInput, TextArea, Select } from "@/components/ui/Field";
 import { dateInputValue, dateStr } from "@/lib/format";
+
+const REQUIREMENT_KEY_LABELS: Record<string, string> = {
+  ice_barrier: "Ice Barrier",
+  drip_edge: "Drip Edge",
+  valley_lining: "Valley Lining",
+  underlayment: "Underlayment",
+  ventilation: "Ventilation",
+  layer_limitation: "Re-Roofing / Layer Limitation",
+  decking: "Decking",
+  fire_classification: "Fire Classification",
+  wind: "Wind Requirements",
+  energy_code: "Energy Code",
+  permit: "Permit Requirements",
+  sales_tax: "Sales Tax Rate",
+  permit_fee: "Permit Fee",
+  other: "Other",
+};
 
 const FIELDS: { key: string; label: string; area?: boolean }[] = [
   { key: "authorityHavingJurisdiction", label: "Authority Having Jurisdiction (AHJ)" },
@@ -173,6 +190,157 @@ export function CodeReportTab({ claim, onChanged }: { claim: ClaimDetail; onChan
         )}
       </div>
       </div>
+
+      <CodeCitationsManager claimId={claim.id} citations={claim.codeCitations} onChanged={onChanged} />
+    </div>
+  );
+}
+
+function CodeCitationsManager({
+  claimId,
+  citations,
+  onChanged,
+}: {
+  claimId: string;
+  citations: CodeCitationDetail[];
+  onChanged: () => Promise<void>;
+}) {
+  const [form, setForm] = useState({
+    requirementKey: "ice_barrier",
+    requirementText: "",
+    sourceName: "",
+    sourceUrl: "",
+    codeSection: "",
+    verified: false,
+  });
+  const [saving, setSaving] = useState(false);
+
+  async function addCitation() {
+    setSaving(true);
+    try {
+      await apiPost(`/api/claims/${claimId}/code-citations`, {
+        requirementKey: form.requirementKey,
+        requirementText: form.requirementText || undefined,
+        sourceName: form.sourceName || undefined,
+        sourceUrl: form.sourceUrl || undefined,
+        codeSection: form.codeSection || undefined,
+        verificationStatus: form.verified ? "verified" : "verification_required",
+        verifiedDate: form.verified ? new Date().toISOString().slice(0, 10) : undefined,
+      });
+      setForm({ requirementKey: "ice_barrier", requirementText: "", sourceName: "", sourceUrl: "", codeSection: "", verified: false });
+      await onChanged();
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function toggleVerified(citation: CodeCitationDetail) {
+    const nextVerified = citation.verificationStatus !== "verified";
+    await apiPatch(`/api/code-citations/${citation.id}`, {
+      verificationStatus: nextVerified ? "verified" : "verification_required",
+      verifiedDate: nextVerified ? new Date().toISOString().slice(0, 10) : null,
+    });
+    await onChanged();
+  }
+
+  async function remove(id: string) {
+    await apiDelete(`/api/code-citations/${id}`);
+    await onChanged();
+  }
+
+  return (
+    <div className="brd-card rounded-sm p-6 space-y-5">
+      <div>
+        <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide">
+          Sourced Jurisdiction Citations
+        </h2>
+        <p className="text-sm text-brd-text-dim mt-1">
+          Each requirement below carries its own exact source, code section, verification date, and reviewer — the
+          report shows &ldquo;JURISDICTION VERIFICATION REQUIRED&rdquo; for anything not marked verified here. Never
+          copy another municipality&apos;s citation to fill a gap.
+        </p>
+      </div>
+
+      {citations.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs sm:text-sm">
+            <thead>
+              <tr className="text-left text-brd-text-dim border-b border-brd-border">
+                <th className="py-2 pr-3">Requirement</th>
+                <th className="py-2 pr-3">Source</th>
+                <th className="py-2 pr-3">Code Section</th>
+                <th className="py-2 pr-3">Status</th>
+                <th className="py-2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {citations.map((c) => (
+                <tr key={c.id} className="border-b border-brd-border/60 align-top">
+                  <td className="py-2 pr-3">
+                    <p className="font-medium text-brd-text">{REQUIREMENT_KEY_LABELS[c.requirementKey] ?? c.requirementKey}</p>
+                    {c.requirementText && <p className="text-brd-text-dim mt-0.5 max-w-xs">{c.requirementText}</p>}
+                  </td>
+                  <td className="py-2 pr-3">
+                    <p>{c.sourceName ?? "—"}</p>
+                    {c.sourceUrl && (
+                      <a href={c.sourceUrl} target="_blank" rel="noreferrer" className="text-brd-gold-bright hover:underline break-all">
+                        {c.sourceUrl}
+                      </a>
+                    )}
+                  </td>
+                  <td className="py-2 pr-3">{c.codeSection ?? "—"}</td>
+                  <td className="py-2 pr-3">
+                    <button
+                      onClick={() => toggleVerified(c)}
+                      className={`brd-tag rounded-sm px-2 py-1 border text-xs ${
+                        c.verificationStatus === "verified"
+                          ? "text-brd-success border-brd-success/40"
+                          : "text-brd-danger border-brd-danger/40"
+                      }`}
+                    >
+                      {c.verificationStatus === "verified" ? `Verified ${dateStr(c.verifiedDate)}` : "Verification Required"}
+                    </button>
+                  </td>
+                  <td className="py-2">
+                    <button onClick={() => remove(c.id)} className="text-brd-danger text-xs">✕</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <div className="grid sm:grid-cols-3 gap-3 items-end pt-4 border-t border-brd-border">
+        <Field label="Requirement">
+          <Select value={form.requirementKey} onChange={(e) => setForm((f) => ({ ...f, requirementKey: e.target.value }))}>
+            {Object.entries(REQUIREMENT_KEY_LABELS).map(([key, label]) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </Select>
+        </Field>
+        <Field label="Source Name">
+          <TextInput value={form.sourceName} onChange={(e) => setForm((f) => ({ ...f, sourceName: e.target.value }))} placeholder="Village of Lake in the Hills" />
+        </Field>
+        <Field label="Code Section">
+          <TextInput value={form.codeSection} onChange={(e) => setForm((f) => ({ ...f, codeSection: e.target.value }))} placeholder="R905.1.2" />
+        </Field>
+        <Field label="Source URL">
+          <TextInput value={form.sourceUrl} onChange={(e) => setForm((f) => ({ ...f, sourceUrl: e.target.value }))} placeholder="https://..." />
+        </Field>
+        <div className="sm:col-span-2">
+          <Field label="Requirement Text">
+            <TextInput value={form.requirementText} onChange={(e) => setForm((f) => ({ ...f, requirementText: e.target.value }))} />
+          </Field>
+        </div>
+      </div>
+      <label className="flex items-center gap-2 text-sm">
+        <input type="checkbox" checked={form.verified} onChange={(e) => setForm((f) => ({ ...f, verified: e.target.checked }))} />
+        I have verified this citation against the source above.
+      </label>
+      <button onClick={addCitation} disabled={saving || !form.sourceName} className="brd-btn-ghost rounded-sm px-4 py-2 text-sm">
+        {saving ? "Adding…" : "+ Add Citation"}
+      </button>
     </div>
   );
 }

@@ -506,6 +506,83 @@ async function main() {
     },
   });
 
+  // Structured, individually-sourced citations mirroring the CodeReport
+  // above — each carries its own source/section/verification status so the
+  // report can show "JURISDICTION VERIFICATION REQUIRED" per-item rather
+  // than an all-or-nothing verified flag. Permit/sales-tax items were not
+  // covered by the OneClick Data report and are seeded unverified rather
+  // than assumed.
+  await db.codeCitation.createMany({
+    data: [
+      {
+        claimId: claim.id,
+        requirementKey: "ice_barrier",
+        requirementText: "Ice barrier required, extending 24 in. inside the exterior wall line (36 in. on slopes 8/12+).",
+        sourceName: "OneClick Data — address-specific code verification report",
+        sourceUrl: "https://www.lith.org/",
+        codeSection: "IRC R905.1.2",
+        verificationStatus: "verified",
+        verifiedDate: new Date("2026-06-18"),
+        reviewedByUserId: user.id,
+      },
+      {
+        claimId: claim.id,
+        requirementKey: "drip_edge",
+        requirementText: "Drip edge required at eaves and rakes, mechanically fastened at 12 in. o.c. max.",
+        sourceName: "OneClick Data — address-specific code verification report",
+        sourceUrl: "https://www.lith.org/",
+        codeSection: "IRC R905.2.8.5",
+        verificationStatus: "verified",
+        verifiedDate: new Date("2026-06-18"),
+        reviewedByUserId: user.id,
+      },
+      {
+        claimId: claim.id,
+        requirementKey: "valley_lining",
+        requirementText: "Valley lining required per manufacturer instructions; open or closed valley options permitted per Table R905.2.8.2.",
+        sourceName: "OneClick Data — address-specific code verification report",
+        sourceUrl: "https://www.lith.org/",
+        codeSection: "IRC R905.2.8.2",
+        verificationStatus: "verified",
+        verifiedDate: new Date("2026-06-18"),
+        reviewedByUserId: user.id,
+      },
+      {
+        claimId: claim.id,
+        requirementKey: "underlayment",
+        requirementText: "Underlayment shall conform to ASTM D226/D1970/D4869/D6757 and be applied per Table R905.1.1(2).",
+        sourceName: "OneClick Data — address-specific code verification report",
+        sourceUrl: "https://www.lith.org/",
+        codeSection: "IRC R905.1.1",
+        verificationStatus: "verified",
+        verifiedDate: new Date("2026-06-18"),
+        reviewedByUserId: user.id,
+      },
+      {
+        claimId: claim.id,
+        requirementKey: "layer_limitation",
+        verificationStatus: "verification_required",
+      },
+      {
+        claimId: claim.id,
+        requirementKey: "permit",
+        requirementText: "Confirm current permit requirement and application process for like-kind re-roofing directly with the Village Building Department.",
+        verificationStatus: "verification_required",
+      },
+      {
+        claimId: claim.id,
+        requirementKey: "permit_fee",
+        requirementText: "Confirm current permit fee schedule with the Village Building Department.",
+        verificationStatus: "verification_required",
+      },
+      {
+        claimId: claim.id,
+        requirementKey: "sales_tax",
+        verificationStatus: "verification_required",
+      },
+    ],
+  });
+
   // Sourced from a real address-specific verified weather history report
   // (Predictive Sales AI "Verified Extreme Weather Report") rather than
   // invented dates/magnitudes. Only the subset most relevant to the claimed

@@ -10,9 +10,13 @@ export const claimDetailInclude = {
   photos: { include: { file: true } },
   revisions: { include: { lineItems: true } },
   codeReport: true,
+  codeCitations: true,
   weatherEvents: true,
   supplements: { include: { carrierItems: true, matches: true } },
   generatedDocuments: true,
+  retailIntake: true,
+  qcChecklists: true,
+  whiteLabelProfile: true,
 } satisfies Prisma.ClaimInclude;
 
 export type ClaimDetail = Prisma.ClaimGetPayload<{ include: typeof claimDetailInclude }>;
@@ -25,3 +29,6 @@ export type PhotoDetail = ClaimDetail["photos"][number];
 export type WeatherEventDetail = ClaimDetail["weatherEvents"][number];
 export type SupplementDetail = ClaimDetail["supplements"][number];
 export type CodeReportDetail = NonNullable<ClaimDetail["codeReport"]>;
+export type CodeCitationDetail = ClaimDetail["codeCitations"][number];
+export type RetailIntakeDetail = NonNullable<ClaimDetail["retailIntake"]>;
+export type QCChecklistDetail = ClaimDetail["qcChecklists"][number];

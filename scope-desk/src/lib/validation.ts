@@ -142,6 +142,36 @@ export const codeReportSchema = z.object({
   notes: z.string().optional(),
 });
 
+export const CODE_CITATION_REQUIREMENT_KEYS = [
+  "ice_barrier",
+  "drip_edge",
+  "valley_lining",
+  "underlayment",
+  "ventilation",
+  "layer_limitation",
+  "decking",
+  "fire_classification",
+  "wind",
+  "energy_code",
+  "permit",
+  "sales_tax",
+  "permit_fee",
+  "other",
+] as const;
+
+export const codeCitationSchema = z.object({
+  requirementKey: z.enum(CODE_CITATION_REQUIREMENT_KEYS),
+  requirementText: z.string().optional(),
+  sourceName: z.string().optional(),
+  sourceUrl: z.string().optional(),
+  codeSection: z.string().optional(),
+  verificationStatus: z.enum(["verified", "verification_required"]).optional(),
+  verifiedDate: z.string().nullable().optional(),
+  reviewedByUserId: z.string().optional(),
+});
+
+export const codeCitationUpdateSchema = codeCitationSchema.partial();
+
 export const weatherEventSchema = z.object({
   eventDate: z.string().min(1),
   eventType: z.string().min(1),
