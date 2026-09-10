@@ -25,18 +25,28 @@ export const DOCUMENT_TYPES = [
 export type DocumentType = (typeof DOCUMENT_TYPES)[number];
 
 export const DOCUMENT_LABELS: Record<DocumentType, string> = {
-  insurance_estimate: "Contractor-Prepared Insurance Estimate",
+  insurance_estimate: "Contractor-Prepared Insurance Restoration Estimate",
   measurement_summary: "Measurement Summary",
   code_report: "Code-Enforcement Report",
   weather_report: "Weather-History Report",
   supplement_request: "Supplement Request",
-  homeowner_proposal: "Homeowner Proposal",
+  homeowner_proposal: "Premium Roof Replacement Proposal",
   material_order: "Material Order",
   invoice: "Invoice",
 };
 
 const REQUIRES_REVISION: DocumentType[] = ["insurance_estimate", "homeowner_proposal", "material_order", "invoice"];
 const REQUIRES_SUPPLEMENT: DocumentType[] = ["supplement_request"];
+
+// The primary product decision controls which documents are even available.
+// Insurance-only: the itemized insurance estimate and carrier-supplement
+// request. Retail-only: the retail proposal (never the same document as the
+// insurance estimate with a different title — see HomeownerProposal.tsx,
+// which never renders ACV/depreciation/deductible/carrier-comparison data).
+export const DOCUMENT_TYPES_BY_REPORT_TYPE: Record<"insurance" | "retail", DocumentType[]> = {
+  insurance: ["insurance_estimate", "measurement_summary", "code_report", "weather_report", "supplement_request", "material_order", "invoice"],
+  retail: ["measurement_summary", "code_report", "weather_report", "homeowner_proposal", "material_order", "invoice"],
+};
 
 export function documentRequirements(type: DocumentType) {
   return {

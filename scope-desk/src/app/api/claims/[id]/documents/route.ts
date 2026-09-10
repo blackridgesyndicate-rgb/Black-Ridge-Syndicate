@@ -2,7 +2,14 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { requireUser, handleApiError, ApiError } from "@/lib/api";
 import { claimDetailInclude } from "@/lib/types";
-import { renderDocument, DOCUMENT_TYPES, DOCUMENT_LABELS, documentRequirements, type DocumentType } from "@/lib/pdf/render";
+import {
+  renderDocument,
+  DOCUMENT_TYPES,
+  DOCUMENT_LABELS,
+  DOCUMENT_TYPES_BY_REPORT_TYPE,
+  documentRequirements,
+  type DocumentType,
+} from "@/lib/pdf/render";
 import { storage, newStorageKey } from "@/lib/storage";
 import { runJob } from "@/lib/jobs";
 
@@ -19,6 +26,14 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 
     const claim = await db.claim.findUnique({ where: { id: claimId }, include: claimDetailInclude });
     if (!claim) throw new ApiError(404, "Claim not found");
+
+    const reportType = (claim.reportType ?? "insurance") as "insurance" | "retail";
+    if (!DOCUMENT_TYPES_BY_REPORT_TYPE[reportType].includes(type)) {
+      throw new ApiError(
+        400,
+        `${DOCUMENT_LABELS[type]} is not available for a ${reportType} report. This claim's report type controls which documents can be generated.`
+      );
+    }
 
     const { needsRevision, needsSupplement } = documentRequirements(type);
 

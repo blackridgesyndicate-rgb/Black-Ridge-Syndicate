@@ -39,19 +39,43 @@ export async function POST(req: Request) {
           zip: data.zip,
         },
       });
-      return tx.claim.create({
+      const claim = await tx.claim.create({
         data: {
           propertyId: property.id,
-          insuranceCarrier: data.insuranceCarrier || null,
-          claimNumber: data.claimNumber || null,
-          policyNumber: data.policyNumber || null,
-          dateOfLoss: data.dateOfLoss ? new Date(data.dateOfLoss) : null,
+          reportType: data.reportType,
+          insuranceCarrier: data.reportType === "insurance" ? data.insuranceCarrier || null : null,
+          claimNumber: data.reportType === "insurance" ? data.claimNumber || null : null,
+          policyNumber: data.reportType === "insurance" ? data.policyNumber || null : null,
+          dateOfLoss: data.reportType === "insurance" && data.dateOfLoss ? new Date(data.dateOfLoss) : null,
+          causeOfLoss: data.reportType === "insurance" ? data.causeOfLoss || null : null,
+          adjusterName: data.reportType === "insurance" ? data.adjusterName || null : null,
+          adjusterPhone: data.reportType === "insurance" ? data.adjusterPhone || null : null,
+          adjusterEmail: data.reportType === "insurance" ? data.adjusterEmail || null : null,
           estimator: data.estimator || user.name,
           inspectionDate: data.inspectionDate ? new Date(data.inspectionDate) : null,
           createdById: user.id,
         },
         include: { property: { include: { customer: true } } },
       });
+
+      if (data.reportType === "retail") {
+        await tx.retailIntake.create({
+          data: {
+            claimId: claim.id,
+            desiredSystem: data.desiredSystem || null,
+            desiredManufacturer: data.desiredManufacturer || null,
+            shingleStyleColor: data.shingleStyleColor || null,
+            warrantySelection: data.warrantySelection || null,
+            ventilationPreference: data.ventilationPreference || null,
+            financingInterest: data.financingInterest ?? false,
+            requestedTimeframe: data.requestedTimeframe || null,
+            knownLeaksConcerns: data.knownLeaksConcerns || null,
+            existingRoofInfo: data.existingRoofInfo || null,
+          },
+        });
+      }
+
+      return claim;
     });
 
     return NextResponse.json({ claim }, { status: 201 });

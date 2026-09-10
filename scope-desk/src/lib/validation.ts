@@ -6,6 +6,7 @@ export const loginSchema = z.object({
 });
 
 export const createClaimSchema = z.object({
+  reportType: z.enum(["insurance", "retail"]).default("insurance"),
   homeownerName: z.string().min(1, "Homeowner name is required"),
   phone: z.string().optional(),
   email: z.string().email().optional().or(z.literal("")),
@@ -18,8 +19,22 @@ export const createClaimSchema = z.object({
   claimNumber: z.string().optional(),
   policyNumber: z.string().optional(),
   dateOfLoss: z.string().optional(),
+  causeOfLoss: z.string().optional(),
+  adjusterName: z.string().optional(),
+  adjusterPhone: z.string().optional(),
+  adjusterEmail: z.string().optional(),
   estimator: z.string().optional(),
   inspectionDate: z.string().optional(),
+  // Retail-only intake, mirrors src/lib/orderIntake.ts's retailIntakeSchema.
+  desiredSystem: z.string().optional(),
+  desiredManufacturer: z.string().optional(),
+  shingleStyleColor: z.string().optional(),
+  warrantySelection: z.string().optional(),
+  ventilationPreference: z.string().optional(),
+  financingInterest: z.boolean().optional(),
+  requestedTimeframe: z.string().optional(),
+  knownLeaksConcerns: z.string().optional(),
+  existingRoofInfo: z.string().optional(),
 });
 
 export const updateClaimSchema = createClaimSchema.partial().extend({
@@ -89,6 +104,8 @@ export const lineItemSchema = z.object({
   codeCitation: z.string().optional(),
   included: z.boolean().optional(),
   sortOrder: z.number().optional(),
+  isUpgrade: z.boolean().optional(),
+  overrideReason: z.string().optional(),
 });
 
 export const lineItemUpdateSchema = lineItemSchema.partial();
@@ -101,6 +118,7 @@ export const revisionSettingsSchema = z.object({
   defaultDepreciationPercent: z.number().optional(),
   deductible: z.number().optional(),
   priorPayments: z.number().optional(),
+  overheadProfitPercent: z.number().optional(),
 });
 
 export const codeReportSchema = z.object({

@@ -62,6 +62,8 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ lineIt
         ...(data.codeCitation !== undefined ? { codeCitation: data.codeCitation || null } : {}),
         ...(data.included !== undefined ? { included: data.included } : {}),
         ...(data.sortOrder !== undefined ? { sortOrder: data.sortOrder } : {}),
+        ...(data.isUpgrade !== undefined ? { isUpgrade: data.isUpgrade } : {}),
+        ...(data.overrideReason !== undefined ? { overrideReason: data.overrideReason || null, manualOverride: true } : {}),
         ...financials,
       },
     });

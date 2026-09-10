@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import type { ClaimDetail, LineItemDetail, RevisionDetail } from "@/lib/types";
 import { apiPost, apiPatch, apiDelete } from "@/lib/apiClient";
 import { Field, NumberInput, TextInput, Select } from "@/components/ui/Field";
-import { computeInsuranceSummary } from "@/lib/calc/estimate";
+import { computeInsuranceSummary, computeRetailSummary } from "@/lib/calc/estimate";
 import { money, num } from "@/lib/format";
 
 export function EstimateTab({ claim, onChanged }: { claim: ClaimDetail; onChanged: () => Promise<void> }) {
@@ -75,6 +75,8 @@ function RevisionEditor({
   revision: RevisionDetail;
   onChanged: () => Promise<void>;
 }) {
+  const reportType = (claim.reportType ?? "insurance") as "insurance" | "retail";
+  const isRetail = reportType === "retail";
   const [settings, setSettings] = useState({
     label: revision.label ?? "",
     status: revision.status,
@@ -83,6 +85,7 @@ function RevisionEditor({
     defaultDepreciationPercent: revision.defaultDepreciationPercent,
     deductible: revision.deductible,
     priorPayments: revision.priorPayments,
+    overheadProfitPercent: revision.overheadProfitPercent,
   });
   const [savingSettings, setSavingSettings] = useState(false);
   const [addingItem, setAddingItem] = useState(false);
@@ -127,9 +130,13 @@ function RevisionEditor({
   }
 
   const items = [...revision.lineItems].sort((a, b) => a.sortOrder - b.sortOrder);
-  const summary = useMemo(
-    () => computeInsuranceSummary(items, settings.deductible, settings.priorPayments),
-    [items, settings.deductible, settings.priorPayments]
+  const insuranceSummary = useMemo(
+    () => computeInsuranceSummary(items, settings.deductible, settings.priorPayments, settings.overheadProfitPercent),
+    [items, settings.deductible, settings.priorPayments, settings.overheadProfitPercent]
+  );
+  const retailSummary = useMemo(
+    () => computeRetailSummary(items, { overheadProfitPercent: settings.overheadProfitPercent }),
+    [items, settings.overheadProfitPercent]
   );
 
   return (
@@ -152,12 +159,20 @@ function RevisionEditor({
           <Field label="Tax Rate %">
             <NumberInput value={settings.taxRatePercent} onValueChange={(v) => setSettings((s) => ({ ...s, taxRatePercent: v ?? 0 }))} />
           </Field>
-          <Field label="Deductible ($)">
-            <NumberInput value={settings.deductible} onValueChange={(v) => setSettings((s) => ({ ...s, deductible: v ?? 0 }))} />
-          </Field>
-          <Field label="Prior Payments ($)">
-            <NumberInput value={settings.priorPayments} onValueChange={(v) => setSettings((s) => ({ ...s, priorPayments: v ?? 0 }))} />
-          </Field>
+          {isRetail ? (
+            <Field label="Overhead &amp; Profit %">
+              <NumberInput value={settings.overheadProfitPercent} onValueChange={(v) => setSettings((s) => ({ ...s, overheadProfitPercent: v ?? 0 }))} />
+            </Field>
+          ) : (
+            <>
+              <Field label="Deductible ($)">
+                <NumberInput value={settings.deductible} onValueChange={(v) => setSettings((s) => ({ ...s, deductible: v ?? 0 }))} />
+              </Field>
+              <Field label="Prior Payments ($)">
+                <NumberInput value={settings.priorPayments} onValueChange={(v) => setSettings((s) => ({ ...s, priorPayments: v ?? 0 }))} />
+              </Field>
+            </>
+          )}
         </div>
         <div className="flex justify-end mt-4">
           <button onClick={saveSettings} disabled={savingSettings} className="brd-btn-gold rounded-sm px-4 py-2 text-sm">
@@ -180,16 +195,22 @@ function RevisionEditor({
                 <th className="py-2 pr-2 w-24">Unit Price</th>
                 <th className="py-2 pr-2 w-24">Tax Rate %</th>
                 <th className="py-2 pr-2 w-24">Tax</th>
-                <th className="py-2 pr-2 w-24">RCV</th>
-                <th className="py-2 pr-2 w-20">Depr. %</th>
-                <th className="py-2 pr-2 w-24">Depr. $</th>
-                <th className="py-2 pr-2 w-24">ACV</th>
+                <th className="py-2 pr-2 w-24">{isRetail ? "Amount" : "RCV"}</th>
+                {isRetail ? (
+                  <th className="py-2 pr-2 w-20">Upgrade</th>
+                ) : (
+                  <>
+                    <th className="py-2 pr-2 w-20">Depr. %</th>
+                    <th className="py-2 pr-2 w-24">Depr. $</th>
+                    <th className="py-2 pr-2 w-24">ACV</th>
+                  </>
+                )}
                 <th className="py-2"></th>
               </tr>
             </thead>
             <tbody>
               {items.map((li) => (
-                <LineItemRow key={li.id} item={li} onUpdate={updateItem} onRemove={removeItem} />
+                <LineItemRow key={li.id} item={li} isRetail={isRetail} onUpdate={updateItem} onRemove={removeItem} />
               ))}
             </tbody>
           </table>
@@ -220,21 +241,40 @@ function RevisionEditor({
       </div>
 
       <div className="brd-card rounded-sm p-6 max-w-xl ml-auto">
-        <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide mb-4">
-          Insurance Summary — Contractor-Prepared Insurance Restoration Estimate
-        </h2>
-        <dl className="text-sm space-y-2">
-          <Row label="Line-Item Subtotal" value={money(summary.lineItemSubtotal)} />
-          <Row label="Material Sales Tax" value={money(summary.materialSalesTax)} />
-          <Row label="Replacement Cost Value (RCV)" value={money(summary.rcv)} bold />
-          <Row label="Depreciation" value={money(summary.depreciation)} />
-          <Row label="Actual Cash Value (ACV)" value={money(summary.acv)} bold />
-          <Row label="Deductible" value={money(summary.deductible)} />
-          <Row label="Prior Payments" value={money(summary.priorPayments)} />
-          <Row label="Net Claim (due now)" value={money(summary.netClaim)} bold accent />
-          <Row label="Recoverable Depreciation" value={money(summary.recoverableDepreciation)} />
-          <Row label="Remaining Balance (upon completion)" value={money(summary.remainingBalance)} />
-        </dl>
+        {isRetail ? (
+          <>
+            <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide mb-4">
+              Retail Summary — Premium Roof Replacement Proposal
+            </h2>
+            <dl className="text-sm space-y-2">
+              <Row label="Base Contract" value={money(retailSummary.baseContract)} />
+              <Row label="Selected Upgrades" value={money(retailSummary.upgradesTotal)} />
+              <Row label="Material Sales Tax" value={money(retailSummary.materialSalesTax)} />
+              <Row label="Permit Allowance" value={money(retailSummary.permitAllowance)} />
+              <Row label="Overhead &amp; Profit" value={money(retailSummary.overheadProfit)} />
+              <Row label="Discount" value={money(-retailSummary.discount)} />
+              <Row label="Total Contract Price" value={money(retailSummary.totalContractPrice)} bold accent />
+            </dl>
+          </>
+        ) : (
+          <>
+            <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide mb-4">
+              Insurance Summary — Contractor-Prepared Insurance Restoration Estimate
+            </h2>
+            <dl className="text-sm space-y-2">
+              <Row label="Line-Item Subtotal" value={money(insuranceSummary.lineItemSubtotal)} />
+              <Row label="Material Sales Tax" value={money(insuranceSummary.materialSalesTax)} />
+              <Row label="Replacement Cost Value (RCV)" value={money(insuranceSummary.rcv)} bold />
+              <Row label="Depreciation" value={money(insuranceSummary.depreciation)} />
+              <Row label="Actual Cash Value (ACV)" value={money(insuranceSummary.acv)} bold />
+              <Row label="Deductible" value={money(insuranceSummary.deductible)} />
+              <Row label="Prior Payments" value={money(insuranceSummary.priorPayments)} />
+              <Row label="Net Claim (due now)" value={money(insuranceSummary.netClaim)} bold accent />
+              <Row label="Recoverable Depreciation" value={money(insuranceSummary.recoverableDepreciation)} />
+              <Row label="Remaining Balance (upon completion)" value={money(insuranceSummary.remainingBalance)} />
+            </dl>
+          </>
+        )}
       </div>
     </div>
   );
@@ -242,10 +282,12 @@ function RevisionEditor({
 
 function LineItemRow({
   item,
+  isRetail,
   onUpdate,
   onRemove,
 }: {
   item: LineItemDetail;
+  isRetail: boolean;
   onUpdate: (id: string, patch: Record<string, unknown>) => Promise<void>;
   onRemove: (id: string) => Promise<void>;
 }) {
@@ -288,11 +330,23 @@ function LineItemRow({
       </td>
       <td className="py-2 pr-2 pt-3.5">{money(item.taxAmount)}</td>
       <td className="py-2 pr-2 pt-3.5 font-medium">{money(item.rcv)}</td>
-      <td className="py-2 pr-2">
-        <NumberInput value={item.depreciationPercent} onValueChange={(v) => onUpdate(item.id, { depreciationPercent: v ?? 0 })} />
-      </td>
-      <td className="py-2 pr-2 pt-3.5">{money(item.depreciationAmount)}</td>
-      <td className="py-2 pr-2 pt-3.5 font-medium">{money(item.acv)}</td>
+      {isRetail ? (
+        <td className="py-2 pr-2 pt-3">
+          <input
+            type="checkbox"
+            checked={item.isUpgrade}
+            onChange={(e) => onUpdate(item.id, { isUpgrade: e.target.checked })}
+          />
+        </td>
+      ) : (
+        <>
+          <td className="py-2 pr-2">
+            <NumberInput value={item.depreciationPercent} onValueChange={(v) => onUpdate(item.id, { depreciationPercent: v ?? 0 })} />
+          </td>
+          <td className="py-2 pr-2 pt-3.5">{money(item.depreciationAmount)}</td>
+          <td className="py-2 pr-2 pt-3.5 font-medium">{money(item.acv)}</td>
+        </>
+      )}
       <td className="py-2 pt-3.5">
         <button onClick={() => onRemove(item.id)} className="text-brd-danger text-xs">
           ✕

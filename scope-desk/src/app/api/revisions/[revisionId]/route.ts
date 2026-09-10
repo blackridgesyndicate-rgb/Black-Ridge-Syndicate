@@ -65,6 +65,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ revisi
             : {}),
           ...(data.deductible !== undefined ? { deductible: data.deductible } : {}),
           ...(data.priorPayments !== undefined ? { priorPayments: data.priorPayments } : {}),
+          ...(data.overheadProfitPercent !== undefined ? { overheadProfitPercent: data.overheadProfitPercent } : {}),
         },
       });
 

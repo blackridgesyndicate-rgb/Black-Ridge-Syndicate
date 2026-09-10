@@ -6,18 +6,26 @@ import { apiPost } from "@/lib/apiClient";
 import { Select } from "@/components/ui/Field";
 import { dateStr } from "@/lib/format";
 
-const DOCUMENT_OPTIONS: { type: string; label: string; needsRevision?: boolean; needsSupplement?: boolean }[] = [
-  { type: "insurance_estimate", label: "Contractor-Prepared Insurance Estimate", needsRevision: true },
-  { type: "measurement_summary", label: "Measurement Summary" },
-  { type: "code_report", label: "Code-Enforcement Report" },
-  { type: "weather_report", label: "Weather-History Report" },
-  { type: "supplement_request", label: "Supplement Request", needsSupplement: true },
-  { type: "homeowner_proposal", label: "Homeowner Proposal", needsRevision: true },
-  { type: "material_order", label: "Material Order", needsRevision: true },
-  { type: "invoice", label: "Invoice", needsRevision: true },
+const DOCUMENT_OPTIONS: {
+  type: string;
+  label: string;
+  needsRevision?: boolean;
+  needsSupplement?: boolean;
+  reportTypes: ("insurance" | "retail")[];
+}[] = [
+  { type: "insurance_estimate", label: "Contractor-Prepared Insurance Restoration Estimate", needsRevision: true, reportTypes: ["insurance"] },
+  { type: "measurement_summary", label: "Measurement Summary", reportTypes: ["insurance", "retail"] },
+  { type: "code_report", label: "Code-Enforcement Report", reportTypes: ["insurance", "retail"] },
+  { type: "weather_report", label: "Weather-History Report", reportTypes: ["insurance", "retail"] },
+  { type: "supplement_request", label: "Supplement Request", needsSupplement: true, reportTypes: ["insurance"] },
+  { type: "homeowner_proposal", label: "Premium Roof Replacement Proposal", needsRevision: true, reportTypes: ["retail"] },
+  { type: "material_order", label: "Material Order", needsRevision: true, reportTypes: ["insurance", "retail"] },
+  { type: "invoice", label: "Invoice", needsRevision: true, reportTypes: ["insurance", "retail"] },
 ];
 
 export function DocumentsTab({ claim, onChanged }: { claim: ClaimDetail; onChanged: () => Promise<void> }) {
+  const reportType = (claim.reportType ?? "insurance") as "insurance" | "retail";
+  const availableOptions = DOCUMENT_OPTIONS.filter((opt) => opt.reportTypes.includes(reportType));
   const revisions = [...claim.revisions].sort((a, b) => b.revisionNumber - a.revisionNumber);
   const [revisionId, setRevisionId] = useState(revisions[0]?.id ?? "");
   const [supplementId, setSupplementId] = useState(claim.supplements[0]?.id ?? "");
@@ -75,7 +83,7 @@ export function DocumentsTab({ claim, onChanged }: { claim: ClaimDetail; onChang
         )}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {DOCUMENT_OPTIONS.map((opt) => {
+          {availableOptions.map((opt) => {
             const disabled =
               (opt.needsRevision && !revisionId) || (opt.needsSupplement && !supplementId) || generating === opt.type;
             return (
