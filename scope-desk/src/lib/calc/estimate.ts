@@ -300,16 +300,21 @@ export interface InitialLineItem {
   rcv: number;
   depreciationAmount: number;
   acv: number;
+  retailTierKeys: string | null;
+  isUpgrade: boolean;
 }
 
-/** Builds the initial set of line items for a brand-new estimate revision from the active price list. */
+/** Builds the initial set of line items for a brand-new estimate revision from the (already
+ * state/tier-resolved) price list. `reportType` picks between the price list's insurance-specific,
+ * retail-specific, or default unit price — see PriceListItem.insuranceUnitPrice/retailUnitPrice. */
 export function buildInitialLineItems(
   priceList: PriceListItem[],
   measurement: Measurement | null,
   accessories: Accessory[],
   wastePercent: number,
   taxRatePercent: number,
-  defaultDepreciationPercent: number
+  defaultDepreciationPercent: number,
+  reportType: "insurance" | "retail" = "insurance"
 ): InitialLineItem[] {
   return priceList
     .filter((p) => p.active)
@@ -319,13 +324,15 @@ export function buildInitialLineItems(
         measurement && p.calcRule?.includes("install") ? { ...measurement, wastePercent } : measurement;
       const calcQty = calculateQuantityForRule(p.calcRule, effectiveMeasurement, accessories);
       const quantity = calcQty ?? 0;
+      const unitPrice =
+        (reportType === "insurance" ? p.insuranceUnitPrice : p.retailUnitPrice) ?? p.defaultUnitPrice;
       const financials = computeLineItemFinancials({
         quantity,
-        unitPrice: p.defaultUnitPrice,
+        unitPrice,
         taxable: p.taxable,
         taxableMaterialAmount: null,
         taxRatePercent: p.taxable ? taxRatePercent : 0,
-        depreciationPercent: p.defaultDepreciationPercent || defaultDepreciationPercent,
+        depreciationPercent: reportType === "retail" ? 0 : p.defaultDepreciationPercent || defaultDepreciationPercent,
       });
       return {
         category: p.category,
@@ -334,14 +341,16 @@ export function buildInitialLineItems(
         quantity,
         calculatedQuantity: calcQty,
         quantityOverridden: false,
-        unitPrice: p.defaultUnitPrice,
+        unitPrice,
         taxable: p.taxable,
         taxRatePercent: p.taxable ? taxRatePercent : 0,
         codeCitation: p.codeCitation ?? null,
         included: true,
         sortOrder: idx,
         priceListItemCode: p.code,
-        depreciationPercent: p.defaultDepreciationPercent || defaultDepreciationPercent,
+        depreciationPercent: reportType === "retail" ? 0 : p.defaultDepreciationPercent || defaultDepreciationPercent,
+        retailTierKeys: p.retailTierKeys ?? null,
+        isUpgrade: p.standardOrUpgrade === "upgrade",
         ...financials,
       };
     });

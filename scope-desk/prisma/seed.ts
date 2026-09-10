@@ -7,7 +7,15 @@ const db = new PrismaClient();
 // Unit prices below are calibrated from a real contractor-submitted
 // insurance estimate (ScopeConnect / price list ILCC8X_AUG26, Illinois,
 // August 2026) rather than invented figures, so a generated estimate lines
-// up with real-world Xactimate-style pricing for this market.
+// up with real-world Xactimate-style pricing for this market. These rows
+// are seeded with state=null (the universal/default assembly) rather than
+// scoped to "IL" specifically: the pricing was calibrated for Illinois, but
+// the products themselves (GAF's national shingle/component line) aren't
+// state-exclusive, and REGIONALLY_REVIEWED_STATES (src/lib/productAssembly.ts)
+// records that only this Illinois-calibrated data has been reviewed —
+// claims in other states use the same rows unreviewed until an admin adds
+// real state-scoped overrides via the price-list editor (no code change
+// required — see resolvePriceListForState()).
 const PRICE_LIST = [
   {
     category: "Removal",
@@ -39,6 +47,18 @@ const PRICE_LIST = [
     calcRule: "ice_water_barrier_sf",
     codeCitation: "IRC R905.1.2",
     sortOrder: 30,
+    manufacturer: "GAF",
+    productName: "WeatherWatch Ice & Water Shield",
+    technicalFunction: "Self-adhering waterproof membrane that seals around fastener penetrations, preventing water intrusion from ice damming at eaves and from concentrated runoff in valleys.",
+    reasonSelected: "legally_required_code",
+    compatibleSystems: "GAF Timberline HDZ laminate shingle system",
+    applicablePitches: "2/12 and greater",
+    climateSuitability: "Cold/mixed-humid climate — required in areas with a history of ice damming at the eaves per IRC R905.1.2.",
+    codeRelevance: "IRC R905.1.2 (ice barrier)",
+    installReference: "GAF WeatherWatch installation instructions — verify current edition at manufacturer site.",
+    warrantyRelevance: "Required component of GAF System Plus / Golden Pledge warranty coverage.",
+    standardOrUpgrade: "standard",
+    dataSheetUrl: "https://www.gaf.com",
   },
   {
     category: "Underlayment",
@@ -60,6 +80,16 @@ const PRICE_LIST = [
     taxable: true,
     calcRule: "starter_lf",
     sortOrder: 50,
+    manufacturer: "GAF",
+    productName: "Pro-Start Starter Strip Shingles",
+    technicalFunction: "Factory-applied adhesive starter course at eaves and rakes that seals the first course of field shingles against wind uplift and provides a straight, protected roof edge.",
+    reasonSelected: "required_by_manufacturer",
+    compatibleSystems: "GAF Timberline HDZ laminate shingle system",
+    climateSuitability: "General use — wind-uplift performance benefits high-wind-exposure markets.",
+    installReference: "GAF Pro-Start application instructions — verify current edition at manufacturer site.",
+    warrantyRelevance: "GAF requires a GAF starter product for enhanced wind-warranty coverage.",
+    standardOrUpgrade: "standard",
+    dataSheetUrl: "https://www.gaf.com",
   },
   {
     category: "Components",
@@ -90,6 +120,18 @@ const PRICE_LIST = [
     taxable: true,
     calcRule: "install_squares",
     sortOrder: 80,
+    manufacturer: "GAF",
+    productName: "Timberline HDZ Laminate Shingles",
+    technicalFunction: "Primary weatherproof roof covering — a laminated (dimensional) asphalt shingle providing the field roofing surface, wind resistance, and algae-resistant granule surfacing.",
+    reasonSelected: "company_standard",
+    compatibleSystems: "GAF Pro-Start starter, Seal-A-Ridge hip/ridge cap, WeatherWatch ice barrier, FeltBuster/synthetic underlayment",
+    applicablePitches: "2/12 and greater (4/12+ for standard exposure)",
+    climateSuitability: "LayerLock adhesive technology rated for high-wind markets; suitable for IL's mixed-humid, freeze-thaw climate.",
+    codeRelevance: "ASTM D3462, Class A fire rating, UL 2218 Class 4 impact-resistant variant available",
+    installReference: "GAF Timberline HDZ application instructions — verify current edition at manufacturer site.",
+    warrantyRelevance: "Eligible for GAF System Plus and Golden Pledge extended warranties when installed with qualifying GAF accessories by a certified contractor.",
+    standardOrUpgrade: "standard",
+    dataSheetUrl: "https://www.gaf.com",
   },
   {
     category: "Roofing",
@@ -181,6 +223,15 @@ const PRICE_LIST = [
     taxable: true,
     calcRule: "hip_ridge_cap_lf",
     sortOrder: 170,
+    manufacturer: "GAF",
+    productName: "Seal-A-Ridge Hip & Ridge Cap Shingles",
+    technicalFunction: "High-profile cap shingle engineered specifically for hip and ridge lines, sealing the roof's most wind-exposed edges against wind-driven rain.",
+    reasonSelected: "required_by_manufacturer",
+    compatibleSystems: "GAF Timberline HDZ laminate shingle system",
+    installReference: "GAF Seal-A-Ridge application instructions — verify current edition at manufacturer site.",
+    warrantyRelevance: "GAF requires a matching GAF hip/ridge product for System Plus and Golden Pledge warranty eligibility.",
+    standardOrUpgrade: "standard",
+    dataSheetUrl: "https://www.gaf.com",
   },
   {
     category: "Ventilation",
@@ -191,6 +242,16 @@ const PRICE_LIST = [
     taxable: true,
     calcRule: "ridge_vent_lf",
     sortOrder: 180,
+    manufacturer: "GAF",
+    productName: "Cobra Ridge Vent",
+    technicalFunction: "Rigid, externally baffled exhaust vent installed along the ridge that provides continuous, balanced attic exhaust ventilation when paired with soffit/eave intake.",
+    reasonSelected: "recommended_climate_performance",
+    compatibleSystems: "GAF Timberline HDZ laminate shingle system, GAF Seal-A-Ridge cap",
+    climateSuitability: "Balanced attic ventilation reduces winter ice-damming and summer heat buildup — particularly relevant in IL's cold/mixed-humid climate.",
+    installReference: "GAF Cobra Ridge Vent installation instructions — verify current edition at manufacturer site; requires matched net-free-area intake ventilation to function as designed.",
+    warrantyRelevance: "Contributes to GAF System Plus warranty eligibility as part of a complete GAF ventilation system.",
+    standardOrUpgrade: "standard",
+    dataSheetUrl: "https://www.gaf.com",
   },
   {
     category: "Accessories",
@@ -257,7 +318,7 @@ async function main() {
   console.log(`Price list seeded: ${PRICE_LIST.length} items.`);
 
   const existingClaim = await db.claim.findFirst({
-    where: { claimNumber: "IL-2024-88451" },
+    where: { claimNumber: "IL-2026-88451" },
   });
   if (existingClaim) {
     console.log("Sample claim already exists — skipping sample data.");

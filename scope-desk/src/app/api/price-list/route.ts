@@ -31,6 +31,10 @@ export async function POST(req: Request) {
         calcRule: data.calcRule ?? null,
         sortOrder: data.sortOrder ?? (maxSort._max.sortOrder ?? 0) + 1,
         active: data.active ?? true,
+        state: data.state || null,
+        manufacturer: data.manufacturer || null,
+        productName: data.productName || null,
+        reasonSelected: data.reasonSelected || null,
       },
     });
     return NextResponse.json({ item }, { status: 201 });

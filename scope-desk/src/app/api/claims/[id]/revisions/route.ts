@@ -2,13 +2,17 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { requireUser, handleApiError, ApiError } from "@/lib/api";
 import { buildInitialLineItems, type InitialLineItem } from "@/lib/calc/estimate";
+import { resolvePriceListForState, filterForRetailTier } from "@/lib/productAssembly";
 
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     await requireUser();
     const { id: claimId } = await params;
 
-    const claim = await db.claim.findUnique({ where: { id: claimId } });
+    const claim = await db.claim.findUnique({
+      where: { id: claimId },
+      include: { property: true, retailIntake: true },
+    });
     if (!claim) throw new ApiError(404, "Claim not found");
 
     const body = await req.json().catch(() => ({}));
@@ -56,13 +60,21 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         depreciationAmount: li.depreciationAmount,
         acv: li.acv,
         notes: li.notes,
+        retailTierKeys: li.retailTierKeys,
+        isUpgrade: li.isUpgrade,
       }));
     } else {
-      const [priceList, measurement, accessories] = await Promise.all([
-        db.priceListItem.findMany({ where: { active: true } }),
+      const [resolvedPriceList, measurement, accessories] = await Promise.all([
+        resolvePriceListForState(claim.property.state),
         db.measurement.findUnique({ where: { claimId } }),
         db.accessory.findMany({ where: { claimId } }),
       ]);
+      // Retail: only items scoped to the selected tier (or unscoped, i.e.
+      // base-included-in-every-tier) go onto the estimate.
+      const priceList =
+        claim.reportType === "retail"
+          ? filterForRetailTier(resolvedPriceList, claim.retailIntake?.selectedTierKey)
+          : resolvedPriceList;
       wastePercent = measurement?.wastePercent ?? wastePercent;
       lineItemsToCreate = buildInitialLineItems(
         priceList,
@@ -70,7 +82,8 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         accessories,
         wastePercent,
         taxRatePercent,
-        defaultDepreciationPercent
+        defaultDepreciationPercent,
+        claim.reportType as "insurance" | "retail"
       );
     }
 

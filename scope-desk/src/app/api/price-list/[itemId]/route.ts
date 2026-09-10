@@ -22,6 +22,26 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ itemId
         ...(data.codeCitation !== undefined ? { codeCitation: data.codeCitation || null } : {}),
         ...(data.sortOrder !== undefined ? { sortOrder: data.sortOrder } : {}),
         ...(data.active !== undefined ? { active: data.active } : {}),
+        ...(data.state !== undefined ? { state: data.state || null } : {}),
+        ...(data.insuranceUnitPrice !== undefined ? { insuranceUnitPrice: data.insuranceUnitPrice } : {}),
+        ...(data.retailUnitPrice !== undefined ? { retailUnitPrice: data.retailUnitPrice } : {}),
+        ...(data.internalCostPrice !== undefined ? { internalCostPrice: data.internalCostPrice } : {}),
+        ...(data.manufacturer !== undefined ? { manufacturer: data.manufacturer || null } : {}),
+        ...(data.productName !== undefined ? { productName: data.productName || null } : {}),
+        ...(data.technicalFunction !== undefined ? { technicalFunction: data.technicalFunction || null } : {}),
+        ...(data.reasonSelected !== undefined ? { reasonSelected: data.reasonSelected || null } : {}),
+        ...(data.compatibleSystems !== undefined ? { compatibleSystems: data.compatibleSystems || null } : {}),
+        ...(data.applicablePitches !== undefined ? { applicablePitches: data.applicablePitches || null } : {}),
+        ...(data.climateSuitability !== undefined ? { climateSuitability: data.climateSuitability || null } : {}),
+        ...(data.codeRelevance !== undefined ? { codeRelevance: data.codeRelevance || null } : {}),
+        ...(data.installReference !== undefined ? { installReference: data.installReference || null } : {}),
+        ...(data.warrantyRelevance !== undefined ? { warrantyRelevance: data.warrantyRelevance || null } : {}),
+        ...(data.dataSheetUrl !== undefined ? { dataSheetUrl: data.dataSheetUrl || null } : {}),
+        ...(data.infoVerifiedDate !== undefined
+          ? { infoVerifiedDate: data.infoVerifiedDate ? new Date(data.infoVerifiedDate) : null }
+          : {}),
+        ...(data.standardOrUpgrade !== undefined ? { standardOrUpgrade: data.standardOrUpgrade } : {}),
+        ...(data.retailTierKeys !== undefined ? { retailTierKeys: data.retailTierKeys || null } : {}),
       },
     });
     return NextResponse.json({ item });

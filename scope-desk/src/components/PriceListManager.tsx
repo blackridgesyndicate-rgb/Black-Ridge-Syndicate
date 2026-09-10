@@ -3,7 +3,8 @@
 import { useState } from "react";
 import type { PriceListItem } from "@prisma/client";
 import { apiPost, apiPatch, apiDelete } from "@/lib/apiClient";
-import { Field, TextInput, NumberInput } from "@/components/ui/Field";
+import { Field, TextInput, NumberInput, Select } from "@/components/ui/Field";
+import { REASON_SELECTED_LABELS } from "@/lib/productReasons";
 
 export function PriceListManager({ initialItems }: { initialItems: PriceListItem[] }) {
   const [items, setItems] = useState(initialItems);
@@ -66,6 +67,9 @@ export function PriceListManager({ initialItems }: { initialItems: PriceListItem
                   <th className="py-2 pr-3 w-20">Unit</th>
                   <th className="py-2 pr-3 w-32">Unit Price</th>
                   <th className="py-2 pr-3">Code Citation</th>
+                  <th className="py-2 pr-3 w-16">State</th>
+                  <th className="py-2 pr-3">Manufacturer / Product</th>
+                  <th className="py-2 pr-3 w-56">Why Selected</th>
                   <th className="py-2"></th>
                 </tr>
               </thead>
@@ -83,6 +87,34 @@ export function PriceListManager({ initialItems }: { initialItems: PriceListItem
                     </td>
                     <td className="py-2 pr-3">
                       <TextInput defaultValue={item.codeCitation ?? ""} onBlur={(e) => update(item.id, { codeCitation: e.target.value })} />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <TextInput
+                        defaultValue={item.state ?? ""}
+                        placeholder="all"
+                        onBlur={(e) => update(item.id, { state: e.target.value.toUpperCase() || null })}
+                      />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <TextInput
+                        defaultValue={[item.manufacturer, item.productName].filter(Boolean).join(" — ")}
+                        placeholder="Manufacturer — Product name"
+                        onBlur={(e) => {
+                          const [manufacturer, ...rest] = e.target.value.split("—").map((s) => s.trim());
+                          update(item.id, { manufacturer: manufacturer || null, productName: rest.join("—") || null });
+                        }}
+                      />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <Select
+                        value={item.reasonSelected ?? ""}
+                        onChange={(e) => update(item.id, { reasonSelected: e.target.value || null })}
+                      >
+                        <option value="">—</option>
+                        {Object.entries(REASON_SELECTED_LABELS).map(([key, label]) => (
+                          <option key={key} value={key}>{label}</option>
+                        ))}
+                      </Select>
                     </td>
                     <td className="py-2">
                       <button onClick={() => deactivate(item.id)} className="text-brd-danger text-xs">Deactivate</button>
