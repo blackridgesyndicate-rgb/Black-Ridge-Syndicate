@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ClaimDetail } from "@/lib/types";
-import { apiPost, apiDelete } from "@/lib/apiClient";
+import { apiPost, apiDelete, apiUpload } from "@/lib/apiClient";
 import { Field, TextInput, NumberInput, Select, TextArea, ComingSoon } from "@/components/ui/Field";
 import { dateStr } from "@/lib/format";
 
@@ -29,6 +29,27 @@ export function WeatherTab({ claim, onChanged }: { claim: ClaimDetail; onChanged
     notes: "",
   });
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadMsg, setUploadMsg] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  async function handleUpload(file: File) {
+    setUploading(true);
+    setUploadMsg(null);
+    try {
+      const fd = new FormData();
+      fd.append("kind", "weather_report");
+      fd.append("file", file);
+      const result = await apiUpload(`/api/claims/${claim.id}/upload`, fd);
+      setUploadMsg((result.warnings ?? []).join(" "));
+      await onChanged();
+    } catch (err) {
+      setUploadMsg((err as Error).message);
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  }
 
   async function add() {
     if (!form.eventDate) return;
@@ -54,16 +75,34 @@ export function WeatherTab({ claim, onChanged }: { claim: ClaimDetail; onChanged
           <div>
             <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide">Weather-Event History</h2>
             <p className="text-sm text-brd-text-dim mt-1 max-w-2xl">
-              Enter events from NOAA/NWS/NCEI sources. Always record the evidence level honestly — a nearby
-              weather event alone does not prove hail struck this roof.
+              Enter events from NOAA/NWS/NCEI sources, or upload a verified weather-history report. Always record
+              the evidence level honestly — a nearby weather event alone does not prove hail struck this roof.
             </p>
           </div>
           <div className="text-right shrink-0">
-            <ComingSoon label="Automated NOAA Lookup — Coming Soon" />
+            <ComingSoon label="Automated NOAA API Lookup — Coming Soon" />
             <p className="text-xs text-brd-text-dim mt-1 max-w-[220px]">
-              Requires a connected NOAA/NCEI data integration. Enter events manually below for now.
+              Live NOAA/NCEI API calls aren&apos;t wired up yet. Upload a report PDF below, or enter events manually.
             </p>
           </div>
+        </div>
+
+        <div className="mb-5 pb-5 border-b border-brd-border">
+          <p className="brd-eyebrow mb-2">Upload Weather-History Report</p>
+          <div className="flex items-center gap-3 flex-wrap">
+            <input
+              ref={fileRef}
+              type="file"
+              accept=".pdf"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) handleUpload(file);
+              }}
+              className="text-sm text-brd-text-dim file:mr-3 file:brd-btn-ghost file:rounded-sm file:border file:px-3 file:py-1.5 file:text-sm"
+            />
+            {uploading && <span className="text-xs text-brd-text-dim">Processing…</span>}
+          </div>
+          {uploadMsg && <p className="text-sm text-brd-gold-bright mt-3">{uploadMsg}</p>}
         </div>
 
         {claim.weatherEvents.length > 0 && (

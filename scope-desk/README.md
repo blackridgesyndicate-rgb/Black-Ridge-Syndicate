@@ -29,7 +29,13 @@ file storage, and real PDF generation. Nothing here is a mockup.
 - **Parser providers** — `src/lib/parsers/` defines a `ReportParser` interface with
   implementations for PDF (GAF QuickMeasure / EagleView / Roofr / generic — label-driven regex
   extraction over `pdf-parse` text), CSV, and XML. Unrecognized fields are never guessed; they're
-  left blank and flagged `needs_review` for manual entry.
+  left blank and flagged `needs_review` for manual entry. Two more standalone parsers
+  (`codeReportParser.ts`, `weatherReportParser.ts`) handle uploading a jurisdiction/code
+  verification report (tuned to the OneClick Code "Residential Roofing Report" layout) and a
+  verified weather-history report (tuned to the Predictive Sales AI layout) from the Code Report
+  and Weather tabs — both run automatically on either upload, since some vendors bundle both
+  sections into one PDF, and both were built and verified against real report samples rather than
+  a synthetic test file.
 - **PDF generation** — `@react-pdf/renderer`, fully server-side (`src/lib/pdf/`), branded with the
   Black Ridge matte-black/charcoal/champagne-gold theme. All 8 document types (insurance estimate,
   measurement summary, code report, weather report, supplement request, homeowner proposal,
@@ -124,9 +130,11 @@ would need real external services to automate:
 
 - **Automated NOAA/NWS/NCEI weather lookups.** The Weather tab's data model and manual-entry form
   are fully functional (event date, hail size, wind speed, evidence level, confidence, source
-  URL). Automatically pulling storm events from NOAA's public APIs is marked "Coming Soon" — it's
-  a straightforward addition (the NCEI Storm Events API is public/keyless) but wasn't wired up
-  automatically to avoid making unverified network calls against a real address without your
+  URL), and uploading a verified weather-history report PDF (tuned to the Predictive Sales AI
+  format) auto-populates it. What's still marked "Coming Soon" is a *live* NOAA/NCEI API call
+  made automatically from just an address — it's a straightforward addition (the NCEI Storm
+  Events API is public/keyless) but wasn't wired up automatically to avoid making unverified
+  network calls against a real address without your
   sign-off, and to keep the tool from ever fabricating a weather record.
 - **Address-only roof measurement generation.** This app intentionally does **not** scrape or
   call GAF QuickMeasure, EagleView, Roofr, Google Maps, or any other imagery/measurement provider

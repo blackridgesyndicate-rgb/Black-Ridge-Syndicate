@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ClaimDetail } from "@/lib/types";
-import { apiPatch } from "@/lib/apiClient";
+import { apiPatch, apiUpload } from "@/lib/apiClient";
 import { Field, TextInput, TextArea } from "@/components/ui/Field";
-import { dateInputValue } from "@/lib/format";
+import { dateInputValue, dateStr } from "@/lib/format";
 
 const FIELDS: { key: string; label: string; area?: boolean }[] = [
   { key: "authorityHavingJurisdiction", label: "Authority Having Jurisdiction (AHJ)" },
@@ -38,9 +38,30 @@ export function CodeReportTab({ claim, onChanged }: { claim: ClaimDetail; onChan
   const [verified, setVerified] = useState(cr?.verified ?? false);
   const [saving, setSaving] = useState(false);
   const [savedAt, setSavedAt] = useState<number | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadMsg, setUploadMsg] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   function set(k: string, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
+  }
+
+  async function handleUpload(file: File) {
+    setUploading(true);
+    setUploadMsg(null);
+    try {
+      const fd = new FormData();
+      fd.append("kind", "code_report");
+      fd.append("file", file);
+      const result = await apiUpload(`/api/claims/${claim.id}/upload`, fd);
+      setUploadMsg((result.warnings ?? []).join(" "));
+      await onChanged();
+    } catch (err) {
+      setUploadMsg((err as Error).message);
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
   }
 
   async function save() {
@@ -54,8 +75,48 @@ export function CodeReportTab({ claim, onChanged }: { claim: ClaimDetail; onChan
     }
   }
 
+  const codeReportFiles = claim.files.filter((f) => f.kind === "code_report");
+
   return (
-    <div className="brd-card rounded-sm p-6 space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-4xl">
+      <div className="brd-card rounded-sm p-6">
+        <h2 className="text-sm font-semibold text-brd-gold-bright uppercase tracking-wide mb-2">
+          Upload Code-Verification Report
+        </h2>
+        <p className="text-sm text-brd-text-dim mb-3">
+          Accepts an address-specific jurisdiction/code verification report PDF (e.g. OneClick Code). Recognized
+          fields are imported automatically and can still be edited below; anything not found is left as
+          &ldquo;Verification required&rdquo; rather than guessed.
+        </p>
+        <div className="flex items-center gap-3 flex-wrap">
+          <input
+            ref={fileRef}
+            type="file"
+            accept=".pdf"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) handleUpload(file);
+            }}
+            className="text-sm text-brd-text-dim file:mr-3 file:brd-btn-ghost file:rounded-sm file:border file:px-3 file:py-1.5 file:text-sm"
+          />
+          {uploading && <span className="text-xs text-brd-text-dim">Processing…</span>}
+        </div>
+        {uploadMsg && <p className="text-sm text-brd-gold-bright mt-3">{uploadMsg}</p>}
+        {codeReportFiles.length > 0 && (
+          <ul className="text-xs text-brd-text-dim mt-3 space-y-1">
+            {codeReportFiles.map((f) => (
+              <li key={f.id}>
+                {dateStr(f.uploadedAt)} —{" "}
+                <a href={`/api/files/${f.id}`} target="_blank" rel="noreferrer" className="text-brd-gold-bright hover:underline">
+                  {f.filename}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className="brd-card rounded-sm p-6 space-y-6">
       <div>
         <h2 className="brd-heading text-xl text-brd-text">Code-Enforcement Report</h2>
         <p className="text-sm text-brd-text-dim mt-1">
@@ -110,6 +171,7 @@ export function CodeReportTab({ claim, onChanged }: { claim: ClaimDetail; onChan
             Unverified
           </span>
         )}
+      </div>
       </div>
     </div>
   );

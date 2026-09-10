@@ -60,6 +60,8 @@ export function newStorageKey(claimId: string, originalFilename: string): string
 export const ALLOWED_UPLOAD_TYPES: Record<string, string[]> = {
   measurement_report: [".pdf", ".xml", ".csv"],
   carrier_estimate: [".pdf", ".xml", ".csv"],
+  code_report: [".pdf"],
+  weather_report: [".pdf"],
   photo: [".jpg", ".jpeg", ".png", ".webp", ".heic"],
   other: [".pdf", ".jpg", ".jpeg", ".png", ".webp", ".csv", ".xml", ".txt"],
 };

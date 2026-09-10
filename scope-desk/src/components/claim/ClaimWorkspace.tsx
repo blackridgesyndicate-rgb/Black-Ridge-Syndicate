@@ -41,12 +41,18 @@ export function ClaimWorkspace({ initialClaim }: { initialClaim: ClaimDetail }) 
   const [claim, setClaim] = useState<ClaimDetail>(initialClaim);
   const [tab, setTab] = useState<TabKey>("overview");
   const [refreshing, setRefreshing] = useState(false);
+  // Several tabs seed local form state from `claim` once (so typing doesn't
+  // fight a live prop). Bumping this on every refresh and using it as each
+  // tab's `key` forces a clean remount so an upload's extracted fields show
+  // up immediately even if the user never leaves the tab.
+  const [dataVersion, setDataVersion] = useState(0);
 
   const refresh = useCallback(async () => {
     setRefreshing(true);
     try {
       const data = await apiGet(`/api/claims/${initialClaim.id}`);
       setClaim(data.claim);
+      setDataVersion((v) => v + 1);
     } finally {
       setRefreshing(false);
     }
@@ -86,14 +92,14 @@ export function ClaimWorkspace({ initialClaim }: { initialClaim: ClaimDetail }) 
         ))}
       </div>
 
-      {tab === "overview" && <OverviewTab claim={claim} onChanged={refresh} />}
-      {tab === "measurements" && <MeasurementsTab claim={claim} onChanged={refresh} />}
-      {tab === "accessories" && <AccessoriesTab claim={claim} onChanged={refresh} />}
-      {tab === "estimate" && <EstimateTab claim={claim} onChanged={refresh} />}
-      {tab === "code" && <CodeReportTab claim={claim} onChanged={refresh} />}
-      {tab === "weather" && <WeatherTab claim={claim} onChanged={refresh} />}
-      {tab === "supplement" && <SupplementTab claim={claim} onChanged={refresh} />}
-      {tab === "documents" && <DocumentsTab claim={claim} onChanged={refresh} />}
+      {tab === "overview" && <OverviewTab key={dataVersion} claim={claim} onChanged={refresh} />}
+      {tab === "measurements" && <MeasurementsTab key={dataVersion} claim={claim} onChanged={refresh} />}
+      {tab === "accessories" && <AccessoriesTab key={dataVersion} claim={claim} onChanged={refresh} />}
+      {tab === "estimate" && <EstimateTab key={dataVersion} claim={claim} onChanged={refresh} />}
+      {tab === "code" && <CodeReportTab key={dataVersion} claim={claim} onChanged={refresh} />}
+      {tab === "weather" && <WeatherTab key={dataVersion} claim={claim} onChanged={refresh} />}
+      {tab === "supplement" && <SupplementTab key={dataVersion} claim={claim} onChanged={refresh} />}
+      {tab === "documents" && <DocumentsTab key={dataVersion} claim={claim} onChanged={refresh} />}
     </div>
   );
 }
