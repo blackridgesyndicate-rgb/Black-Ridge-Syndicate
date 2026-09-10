@@ -1,9 +1,8 @@
 import type { Accessory, Measurement, PriceListItem } from "@prisma/client";
 import { computeDerivedQuantities } from "@/lib/calc/measurements";
+import { d, toMoney, round2, roundMoney, lineTotal, lineTotalUnrounded, percentOf, sumMoney, type RoundingMode } from "@/lib/calc/money";
 
-export function round2(n: number): number {
-  return Math.round((n + Number.EPSILON) * 100) / 100;
-}
+export { round2 } from "@/lib/calc/money";
 
 /**
  * Given a price-list item's calcRule key, determine the system-suggested
@@ -111,11 +110,18 @@ export interface LineItemFinancials {
   taxableMaterialAmount: number;
   taxAmount: number;
   rcv: number;
+  rcvUnrounded: number;
   depreciationAmount: number;
   acv: number;
 }
 
-/** Recomputes all money fields for a single line item. Pure function — safe to call on every edit. */
+/**
+ * Recomputes all money fields for a single line item using decimal-safe
+ * arithmetic throughout (no intermediate float multiplication/division).
+ * Pure function — safe to call on every edit. `rcvUnrounded` preserves the
+ * pre-rounding value for audit even though `rcv` (rounded per `roundingMode`)
+ * is the figure used everywhere else in the app.
+ */
 export function computeLineItemFinancials(input: {
   quantity: number;
   unitPrice: number;
@@ -123,21 +129,33 @@ export function computeLineItemFinancials(input: {
   taxableMaterialAmount: number | null; // null = derive default (full line amount when taxable)
   taxRatePercent: number;
   depreciationPercent: number;
+  roundingMode?: RoundingMode;
 }): LineItemFinancials {
-  const lineTotal = input.quantity * input.unitPrice;
-  const taxableMaterialAmount = round2(
-    input.taxableMaterialAmount ?? (input.taxable ? lineTotal : 0)
+  const mode = input.roundingMode ?? "nearest_cent";
+  const total = d(input.quantity).times(d(input.unitPrice));
+  const taxableMaterialAmount = toMoney(
+    input.taxableMaterialAmount != null ? d(input.taxableMaterialAmount) : input.taxable ? total : d(0),
+    mode
   );
-  const taxAmount = round2(taxableMaterialAmount * (input.taxRatePercent / 100));
-  const rcv = round2(lineTotal + taxAmount);
-  const depreciationAmount = round2(lineTotal * (input.depreciationPercent / 100));
-  const acv = round2(rcv - depreciationAmount);
-  return { taxableMaterialAmount, taxAmount, rcv, depreciationAmount, acv };
+  const taxAmount = percentOf(taxableMaterialAmount, input.taxRatePercent);
+  const rcvDecimal = total.plus(d(taxAmount));
+  const rcv = toMoney(rcvDecimal, mode);
+  const depreciationAmount = percentOf(lineTotal(input.quantity, input.unitPrice), input.depreciationPercent);
+  const acv = toMoney(rcvDecimal.minus(d(depreciationAmount)), mode);
+  return {
+    taxableMaterialAmount,
+    taxAmount,
+    rcv,
+    rcvUnrounded: rcvDecimal.toNumber(),
+    depreciationAmount,
+    acv,
+  };
 }
 
 export interface InsuranceSummary {
   lineItemSubtotal: number;
   materialSalesTax: number;
+  overheadProfit: number;
   rcv: number;
   depreciation: number;
   acv: number;
@@ -148,31 +166,116 @@ export interface InsuranceSummary {
   remainingBalance: number;
 }
 
+/**
+ * Every sum below runs through decimal-safe arithmetic (sumMoney/percentOf)
+ * rather than reduce()-ing raw floats, so a multi-page estimate's totals
+ * can't drift from the sum of what's printed on each line.
+ */
 export function computeInsuranceSummary(
   lineItems: { quantity: number; unitPrice: number; taxAmount: number; rcv: number; depreciationAmount: number; acv: number; included: boolean }[],
   deductible: number,
-  priorPayments: number
+  priorPayments: number,
+  overheadProfitPercent = 0,
+  roundingMode: RoundingMode = "nearest_cent"
 ): InsuranceSummary {
   const included = lineItems.filter((li) => li.included);
-  const lineItemSubtotal = round2(included.reduce((s, li) => s + li.quantity * li.unitPrice, 0));
-  const materialSalesTax = round2(included.reduce((s, li) => s + li.taxAmount, 0));
-  const rcv = round2(included.reduce((s, li) => s + li.rcv, 0));
-  const depreciation = round2(included.reduce((s, li) => s + li.depreciationAmount, 0));
-  const acv = round2(included.reduce((s, li) => s + li.acv, 0));
-  const netClaim = round2(acv - deductible - priorPayments);
-  const recoverableDepreciation = round2(depreciation);
-  const remainingBalance = round2(rcv - deductible - priorPayments - netClaim);
+  const lineItemSubtotal = sumMoney(
+    included.map((li) => lineTotalUnrounded(li.quantity, li.unitPrice)),
+    roundingMode
+  );
+  const materialSalesTax = sumMoney(included.map((li) => li.taxAmount), roundingMode);
+  const overheadProfit = percentOf(lineItemSubtotal, overheadProfitPercent);
+  const rcv = toMoney(d(sumMoney(included.map((li) => li.rcv), roundingMode)).plus(d(overheadProfit)), roundingMode);
+  const depreciation = sumMoney(included.map((li) => li.depreciationAmount), roundingMode);
+  const acv = toMoney(d(rcv).minus(d(depreciation)), roundingMode);
+  const netClaim = toMoney(d(acv).minus(d(deductible)).minus(d(priorPayments)), roundingMode);
+  const recoverableDepreciation = roundMoney(depreciation, roundingMode);
+  const remainingBalance = toMoney(d(rcv).minus(d(deductible)).minus(d(priorPayments)).minus(d(netClaim)), roundingMode);
   return {
     lineItemSubtotal,
     materialSalesTax,
+    overheadProfit,
     rcv,
     depreciation,
     acv,
-    deductible: round2(deductible),
-    priorPayments: round2(priorPayments),
+    deductible: roundMoney(deductible, roundingMode),
+    priorPayments: roundMoney(priorPayments, roundingMode),
     netClaim,
     recoverableDepreciation,
     remainingBalance,
+  };
+}
+
+export interface RetailSummary {
+  baseContract: number;
+  upgradesTotal: number;
+  discount: number;
+  materialSalesTax: number;
+  permitAllowance: number;
+  overheadProfit: number;
+  totalContractPrice: number;
+  depositAmount: number;
+  progressPaymentAmount: number;
+  finalBalance: number;
+}
+
+/**
+ * Retail proposals never carry ACV, depreciation, deductible, prior
+ * payments, or carrier-comparison figures — this summary shape deliberately
+ * has no fields for them so a retail PDF can't accidentally render
+ * insurance-only language.
+ */
+export function computeRetailSummary(
+  lineItems: { quantity: number; unitPrice: number; taxAmount: number; isUpgrade: boolean; included: boolean }[],
+  opts: {
+    discountAmount?: number;
+    permitAllowance?: number;
+    overheadProfitPercent?: number;
+    depositPercent?: number;
+    progressPaymentPercent?: number;
+    roundingMode?: RoundingMode;
+  } = {}
+): RetailSummary {
+  const mode = opts.roundingMode ?? "nearest_cent";
+  const included = lineItems.filter((li) => li.included);
+  const base = included.filter((li) => !li.isUpgrade);
+  const upgrades = included.filter((li) => li.isUpgrade);
+
+  const baseContract = sumMoney(base.map((li) => lineTotalUnrounded(li.quantity, li.unitPrice)), mode);
+  const upgradesTotal = sumMoney(upgrades.map((li) => lineTotalUnrounded(li.quantity, li.unitPrice)), mode);
+  const materialSalesTax = sumMoney(included.map((li) => li.taxAmount), mode);
+  const discount = roundMoney(opts.discountAmount ?? 0, mode);
+  const permitAllowance = roundMoney(opts.permitAllowance ?? 0, mode);
+  const overheadProfit = percentOf(d(baseContract).plus(d(upgradesTotal)).toNumber(), opts.overheadProfitPercent ?? 0);
+
+  const totalContractPrice = toMoney(
+    d(baseContract)
+      .plus(d(upgradesTotal))
+      .plus(d(materialSalesTax))
+      .plus(d(permitAllowance))
+      .plus(d(overheadProfit))
+      .minus(d(discount)),
+    mode
+  );
+
+  const depositAmount = percentOf(totalContractPrice, opts.depositPercent ?? 0);
+  const progressPaymentAmount = percentOf(totalContractPrice, opts.progressPaymentPercent ?? 0);
+  const finalBalance = toMoney(
+    d(totalContractPrice).minus(d(depositAmount)).minus(d(progressPaymentAmount)),
+    mode
+  );
+
+  return {
+    baseContract,
+    upgradesTotal,
+    discount,
+    materialSalesTax,
+    permitAllowance,
+    overheadProfit,
+    totalContractPrice,
+    depositAmount,
+    progressPaymentAmount,
+    finalBalance,
   };
 }
 
