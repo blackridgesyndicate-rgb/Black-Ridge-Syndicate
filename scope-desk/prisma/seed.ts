@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { computeLineItemFinancials, calculateQuantityForRule, round2 } from "../src/lib/calc/estimate";
+import { computeLineItemFinancials, calculateQuantityForRule, buildInitialLineItems, round2 } from "../src/lib/calc/estimate";
+import { mergeByState } from "../src/lib/productAssemblyCore";
 
 const db = new PrismaClient();
 
@@ -321,9 +322,8 @@ async function main() {
     where: { claimNumber: "IL-2026-88451" },
   });
   if (existingClaim) {
-    console.log("Sample claim already exists — skipping sample data.");
-    return;
-  }
+    console.log("Insurance sample claim already exists — skipping.");
+  } else {
 
   const customer = await db.customer.create({
     data: { name: "Martin & Diane Callahan", phone: "(847) 555-0148", email: "mcallahan@example.com" },
@@ -723,6 +723,168 @@ async function main() {
   });
 
   console.log(`Sample claim created for 3950 Peartree Drive (claim id: ${claim.id}).`);
+  }
+
+  // ---------------------------------------------------------------------
+  // Retail sample claim — exercises the non-insurance pathway end to end
+  // (RetailIntake, retail tiers, retail line-item pricing, no ACV/
+  // depreciation/deductible anywhere in its data).
+  // ---------------------------------------------------------------------
+
+  const existingRetailTiers = await db.retailTier.count();
+  if (existingRetailTiers === 0) {
+    await db.retailTier.createMany({
+      data: [
+        { key: "good", label: "Good", position: 0, description: "Solid, code-compliant base system." },
+        { key: "better", label: "Better", position: 1, description: "Upgraded shingle line and extended warranty." },
+        { key: "best", label: "Best", position: 2, description: "Top-tier system with maximum warranty coverage." },
+      ],
+    });
+    console.log("Retail tiers seeded: Good / Better / Best.");
+  }
+
+  const existingRetailClaim = await db.claim.findFirst({ where: { reportType: "retail", estimator: user.name } });
+  if (existingRetailClaim) {
+    console.log("Retail sample claim already exists — skipping.");
+  } else {
+
+  const retailCustomer = await db.customer.create({
+    data: { name: "Robert & Ellen Marsh", phone: "(847) 555-0212", email: "rmarsh@example.com" },
+  });
+  const retailProperty = await db.property.create({
+    data: {
+      customerId: retailCustomer.id,
+      addressLine1: "812 Windham Court",
+      city: "Crystal Lake",
+      state: "IL",
+      zip: "60014",
+    },
+  });
+  const retailClaim = await db.claim.create({
+    data: {
+      propertyId: retailProperty.id,
+      reportType: "retail",
+      estimator: user.name,
+      inspectionDate: new Date("2026-08-25"),
+      status: "estimating",
+      createdById: user.id,
+    },
+  });
+
+  await db.retailIntake.create({
+    data: {
+      claimId: retailClaim.id,
+      desiredSystem: "GAF Timberline HDZ laminate shingles",
+      desiredManufacturer: "GAF",
+      shingleStyleColor: "Charcoal",
+      warrantySelection: "GAF Golden Pledge (50-yr, transferable)",
+      ventilationPreference: "Ridge vent with soffit intake",
+      financingInterest: true,
+      requestedTimeframe: "Within 60 days",
+      knownLeaksConcerns: "Minor granule loss noted near the chimney; no active leaks reported by the homeowner.",
+      existingRoofInfo: "Original 25-year architectural shingles installed circa 2003, never replaced.",
+      budgetRangeMin: 18000,
+      budgetRangeMax: 24000,
+      selectedTierKey: "better",
+    },
+  });
+
+  const retailMeasurement = await db.measurement.create({
+    data: {
+      claimId: retailClaim.id,
+      roofAreaSqFt: 1842,
+      measuredSquares: 18.42,
+      facets: 8,
+      predominantPitch: "6/12",
+      pitchAreasJson: JSON.stringify([
+        { pitch: "4/12", areaSqFt: 412 },
+        { pitch: "6/12", areaSqFt: 1430 },
+      ]),
+      eaves: 84,
+      rakes: 122,
+      ridges: 58,
+      hips: 0,
+      valleys: 22,
+      stepFlashingLength: 24,
+      apronFlashingLength: 0,
+      dripEdgeLength: 206,
+      wastePercent: 10,
+      membraneWidthFeet: 3,
+      fieldSourceJson: JSON.stringify(
+        Object.fromEntries(
+          [
+            "roofAreaSqFt", "measuredSquares", "facets", "predominantPitch", "eaves", "rakes", "ridges", "hips",
+            "valleys", "stepFlashingLength", "dripEdgeLength",
+          ].map((k) => [k, "manual"])
+        )
+      ),
+    },
+  });
+
+  await db.accessory.createMany({
+    data: [
+      { claimId: retailClaim.id, type: "pipe_jack", quantity: 3 },
+      { claimId: retailClaim.id, type: "ridge_vent", quantity: 58, unit: "lf" },
+    ],
+  });
+
+  await db.inspectionFinding.create({
+    data: {
+      claimId: retailClaim.id,
+      category: "slopes",
+      location: "Chimney-adjacent field, south slope",
+      damageType: "wear",
+      description: "Granule loss and early-stage shingle curling consistent with age, not storm damage.",
+      notes: "Homeowner-requested retail replacement — no insurance claim involved.",
+    },
+  });
+
+  const [retailAllPriceList, retailAccessories] = await Promise.all([
+    db.priceListItem.findMany({ where: { active: true } }),
+    db.accessory.findMany({ where: { claimId: retailClaim.id } }),
+  ]);
+  const retailResolvedPriceList = mergeByState(retailAllPriceList, retailProperty.state);
+  const retailLineItems = buildInitialLineItems(
+    retailResolvedPriceList,
+    retailMeasurement,
+    retailAccessories,
+    10,
+    8.5,
+    0,
+    "retail"
+  );
+
+  await db.estimateRevision.create({
+    data: {
+      claimId: retailClaim.id,
+      revisionNumber: 1,
+      label: "Revision 1 — Better Package",
+      status: "draft",
+      wastePercent: 10,
+      taxRatePercent: 8.5,
+      defaultDepreciationPercent: 0,
+      deductible: 0,
+      priorPayments: 0,
+      retailTierKey: "better",
+      lineItems: { create: retailLineItems },
+    },
+  });
+
+  // No third-party jurisdiction verification report was purchased for this
+  // retail job — seeded honestly as outstanding rather than reused from a
+  // different municipality (Lake in the Hills' citations do not apply
+  // here). Demonstrates the "JURISDICTION VERIFICATION REQUIRED" fallback.
+  await db.codeCitation.createMany({
+    data: [
+      { claimId: retailClaim.id, requirementKey: "ice_barrier", verificationStatus: "verification_required" },
+      { claimId: retailClaim.id, requirementKey: "drip_edge", verificationStatus: "verification_required" },
+      { claimId: retailClaim.id, requirementKey: "permit", verificationStatus: "verification_required" },
+      { claimId: retailClaim.id, requirementKey: "sales_tax", verificationStatus: "verification_required" },
+    ],
+  });
+
+  console.log(`Retail sample claim created for 812 Windham Court (claim id: ${retailClaim.id}).`);
+  }
 }
 
 main()
