@@ -175,6 +175,7 @@ function CoverPage({
 
       <View style={cover.photoFrame}>
         {coverPhoto ? (
+          // eslint-disable-next-line jsx-a11y/alt-text -- @react-pdf/renderer's Image is a PDF primitive, not a DOM <img>; it has no alt prop.
           <Image src={coverPhoto} style={cover.photo} />
         ) : (
           <Text style={cover.photoPlaceholder}>Property Photograph Not Yet Available</Text>
