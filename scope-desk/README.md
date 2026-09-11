@@ -72,6 +72,7 @@ STORAGE_ROOT="./storage_private"
 STRIPE_SECRET_KEY="sk_test_..."          # from the Stripe Dashboard — required to accept payment
 STRIPE_WEBHOOK_SECRET="whsec_..."        # from the webhook endpoint's settings in the Stripe Dashboard
 APP_BASE_URL="http://localhost:3000"     # used to build Stripe Checkout's success/cancel URLs
+PERPLEXITY_API_KEY="pplx-..."            # from the Perplexity API Console — required for AI Router calls
 ```
 
 ### Payment (Stripe)
@@ -96,6 +97,41 @@ the order paid and calls `fulfillPaidOrder()` (`src/lib/orderFulfillment.ts`), w
 finds-or-creates the Customer, creates the Property and Claim (with `reportType` and the
 customer's intake answers already populated), and shows up immediately on the staff **Orders**
 page (`/orders`) with a link to the new job.
+
+### AI (Perplexity Router)
+
+`src/lib/perplexity.ts` wraps [Perplexity's Router API](https://docs.perplexity.ai/docs/gateway/quickstart),
+which serves frontier models (Claude, GPT, Gemini, ...) behind two provider-compatible schemas so
+the app can swap models without switching SDKs or providers:
+
+- `perplexityChatCompletion()` — OpenAI SDK against `https://api.perplexity.ai/router/v1`
+  (`POST /chat/completions`).
+- `perplexityMessage()` — Anthropic SDK against `https://api.perplexity.ai/router` (the Anthropic
+  SDK appends `/v1/messages` itself).
+- `listPerplexityModels()` — this key's tier-aware model catalog from `GET /router/v1/models`.
+  Always resolve a `creator/model-name` slug (e.g. `anthropic/claude-sonnet-5`) against this list
+  rather than hardcoding one — an unlisted slug returns 400, a tier-excluded model returns 402.
+
+The Perplexity SDK is intentionally **not** used — it targets the separate, web-grounded Agent API,
+not the Router. Without a real `PERPLEXITY_API_KEY`, the rest of the app works normally; only calls
+into `src/lib/perplexity.ts` fail, with a clear error naming the missing key.
+
+To wire up a real key:
+
+1. Create a key at the [API Console](https://console.perplexity.ai) and copy it into
+   `PERPLEXITY_API_KEY`. Never commit a real key or paste it anywhere outside your own `.env` /
+   shell environment; if one is ever exposed, rotate it in the console.
+2. Restart the dev server so the new environment variable is picked up.
+
+`GET /api/ai/router-test` (staff-only) lists this key's model catalog; `POST /api/ai/router-test`
+sends one prompt through either schema — a smoke test for the integration, not a customer feature:
+
+```bash
+curl -s http://localhost:3000/api/ai/router-test \
+  -H "Content-Type: application/json" \
+  --cookie "<your session cookie>" \
+  -d '{"schema":"chat","model":"anthropic/claude-sonnet-5","prompt":"Say hello in five words."}'
+```
 
 ## Deployment
 

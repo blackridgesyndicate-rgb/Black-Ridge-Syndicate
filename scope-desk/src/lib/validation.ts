@@ -268,3 +268,10 @@ export const priceListItemSchema = z.object({
   standardOrUpgrade: z.string().optional(),
   retailTierKeys: z.string().nullable().optional(),
 });
+
+export const perplexityRouterTestSchema = z.object({
+  schema: z.enum(["chat", "messages"]).default("chat"),
+  model: z.string().min(1, "Model slug is required, e.g. anthropic/claude-sonnet-5"),
+  prompt: z.string().min(1, "Prompt is required"),
+  maxTokens: z.number().int().positive().max(4096).optional(),
+});
