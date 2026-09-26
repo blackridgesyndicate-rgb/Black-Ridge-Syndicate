@@ -154,6 +154,7 @@ footer.foot { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--r
 <button class="tab" role="tab" id="tab-diagnosis" data-target="diagnosis" aria-controls="diagnosis">Why I missed</button>
 <button class="tab" role="tab" id="tab-schedule" data-target="schedule" aria-controls="schedule">Schedule</button>
 <button class="tab" role="tab" id="tab-safety" data-target="safety" aria-controls="safety">1 · Safety</button>
+<button class="tab" role="tab" id="tab-materials" data-target="materials" aria-controls="materials">2 · Prep &amp; Materials</button>
   </nav>
 
   <main>
@@ -196,13 +197,13 @@ footer.foot { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--r
 <td>3</td>
 <td><code>04-guide-sec2-prep-materials.md</code></td>
 <td>Guide §2 Roofing Preparation &amp; Materials (20 Q)</td>
-<td>⏳ Next</td>
+<td>✅ Done</td>
 </tr>
 <tr>
 <td>4</td>
 <td><code>05-guide-sec3-steep-slope.md</code></td>
 <td>Guide §3 Steep-Slope Systems (35 Q)</td>
-<td>⏳</td>
+<td>⏳ Next</td>
 </tr>
 <tr>
 <td>5</td>
@@ -1855,6 +1856,649 @@ Everything in the two tables above, plus: 1,800 lb / 3.5 ft / 6 ft (PFAS) · 42 
 - "Required" or "permitted" means OSHA text; "recommended" or "best practice" means NRCA.
 - When two answers are both legal, the BEST answer usually <strong>eliminates</strong> the hazard (de-energize, guardrail) rather than relying on behavior (monitor, "be careful").
 - Always ask: <em>what comes first?</em> Usually <strong>stop the work / make it safe → inspect → then continue</strong>.</p>
+</aside></section>
+<section class="panel" role="tabpanel" id="materials" aria-labelledby="tab-materials"><h1>Study Guide — Section 2: Roofing Preparation &amp; Materials (20 questions, 15% of exam)</h1>
+<p><strong>CTS references most likely behind this section (NOT READ, paywalled):</strong> <em>The NRCA Roofing Manual</em> (all four volumes: decks, underlayments, insulation, storage), Atcheson's <em>Roofing Construction and Estimating</em> (quantities), and the NRCA asbestos guide.</p>
+<p><strong>What I used instead:</strong> ASTM standard designations (titles and scope are public), APA (Engineered Wood Association) public guidance, model-code text (IRC/IBC, flagged <strong>[JURISDICTION]</strong>), NRCA public articles, and manufacturer instructions (flagged <strong>[MANUFACTURER]</strong>).</p>
+<p>Flags work the same as in Section 1. <strong>[NRCA-P]</strong> means NRCA practice as widely published; I could not check it against the manual itself.</p>
+<hr />
+<h2>2.1 Roof decks: types, what "acceptable" means, and inspection</h2>
+<h3>Plain English</h3>
+<p>The deck is the structural surface the roof system goes on. The roofer does not <em>design</em> the deck. The roofer does have to confirm it is <strong>suitable to receive roofing</strong> before starting, and report problems in writing.</p>
+<h3>Deck types you must recognize</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Deck</th>
+<th>What it is</th>
+<th>Key roofing concerns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plywood / OSB panels</strong></td>
+<td>Wood structural panels with an APA span rating (e.g., "24/16" = 24 in max roof support spacing / 16 in floor)</td>
+<td>Panel thickness vs. rafter spacing. <strong>Edge support</strong> between rafters (H-clips or tongue-and-groove). <strong>⅛-in gap</strong> at panel ends and edges for expansion (APA). Moisture content. Delamination. Nail pops</td>
+</tr>
+<tr>
+<td><strong>Board (plank) sheathing</strong></td>
+<td>Nominal 1×6 or 1×8 boards</td>
+<td>Gaps, cupped or split boards, knotholes. <strong>Spaced sheathing</strong> is used under wood shakes and shingles (IRC R905.7.1) <strong>[JURISDICTION]</strong></td>
+</tr>
+<tr>
+<td><strong>Steel deck</strong></td>
+<td>Corrugated/ribbed steel. Most common is <strong>wide-rib ("Type B") 1½ in deep</strong></td>
+<td>Gauge (<strong>22 ga</strong> is the common minimum for roof systems, per NRCA/FM practice), attachment to joists (welds or screws), sidelap fastening. <strong>Insulation must be rigid enough to span the flutes</strong> [MANUFACTURER/FM]. Rust, deflection</td>
+</tr>
+<tr>
+<td><strong>Structural concrete</strong> (cast-in-place or precast)</td>
+<td>Normal- or lightweight-aggregate structural concrete</td>
+<td><strong>Moisture in the slab</strong> (lightweight structural concrete holds water for a long time). Surface must be dry, smooth, and cured. Prime before hot asphalt (ASTM D41 primer). Precast joints need to be grouted or stripped</td>
+</tr>
+<tr>
+<td><strong>Lightweight insulating concrete (LWIC)</strong></td>
+<td>Cellular or perlite/vermiculite aggregate fill, poured over a vented steel form deck</td>
+<td>Must cure and dry. Base sheet is <strong>mechanically fastened with LWIC-specific fasteners</strong> (not mopped solid). Needs venting paths <strong>[MANUFACTURER]</strong></td>
+</tr>
+<tr>
+<td><strong>Poured gypsum / gypsum plank</strong></td>
+<td>Gypsum-based decks, mostly older buildings</td>
+<td>Moisture-sensitive; special fasteners; don't flood with water</td>
+</tr>
+<tr>
+<td><strong>Cementitious wood fiber</strong> (e.g., "Tectum"-type)</td>
+<td>Wood fiber bonded with cement</td>
+<td>Fastener pull-out capacity; keep dry</td>
+</tr>
+</tbody>
+</table></div>
+<h3>What the roofer sees / decision tested</h3>
+<ul>
+<li><strong>Before starting:</strong> is the deck dry, clean, smooth, securely fastened, free of ridges, depressions, and debris, and adequately sloped to drains?</li>
+<li><strong>If defects are found:</strong> document them and <strong>notify the owner or general contractor in writing before proceeding.</strong> Many contracts treat starting work as acceptance of the substrate. This is <strong>INFERENCE</strong> from standard specification language; check your contract. The roofer does not decide structural adequacy, but should not roof over visibly deteriorated, wet, or overstressed decking.</li>
+<li><strong>Deflection and ponding:</strong> a deck that sags between supports will pond water. A new membrane doesn't fix that. The fix is structural (framing/deck) or <strong>tapered insulation/crickets</strong>, not heavier roofing.</li>
+</ul>
+<h3>Common wrong answers</h3>
+<ul>
+<li>"The roofer is responsible for the structural design of the deck." The designer and the owner are.</li>
+<li>"Mop the base sheet solid to LWIC." LWIC base sheets are <strong>mechanically fastened</strong>, because trapped moisture must escape.</li>
+<li>"Any insulation can go over a steel deck." It must span the flute opening without crushing; thin or soft boards fail under foot traffic.</li>
+</ul>
+<hr />
+<h2>2.2 Tear-off vs. re-cover, and moisture diagnosis before reroofing</h2>
+<h3>Code limits on re-cover (IRC R908 / IBC 1511, 2018–2021 model codes) [JURISDICTION]</h3>
+<p>A new covering may <strong>not</strong> be installed over an existing one when:</p>
+<ol>
+<li>the existing roof or covering is <strong>water-soaked</strong> or has <strong>deteriorated</strong> so it can't serve as a base;</li>
+<li>the existing covering is <strong>slate, clay, cement, or asbestos-cement tile</strong>;</li>
+<li>there are already <strong>two or more applications</strong> of any type of covering.</li>
+</ol>
+<p>There are narrow exceptions (e.g., certain metal systems, or a new separate structural system). Local amendments vary.</p>
+<p><strong>NRCA's position [NRCA-P]:</strong> complete tear-off is generally preferred. It lets you inspect the deck and remove wet materials. Re-cover is an owner/designer decision based on a condition survey.</p>
+<h3>Moisture surveys (low-slope)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>How it works</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Infrared thermography</strong></td>
+<td>Wet insulation holds heat. After a <strong>sunny day</strong>, wet areas show warmer at dusk/night</td>
+<td>Needs a dry surface, low wind, and a good solar load. Ballast and reflective surfaces limit it</td>
+</tr>
+<tr>
+<td><strong>Nuclear moisture gauge</strong></td>
+<td>Counts hydrogen (water) in the assembly with a neutron source; readings on a grid</td>
+<td>Licensed operator. Hydrogen in some insulations (e.g., foam, asphalt) raises baseline readings</td>
+</tr>
+<tr>
+<td><strong>Electrical capacitance / impedance</strong></td>
+<td>Measures the dielectric change from moisture, through the membrane</td>
+<td>Fast; shallow reading depth; affected by surface water and conductive materials</td>
+</tr>
+<tr>
+<td><strong>Core cuts</strong></td>
+<td>Physically remove a sample</td>
+<td><strong>Confirms</strong> the other methods and shows the actual assembly. Patch immediately</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Decision tested:</strong> the best way to <strong>confirm</strong> wet insulation found by an infrared scan is a <strong>core cut</strong> at the suspect area. Rescanning or "wait for the next rain" are weaker answers.</p>
+<hr />
+<h2>2.3 Material delivery, storage, and loading</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Correct storage [NRCA-P / MANUFACTURER]</th>
+<th>Tempting wrong answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Roll goods</strong> (felts, base sheets, mod-bit rolls, rolled underlayment)</td>
+<td><strong>On end</strong> (upright), on pallets, off the ground. Protect from moisture</td>
+<td>Laying rolls flat, which deforms them and causes wrinkles</td>
+</tr>
+<tr>
+<td><strong>Insulation boards</strong></td>
+<td>Off the ground on pallets, under <strong>breathable, waterproof tarps</strong>, secured against wind</td>
+<td>Relying on the factory plastic wrap. It is for shipping, not weather protection</td>
+</tr>
+<tr>
+<td><strong>Asphalt shingles</strong></td>
+<td>Flat, in a cool, dry, ventilated place. Don't stack pallets beyond the manufacturer's limit. <strong>Don't bend bundles over the ridge</strong>, especially in cold weather</td>
+<td>"Store in direct sun to soften." Bundles stick together and the granules/sealant are damaged</td>
+</tr>
+<tr>
+<td><strong>Adhesives, primers, sealants, EPDM bonding adhesive</strong></td>
+<td>Within the manufacturer's temperature range (often warm storage in cold weather). Away from ignition sources (solvents)</td>
+<td>Storing overnight on a cold roof, then using immediately</td>
+</tr>
+<tr>
+<td><strong>Metal panels</strong></td>
+<td>Off the ground, sloped to drain, kept dry. <strong>Wet-stacked</strong> panels get white rust/staining</td>
+<td>Leaving bundles flat under tarps that trap condensation</td>
+</tr>
+<tr>
+<td><strong>Rooftop loading</strong></td>
+<td><strong>Spread loads.</strong> Place over beams, columns, or bearing walls, never mid-span on the deck. Don't exceed the deck's design load. Never within 6 ft of an unguarded edge (OSHA, see §1)</td>
+<td>Stacking an entire pallet in the center of a bay</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Worked calculation: point load from a pallet</h3>
+<p>A pallet holds 42 bundles of laminated shingles at ~75 lb each <strong>[MANUFACTURER: weights vary 60–90 lb]</strong>. The pallet footprint is 4 ft × 4 ft.</p>
+<ol>
+<li>Total load = 42 × 75 lb = <strong>3,150 lb</strong></li>
+<li>Area = 4 ft × 4 ft = <strong>16 sq ft</strong></li>
+<li>Pressure = 3,150 ÷ 16 = <strong>≈ 197 psf</strong></li>
+</ol>
+<p>A typical residential roof design live load is 20 psf, and snow load may be 20–30 psf in Illinois <strong>[JURISDICTION]</strong>. A load of ~200 psf is roughly <strong>10×</strong> that design load. That's why bundles are distributed across the roof and placed near bearing points. It isn't proof of failure (structures carry safety factors), but it is the reasoning the question is testing.</p>
+<hr />
+<h2>2.4 Underlayments and felts</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Standard</th>
+<th>Use / notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Asphalt-saturated organic felt</td>
+<td><strong>ASTM D226</strong> Type I ("No. 15") / Type II ("No. 30")</td>
+<td>Traditional steep-slope underlayment. Type II is heavier. Also used as a slip sheet</td>
+</tr>
+<tr>
+<td>Asphalt-saturated felt (lighter)</td>
+<td><strong>ASTM D4869</strong> Types I–IV</td>
+<td>Steep-slope underlayment</td>
+</tr>
+<tr>
+<td><strong>Self-adhering polymer-modified bitumen</strong></td>
+<td><strong>ASTM D1970</strong></td>
+<td>Ice barrier at eaves, valleys, around penetrations. <strong>Use a high-temperature grade under metal and tile</strong> in hot-roof conditions <strong>[MANUFACTURER]</strong></td>
+</tr>
+<tr>
+<td>Synthetic underlayment</td>
+<td>Evaluated under <strong>ICC-ES AC188</strong> (report per product)</td>
+<td>Light, strong, <strong>limited UV exposure time</strong> (e.g., 30–180 days depending on product) <strong>[MANUFACTURER]</strong></td>
+</tr>
+<tr>
+<td>Glass-fiber ply felts (BUR)</td>
+<td><strong>ASTM D2178</strong> (Type IV, Type VI)</td>
+<td>Plies in built-up roofing. Type VI is heavier/stronger</td>
+</tr>
+<tr>
+<td>Base sheets (BUR/mod-bit)</td>
+<td><strong>ASTM D4601</strong> (coated glass base sheet), <strong>D2626</strong> (organic base)</td>
+<td>First ply. Nailable base sheets for wood, LWIC, and gypsum decks</td>
+</tr>
+<tr>
+<td>Roll roofing</td>
+<td><strong>ASTM D6380</strong></td>
+<td>Mineral-surfaced roll roofing (min. slope 1:12 per IRC R905.5) <strong>[JURISDICTION]</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Decision tested:</strong> a metal roof in direct sun over a self-adhered underlayment → a <strong>high-temperature-rated</strong> self-adhered underlayment. A standard grade can flow and bleed.</p>
+<hr />
+<h2>2.5 Bitumens: asphalt and coal tar</h2>
+<h3>Roofing asphalt, ASTM D312 (softening point = the temperature where it starts to flow)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Softening point (°F)</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type I</strong> ("dead level")</td>
+<td><strong>135–151</strong></td>
+<td>Dead-level or very low slopes, cool climates. Self-heals, but flows on slopes</td>
+</tr>
+<tr>
+<td><strong>Type II</strong> ("flat")</td>
+<td><strong>158–176</strong></td>
+<td>Low slopes</td>
+</tr>
+<tr>
+<td><strong>Type III</strong> ("steep")</td>
+<td><strong>185–205</strong></td>
+<td>The <strong>most commonly used</strong> BUR asphalt; moderate slopes</td>
+</tr>
+<tr>
+<td><strong>Type IV</strong> ("special steep")</td>
+<td><strong>210–225</strong></td>
+<td>Steeper slopes and hot climates</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Rule of logic:</strong> <strong>higher slope and hotter climate → higher softening point</strong>, to prevent <strong>slippage</strong> (plies sliding downslope). Exact slope limits per type depend on the reference edition and the manufacturer. <strong>Learn the ordering above for certain; treat slope cut-offs as [EDITION/MANUFACTURER].</strong></p>
+<h3>Coal tar (ASTM D450 Type I, Type III)</h3>
+<ul>
+<li>Excellent on <strong>dead-level roofs</strong> (cold-flows and self-heals; very water-resistant).</li>
+<li><strong>Incompatible with asphalt.</strong> Don't mix coal tar and asphalt materials without the manufacturer's approved separation.</li>
+<li>Coal-tar fumes are more irritating and hazardous. Minimum-slope rules differ (IBC: coal-tar BUR min. <strong>⅛:12</strong>; other membranes <strong>¼:12</strong>) <strong>[JURISDICTION]</strong>.</li>
+</ul>
+<h3>Related asphalt products</h3>
+<ul>
+<li><strong>ASTM D41 asphalt primer:</strong> applied to concrete and metal surfaces <strong>before</strong> hot asphalt or adhesives, to improve adhesion.</li>
+<li><strong>Roof cement / flashing cement</strong> (ASTM D4586, asbestos-free): trowel-grade, used for repairs and flashing. Not a substitute for proper metal/membrane flashings.</li>
+<li><strong>Cutbacks</strong> (solvent-thinned) vs. <strong>emulsions</strong> (water-based). Emulsions must not freeze before curing.</li>
+</ul>
+<h3>Hot-asphalt terms (see §1 for safety)</h3>
+<ul>
+<li><strong>EVT:</strong> apply at EVT ± 25°F.</li>
+<li><strong>Flash point:</strong> never reach it.</li>
+<li><strong>FBT (finished blowing temperature):</strong> don't hold above FBT for long.</li>
+</ul>
+<p>Heating asphalt too hot or too long <strong>lowers its softening point</strong> (it degrades the asphalt), which raises slippage risk. That is a classic "most likely cause" item.</p>
+<hr />
+<h2>2.6 Roof insulation and cover boards</h2>
+<h3>Plain English</h3>
+<p>Insulation saves energy. It also gives the membrane a smooth, firm base and can create slope (tapered systems). Different boards have different R-values, compatibility, and moisture behavior.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Board</th>
+<th>Approx. R per inch*</th>
+<th>Strengths</th>
+<th>Watch-outs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Polyisocyanurate (polyiso)</strong>, ASTM C1289</td>
+<td>≈ <strong>5.6–5.7</strong> (LTTR, rated at a 75°F mean; lower in cold weather)</td>
+<td>Highest R per inch; fire performance; takes hot asphalt and most adhesives</td>
+<td><strong>R-value drops at low temperatures</strong>; facer damage from moisture; must be kept dry</td>
+</tr>
+<tr>
+<td><strong>Extruded polystyrene (XPS)</strong>, ASTM C578</td>
+<td>≈ <strong>5.0</strong></td>
+<td>Low water absorption. Used <strong>above</strong> the membrane in <strong>protected membrane roofs (PMR)</strong></td>
+<td><strong>Melts with hot asphalt</strong>; attacked by <strong>solvents</strong> and coal-tar products</td>
+</tr>
+<tr>
+<td><strong>Expanded polystyrene (EPS)</strong>, ASTM C578</td>
+<td>≈ <strong>3.6–4.2</strong> (by density)</td>
+<td>Inexpensive; used in tapered systems</td>
+<td><strong>Same solvent/heat sensitivity as XPS.</strong> Needs a cover or separation layer</td>
+</tr>
+<tr>
+<td><strong>Mineral wool (rock wool) board</strong></td>
+<td>≈ <strong>3.7–4.2</strong></td>
+<td>Noncombustible; acoustic</td>
+<td>Heavy; absorbs water if wet</td>
+</tr>
+<tr>
+<td><strong>Perlite board</strong>, ASTM C728</td>
+<td>≈ <strong>2.6–2.8</strong></td>
+<td>Compatible with hot asphalt; good cover board over foam</td>
+<td>Low R; fragile</td>
+</tr>
+<tr>
+<td><strong>Wood fiberboard</strong>, ASTM C208</td>
+<td>≈ <strong>2.5–2.8</strong></td>
+<td>Hot-asphalt compatible; cover board</td>
+<td>Absorbs water</td>
+</tr>
+<tr>
+<td><strong>Gypsum cover board</strong>, ASTM C1177 / C1278</td>
+<td>≈ <strong>0.5 for ½ in</strong></td>
+<td>Fire, hail, and traffic resistance; substrate for adhered membranes and vapor retarders over steel</td>
+<td>Heavy; negligible R</td>
+</tr>
+<tr>
+<td><strong>Cellular glass</strong>, ASTM C552</td>
+<td>≈ <strong>3.3–3.4</strong></td>
+<td>High compressive strength; impermeable</td>
+<td>Brittle; costly</td>
+</tr>
+<tr>
+<td><strong>HD (high-density) polyiso cover board</strong></td>
+<td>≈ 2.5 for ½ in</td>
+<td>Light cover board</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>*Approximate values from typical product data sheets. <strong>Exam items usually test the ranking</strong> (polyiso &gt; XPS &gt; EPS &gt; mineral wool ≈ cellular glass &gt; perlite ≈ fiberboard &gt; gypsum), not exact decimals. <strong>[MANUFACTURER]</strong></p>
+<h3>Installation practice [NRCA-P]</h3>
+<ul>
+<li><strong>Two or more layers with joints staggered/offset</strong> between layers. This reduces thermal bridging and air paths through joints.</li>
+<li><strong>Don't install more insulation than can be covered with membrane the same day.</strong> At day's end, install <strong>temporary water cut-offs / night seals</strong> and <strong>remove them</strong> before resuming, so they don't become buried dams.</li>
+<li><strong>Attachment:</strong> mechanically fastened (screws and plates, with the pattern set by wind zone), adhered (hot asphalt for compatible boards, or low-rise foam adhesive in beads), or loose-laid under ballast.</li>
+<li><strong>Cover board</strong> over foam insulation is recommended under <strong>adhered</strong> membranes and where traffic, hail, or fire rating matters.</li>
+</ul>
+<h3>Worked calculation: total R-value</h3>
+<p>An assembly has two layers of 2.0-in polyiso at R-5.7/in, plus a ½-in gypsum cover board at R-0.5. Is it R-25?</p>
+<ol>
+<li>Polyiso: 2 layers × 2.0 in × 5.7 = <strong>22.8</strong></li>
+<li>Cover board: <strong>0.5</strong></li>
+<li>Total ≈ <strong>23.3.</strong> That is short of R-25 by 1.7.</li>
+<li>Extra polyiso needed = 1.7 ÷ 5.7 = <strong>0.30 in</strong>. In practice you'd go to a thicker layer (e.g., 2.0 in + 2.5 in = 4.5 in → 25.65 + 0.5 = <strong>26.2</strong>).</li>
+</ol>
+<p>(Energy-code R-values for commercial roofs come from the Illinois Energy Conservation Code / IECC <strong>[JURISDICTION/EDITION]</strong>.)</p>
+<h3>Worked calculation: tapered insulation</h3>
+<p>A drain sits at the low point, and the high point is 36 ft away. The slope is ¼ in per ft.</p>
+<ol>
+<li>Rise = 36 ft × 0.25 in/ft = <strong>9 in</strong></li>
+<li>With a <strong>1-in minimum starter thickness</strong> at the drain, the high-side thickness = 1 + 9 = <strong>10 in</strong> of taper, plus any flat base layers.</li>
+<li><strong>At ⅛ in/ft</strong> the rise would be only 4.5 in. But <strong>¼:12 is the common minimum for positive drainage</strong> (IBC 1507 for membranes) <strong>[JURISDICTION]</strong>, and NRCA recommends designing for ¼:12.</li>
+</ol>
+<hr />
+<h2>2.7 Vapor retarders, air barriers, and condensation basics</h2>
+<h3>Definitions (model-code classes) [JURISDICTION]</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Permeance</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Class I</strong></td>
+<td><strong>≤ 0.1 perm</strong></td>
+<td>Polyethylene sheet, foil facers, some modified-bitumen vapor retarders</td>
+</tr>
+<tr>
+<td><strong>Class II</strong></td>
+<td><strong>&gt; 0.1 to ≤ 1.0 perm</strong></td>
+<td>Kraft facing, some self-adhered membranes</td>
+</tr>
+<tr>
+<td><strong>Class III</strong></td>
+<td><strong>&gt; 1.0 to ≤ 10 perm</strong></td>
+<td>Latex paint</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Rules of thumb</h3>
+<ul>
+<li><strong>Location:</strong> on the <strong>warm-in-winter side</strong> of the insulation. In an Illinois heated building, that is <strong>below the insulation</strong>, on the deck side.</li>
+<li><strong>When one is needed on a low-slope roof [NRCA-P, widely cited]:</strong> consider a vapor retarder when the <strong>outside mean January temperature is below 40°F</strong> and <strong>interior winter RH is 45% or greater</strong>. Always evaluate <strong>high-humidity occupancies</strong> (pools, laundries, paper mills, food processing, wet manufacturing). All of Illinois has January means below 40°F. <strong>[EDITION]</strong>: recent NRCA guidance leans on a dew-point/hygrothermal analysis by the designer.</li>
+<li><strong>Air leakage moves far more moisture than vapor diffusion.</strong> Unsealed deck penetrations and perimeter gaps cause condensation. The 2026 NRCA volume title itself, "…Condensation and <strong>Air Leakage</strong> Control," reflects that emphasis.</li>
+<li><strong>Over steel decks:</strong> install a <strong>substrate board</strong> (e.g., gypsum) on the flutes first, then the vapor retarder, then insulation.</li>
+<li><strong>Dew point:</strong> the temperature at which air becomes saturated and water condenses. If any layer in the assembly is colder than the indoor air's dew point, and moist air can reach it, condensation forms there.</li>
+</ul>
+<p><strong>Diagnosis pattern:</strong> drips or ceiling stains in <strong>cold, dry weather</strong> that stop when it warms up, with no rain → <strong>condensation/air leakage</strong>, not a membrane leak.</p>
+<hr />
+<h2>2.8 Metals, fasteners, and corrosion</h2>
+<h3>The galvanic series in plain English</h3>
+<p>When two different metals touch in the presence of water, the <strong>less noble (anodic)</strong> metal corrodes.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>More anodic (corrodes) →</th>
+<th>→ More cathodic (protected)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Zinc / galvanized coating → aluminum → steel/iron → lead → tin → copper → stainless (passive)</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Problem</th>
+<th>Correct approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Copper runoff onto galvanized or aluminum</strong> (gutters, flashings downstream)</td>
+<td>Copper ions attack zinc and aluminum</td>
+<td>Don't drain copper onto them. Use compatible metals downstream</td>
+</tr>
+<tr>
+<td><strong>Aluminum against ACQ/CA pressure-treated lumber</strong></td>
+<td>The copper-based treatment corrodes aluminum</td>
+<td>Separation membrane, or use a compatible metal</td>
+</tr>
+<tr>
+<td><strong>Fasteners in treated lumber</strong></td>
+<td>Rapid corrosion</td>
+<td><strong>Hot-dip galvanized (ASTM A153)</strong> or <strong>stainless</strong> fasteners <strong>[MANUFACTURER / IRC R317.3]</strong></td>
+</tr>
+<tr>
+<td><strong>Galvalume (aluminum-zinc) panels against wet concrete, mortar, or lead</strong></td>
+<td>Alkaline or lead contact attacks the coating</td>
+<td>Isolate</td>
+</tr>
+<tr>
+<td><strong>Zinc or galvanized under red cedar</strong></td>
+<td>Tannic acid corrodes zinc</td>
+<td>Use copper or stainless flashings</td>
+</tr>
+<tr>
+<td><strong>Copper flashing with copper-compatible fasteners</strong></td>
+<td>—</td>
+<td><strong>Copper or stainless</strong> fasteners/cleats, never galvanized</td>
+</tr>
+<tr>
+<td>Slate and clay tile</td>
+<td>Long-life coverings</td>
+<td><strong>Copper or stainless</strong> nails (not electro-galvanized)</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Roofing nails (asphalt shingles, IRC R905.2.5 / ASTM F1667) [JURISDICTION]</h3>
+<ul>
+<li>Corrosion-resistant, <strong>12-gauge (0.105 in) minimum shank</strong>, <strong>⅜-in minimum head</strong>.</li>
+<li>Long enough to penetrate <strong>¾ in into the deck, or through the deck</strong>, whichever is less.</li>
+</ul>
+<hr />
+<h2>2.9 Master compatibility table ("never touch")</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Incompatible with</th>
+<th>Why</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EPDM</strong></td>
+<td>Petroleum products, <strong>asphalt</strong>, oils, grease, some solvents, animal fats (restaurant exhaust)</td>
+<td>Swelling and degradation</td>
+<td>Separation sheet; walk pads near kitchen exhausts; use manufacturer-approved products</td>
+</tr>
+<tr>
+<td><strong>PVC membrane</strong></td>
+<td><strong>Asphalt</strong>, coal tar, oils, <strong>polystyrene (EPS/XPS)</strong></td>
+<td>Plasticizer migration makes the membrane brittle</td>
+<td>Separation/slip sheet (e.g., fleece or a manufacturer-approved barrier)</td>
+</tr>
+<tr>
+<td><strong>TPO</strong></td>
+<td>Many manufacturers require separation from old asphalt surfaces and prohibit direct contact with some solvents and oils <strong>[MANUFACTURER]</strong></td>
+<td>—</td>
+<td>Cover board or separation layer per the manufacturer</td>
+</tr>
+<tr>
+<td><strong>EPS / XPS</strong></td>
+<td><strong>Hot asphalt</strong>, solvent-based adhesives, coal tar</td>
+<td>Melting and dissolving</td>
+<td>Cover board/overlay; water-based or approved adhesives</td>
+</tr>
+<tr>
+<td><strong>Coal tar</strong></td>
+<td><strong>Asphalt</strong></td>
+<td>Chemically incompatible</td>
+<td>Separate systems or approved transition</td>
+</tr>
+<tr>
+<td><strong>Copper</strong></td>
+<td>Aluminum, galvanized downstream</td>
+<td>Galvanic corrosion</td>
+<td>See §2.8</td>
+</tr>
+<tr>
+<td><strong>Aluminum</strong></td>
+<td>Copper, ACQ lumber, wet mortar/concrete</td>
+<td>Corrosion</td>
+<td>Isolate</td>
+</tr>
+<tr>
+<td><strong>Polyiso</strong></td>
+<td>(Generally broad compatibility) but <strong>moisture</strong></td>
+<td>Loses R, facers delaminate</td>
+<td>Keep dry</td>
+</tr>
+</tbody>
+</table></div>
+<!-- box -->
+
+<aside class="callout memorize">
+<p><strong>WHAT TO MEMORIZE</strong>
+Rolls stored <strong>on end</strong> · factory wrap is not weather protection · spread loads over supports · re-cover prohibited when wet/deteriorated, over slate/clay/cement tile, or over 2+ layers · <strong>core cut confirms</strong> a moisture scan
+D226 (No.15/No.30), D4869, <strong>D1970 self-adhered</strong>, D2178 glass plies, D4601 base sheet · asphalt <strong>D312 Types I 135–151 / II 158–176 / III 185–205 / IV 210–225 °F</strong> · coal tar D450 ≠ asphalt · D41 primer on concrete/metal
+R/in: polyiso ~5.7 &gt; XPS 5 &gt; EPS ~3.6–4.2 &gt; mineral wool/cellular glass ~3.4–4 &gt; perlite/fiberboard ~2.5–2.8 &gt; gypsum ~0.5 per ½ in
+Vapor retarder Class I ≤ 0.1 perm; warm side; NRCA rule: Jan mean &lt; 40°F and RH ≥ 45%
+EPDM ✕ petroleum/asphalt · PVC ✕ asphalt/coal tar/polystyrene · foam ✕ hot asphalt &amp; solvents · copper runoff ✕ galvanized/aluminum · ACQ lumber → HDG or stainless</p>
+</aside>
+<!-- box -->
+
+<aside class="callout reason">
+<p><strong>HOW TO REASON THROUGH IT</strong>
+- For a <strong>storage/handling</strong> item, the right answer protects the material from <strong>moisture, deformation, and overheating</strong>, and protects the structure from <strong>concentrated load</strong>.
+- For a <strong>compatibility</strong> item, name the chemistry: plasticizer (PVC), oil/petroleum (EPDM), solvent/heat (polystyrene), or galvanic (metals).
+- For a <strong>deck</strong> item, the roofer's job is to <strong>verify and report</strong>, not to redesign.</p>
+</aside>
+<hr />
+<h2>2.10 Estimating quantities: the core math (Atcheson-style; methods are standard)</h2>
+<h3>Key units</h3>
+<ul>
+<li><strong>1 square = 100 sq ft</strong> of roof surface.</li>
+<li><strong>Slope</strong> = rise per 12 in of run (e.g., 6:12). <strong>Pitch</strong> = rise ÷ span (6:12 slope = <strong>¼ pitch</strong>). Tests mix the two; don't.</li>
+</ul>
+<h3>Slope (pitch) factors: roof area = plan area × factor</h3>
+<p>Factor = √(rise² + 12²) ÷ 12</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Slope</th>
+<th>3:12</th>
+<th>4:12</th>
+<th>5:12</th>
+<th>6:12</th>
+<th>7:12</th>
+<th>8:12</th>
+<th>9:12</th>
+<th>10:12</th>
+<th>12:12</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Factor</strong></td>
+<td>1.031</td>
+<td>1.054</td>
+<td>1.083</td>
+<td>1.118</td>
+<td>1.158</td>
+<td>1.202</td>
+<td>1.250</td>
+<td>1.302</td>
+<td>1.414</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Hip/valley length factor</strong> (per foot of common-rafter run, for equal slopes) = √(rise² + 288) ÷ 12. For 6:12: √(36 + 288) = √324 = 18 → <strong>1.5</strong>.</p>
+<h3>Worked calculation A: squares and bundles</h3>
+<p>A gable roof has a plan area (including overhangs) of 40 ft × 30 ft, a slope of 6:12, and a 10% waste allowance. The shingles run 3 bundles per square.</p>
+<ol>
+<li>Plan area = 40 × 30 = <strong>1,200 sq ft</strong></li>
+<li>Roof area = 1,200 × 1.118 = <strong>1,341.6 sq ft</strong> = 13.42 squares</li>
+<li>Add 10% waste: 13.42 × 1.10 = <strong>14.76 squares → order 15 squares</strong></li>
+<li>Bundles = 15 × 3 = <strong>45 bundles</strong></li>
+</ol>
+<p>(Waste allowances vary by roof complexity. Roughly 10% for simple gables and 15%+ for cut-up hip roofs is a common industry rule of thumb, not a code figure.)</p>
+<h3>Worked calculation B: shingles and nails per square</h3>
+<ul>
+<li><strong>3-tab 12 in × 36 in at 5-in exposure:</strong> exposed area per shingle = 5 × 36 = 180 sq in. Shingles per square = 14,400 ÷ 180 = <strong>80</strong>. At 4 nails each = <strong>320 nails/sq</strong>; at 6 nails (high-wind) = <strong>480 nails/sq</strong>.</li>
+<li><strong>Metric laminate 13¼ in × 39⅜ in at 5⅝-in exposure:</strong> 5.625 × 39.375 = 221.5 sq in → 14,400 ÷ 221.5 = <strong>≈ 65 shingles/sq</strong>.</li>
+</ul>
+<h3>Worked calculation C: ridge cap</h3>
+<p>A 40-ft ridge with 12-in cap pieces at 5-in exposure: 40 ft × 12 in/ft ÷ 5 in = <strong>96 pieces</strong>. With 3 pieces cut per 3-tab shingle → <strong>32 shingles</strong>. (Laminated ridge products list their own linear-foot coverage per bundle <strong>[MANUFACTURER]</strong>.)</p>
+<h3>Worked calculation D: drip edge</h3>
+<p>Same roof as calculation A (the 40 × 30 ft plan already includes overhangs, so each half-span is 15 ft horizontal).</p>
+<ol>
+<li>Eaves = 2 × 40 ft = <strong>80 ft</strong></li>
+<li>Rakes: 15 ft × 1.118 = 16.77 ft each, × 4 rake edges = <strong>67.1 ft</strong></li>
+<li>Total = <strong>147.1 LF</strong></li>
+<li>10-ft pieces lapped 2 in give a net 9.83 ft each → 147.1 ÷ 9.83 = 14.96 → <strong>15 pieces</strong> (most estimators would order 16 to allow for cutting waste).</li>
+</ol>
+<h3>Worked calculation E: ice barrier width (code version) [JURISDICTION]</h3>
+<p>The IRC requires the ice barrier to extend from the eave to <strong>at least 24 in inside the exterior wall line</strong> (R905.1.2). Overhang = 12 in horizontal; slope = 6:12.</p>
+<ol>
+<li>Horizontal distance = 12 in (overhang) + 24 in = <strong>36 in</strong></li>
+<li>Along the slope: 36 × 1.118 = <strong>40.2 in</strong></li>
+<li>One 36-in-wide course is <strong>not enough</strong>. You need a second course (lapped per the manufacturer).</li>
+</ol>
+<p>Some manufacturers and designers measure from the <strong>interior</strong> face of the wall. That adds the wall thickness and is more conservative. Read the stem.</p>
+<h3>Worked calculation F: underlayment rolls</h3>
+<p>ASTM D226 Type I ("No. 15") rolls nominally cover <strong>4 squares</strong>. Type II ("No. 30") rolls cover about <strong>2 squares</strong>. Synthetic rolls vary (commonly 10 squares) <strong>[MANUFACTURER]</strong>.</p>
+<ul>
+<li>15 squares of No. 30 → 15 ÷ 2 = 7.5 → <strong>8 rolls</strong>. For a low-slope double layer (see §3), double it → <strong>15 rolls</strong>.</li>
+</ul>
+<h3>Worked calculation G: BUR materials (NRCA-style rates) [EDITION/MANUFACTURER]</h3>
+<p>A 4-ply glass-fiber BUR on insulation, 100 squares, with a gravel surface.</p>
+<ul>
+<li><strong>Interply mopping:</strong> ≈ <strong>25 lb asphalt per square</strong> per mopping (NRCA commonly cites 20–25 lb ± 15%). With 4 moppings (base + 3 interply): 4 × 25 × 100 = <strong>10,000 lb</strong></li>
+<li><strong>Flood coat:</strong> ≈ <strong>60 lb/sq</strong> (asphalt) → <strong>6,000 lb</strong></li>
+<li><strong>Aggregate:</strong> ≈ <strong>400 lb/sq gravel</strong> (≈ 300 lb/sq slag) → 40,000 lb = <strong>20 tons</strong></li>
+<li><strong>Total asphalt ≈ 16,000 lb (8 tons)</strong></li>
+</ul>
+<!-- box -->
+
+<aside class="callout memorize">
+<p><strong>WHAT TO MEMORIZE (estimating)</strong>
+1 sq = 100 sq ft · factor = √(rise²+144)/12 · 4:12 1.054 · 6:12 1.118 · 8:12 1.202 · 12:12 1.414 · hip/valley 6:12 = 1.5 · 3-tab = 80/sq, 320 nails (4/shingle) · No.15 ≈ 4 sq/roll, No.30 ≈ 2 sq/roll · BUR ≈ 25 lb/mopping/sq, flood 60 lb/sq, gravel 400 lb/sq</p>
+</aside>
+<!-- box -->
+
+<aside class="callout reason">
+<p><strong>HOW TO REASON THROUGH A CALCULATION ITEM</strong>
+1) Convert everything to the same unit (inches vs. feet). 2) Plan area → slope area → add waste → round <strong>up</strong> to whole squares, bundles, or rolls. 3) Sanity-check: a 1,200-sq-ft house footprint is ~13–16 squares, not 1.3 or 130.</p>
 </aside></section>
   </main>
 

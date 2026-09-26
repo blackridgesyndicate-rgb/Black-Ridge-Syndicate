@@ -11,8 +11,8 @@
 | 1A | `01-source-audit-and-blueprint.md` | Source audit, what I read and what I couldn't, verified blueprint, admin rules, next date | ✅ Done |
 | 1B | `02-diagnosis-why-practice-tests-failed.md` | Why generic prep failed; the nine skills the exam demands | ✅ Done |
 | 2 | `03-guide-sec1-safety.md` | Guide §1 Safety & Employee Protection (25 Q) | ✅ Done |
-| 3 | `04-guide-sec2-prep-materials.md` | Guide §2 Roofing Preparation & Materials (20 Q) | ⏳ Next |
-| 4 | `05-guide-sec3-steep-slope.md` | Guide §3 Steep-Slope Systems (35 Q) | ⏳ |
+| 3 | `04-guide-sec2-prep-materials.md` | Guide §2 Roofing Preparation & Materials (20 Q) | ✅ Done |
+| 4 | `05-guide-sec3-steep-slope.md` | Guide §3 Steep-Slope Systems (35 Q) | ⏳ Next |
 | 5 | `06-guide-sec4-low-slope.md` | Guide §4 Low-Slope Systems (15 Q) | ⏳ |
 | 6 | `07-guide-sec5-rules-business.md` | Guide §5 Rules, Regulations & Business Practices (20 Q) | ⏳ |
 | 7 | `08-guide-sec6-non-residential.md` | Guide §6 Non-Residential Systems (15 Q) | ⏳ |
