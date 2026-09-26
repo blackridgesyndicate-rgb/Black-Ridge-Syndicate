@@ -14,20 +14,16 @@ HERE = Path(__file__).parent
 # (anchor, tab label, file)
 PARTS = [
     ("start", "Start here", "00-README-index.md"),
-    ("blueprint", "Exam blueprint", "01-source-audit-and-blueprint.md"),
-    ("diagnosis", "Why I missed", "02-diagnosis-why-practice-tests-failed.md"),
-    ("schedule", "Schedule", "14-study-schedule.md"),
     ("safety", "1 · Safety", "03-guide-sec1-safety.md"),
     ("materials", "2 · Prep & Materials", "04-guide-sec2-prep-materials.md"),
     ("steep", "3 · Steep-Slope", "05-guide-sec3-steep-slope.md"),
     ("lowslope", "4 · Low-Slope", "06-guide-sec4-low-slope.md"),
     ("rules", "5 · Rules & Business", "07-guide-sec5-rules-business.md"),
     ("nonres", "6 · Non-Residential", "08-guide-sec6-non-residential.md"),
-    ("mock1", "Mock Exam 1", "09-mock-exam-1.md"),
-    ("key1", "Mock 1 Key", "10-mock-exam-1-key.md"),
-    ("mock2", "Mock Exam 2", "11-mock-exam-2.md"),
-    ("key2", "Mock 2 Key", "12-mock-exam-2-key.md"),
-    ("scores", "Score sheets", "13-score-sheets.md"),
+    ("scores", "Score sheet", "13-score-sheets.md"),
+    ("schedule", "Schedule", "14-study-schedule.md"),
+    ("blueprint", "Exam blueprint", "01-source-audit-and-blueprint.md"),
+    ("diagnosis", "Why I missed", "02-diagnosis-why-practice-tests-failed.md"),
 ]
 
 
@@ -68,6 +64,14 @@ def main():
             f'<section class="panel" role="tabpanel" id="{anchor}" aria-labelledby="tab-{anchor}">'
             f"{render(path.read_text())}</section>"
         )
+    # Interactive practice-exam tab (built from mocks.json by build_mocks.py)
+    mocks = HERE / "mocks.json"
+    if mocks.exists():
+        tabs.insert(1, '<button class="tab" role="tab" id="tab-practice" data-target="practice" '
+                       'aria-controls="practice">Practice exams</button>')
+        panels.insert(1, (HERE / "practice_panel.html").read_text())
+        data = mocks.read_text().replace("</", "<\\/")
+        panels.append(f'<script type="application/json" id="mockdata">{data}</script>')
     template = (HERE / "study_template.html").read_text()
     out = template.replace("<!--TABS-->", "\n".join(tabs)).replace("<!--PANELS-->", "\n".join(panels))
     (HERE / "study.html").write_text(out)

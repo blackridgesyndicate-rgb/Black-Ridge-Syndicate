@@ -1,0 +1,1987 @@
+## Mock Exam 1 source file. Each item begins with a Q-marker line; the build script may reorder options to balance the key (except KEEP items).
+
+### Q
+S: 1
+T: Fall protection — low-slope roof, narrow building
+Q: A three-person crew is tearing off and replacing a built-up roof on a flat (¼:12) roof that is 42 ft wide and 120 ft long. The edges are 28 ft above grade. No mechanical equipment will be used. Which fall-protection approach is permitted by itself, without any other system?
+A: A safety monitoring system with a competent-person monitor
+B: A warning line system set 6 ft from all edges
+C: Toeboards installed along every roof edge
+D: Having workers stay at least 10 ft from the edge whenever possible
+ANS: A
+EXP: For roofing work on low-slope roofs, 29 CFR 1926.501(b)(10) allows a safety monitoring system alone when the roof is 50 ft or less in width. This roof is 42 ft wide, so a monitor alone is permitted.
+WB: A warning line only marks an area. It must be combined with guardrails, nets, PFAS, or a safety monitor, because work still happens between the line and the edge.
+WC: Toeboards protect people below from falling objects. They do not stop a worker from falling.
+WD: "Stay back when possible" is not a fall-protection system recognized by OSHA.
+SRC: 29 CFR 1926.501(b)(10); 1926.502(h)
+
+### Q
+S: 1
+T: Fall protection — steep residential roof
+Q: A crew is reroofing a two-story house with a 7:12 slope. The eaves are 19 ft above grade. Which is the BEST fall protection for this job?
+A: Personal fall arrest systems attached to roof anchors fastened into the framing per the anchor manufacturer's instructions
+B: A warning line along the eaves combined with a safety monitor
+C: A safety monitor who watches all workers from the ground
+D: Roof brackets with a 2×6 slide guard at the eave, and no other protection
+ANS: A
+EXP: A 7:12 roof is a steep roof (greater than 4:12). Steep roofs require guardrails with toeboards, safety nets, or PFAS (1926.501(b)(11)). For residential construction (1926.501(b)(13)), conventional protection is presumed feasible. PFAS on properly installed anchors is the standard, compliant choice.
+WB: Warning lines and safety monitors are only permitted for roofing work on low-slope roofs (4:12 or less).
+WC: A monitor must be on the same walking/working surface as the workers, and monitors aren't permitted on steep roofs anyway.
+WD: Slide guards alone are not an OSHA fall-protection system. The old interim residential guidance that allowed them was rescinded.
+SRC: 29 CFR 1926.501(b)(11), (b)(13); OSHA STD 03-11-002 (2010)
+
+### Q
+S: 1
+T: Warning line — mechanical equipment
+Q: A mechanical felt-laying machine will travel east–west on a low-slope roof. How far from the east and west roof edges, which are perpendicular to the machine's direction of travel, must the warning line be at minimum?
+KEEP
+A: 6 ft
+B: 8 ft
+C: 10 ft
+D: 15 ft
+ANS: C
+EXP: When mechanical equipment is used, the warning line must be at least 6 ft from edges parallel to the direction of travel and at least 10 ft from edges perpendicular to it. The machine could run straight toward those edges.
+WA: 6 ft is the distance for edges parallel to travel, or for work with no mechanical equipment.
+WB: 8 ft is not a value in the warning-line rule.
+WD: 15 ft exceeds the minimum. It is allowed, but it is not the required minimum.
+SRC: 29 CFR 1926.502(f)(1)(ii)
+
+### Q
+S: 1
+T: Warning line construction
+Q: A foreman inspects a newly erected warning line. Which condition violates OSHA's warning-line requirements?
+A: The rope sags to 31 in above the roof surface between two stanchions
+B: The line is flagged with high-visibility material every 5 ft
+C: The line's highest point is 38 in above the roof surface
+D: The stanchions resist a 20-lb horizontal push applied 30 in above the roof without tipping
+ANS: A
+EXP: The line's lowest point, including sag, must be no less than 34 in above the walking/working surface, and its highest point no more than 39 in. A 31-in sag is too low.
+WB: Flagging is required at intervals of not more than 6 ft, so 5 ft complies.
+WC: 38 in is within the 34–39 in range.
+WD: Stanchions must resist at least 16 lb at 30 in, so 20 lb exceeds the requirement.
+SRC: 29 CFR 1926.502(f)(2)
+
+### Q
+S: 1
+T: PFAS — anchorage location and free fall
+Q: A roofer wears a full-body harness with a 6-ft shock-absorbing lanyard. The lanyard is clipped to a roof anchor at the level of the roofer's feet on a 6:12 roof. What is the MAIN problem with this setup?
+A: The potential free fall is about 11 ft, which exceeds OSHA's 6-ft free-fall limit
+B: Lanyards must never be used on steep roofs
+C: The anchor must be rated for 1,800 lb
+D: There is no problem, because the shock absorber reduces the arresting force
+ANS: A
+EXP: With the anchor at foot level, the worker falls the lanyard length plus the height of the back D-ring (about 5 ft) before the lanyard even starts to arrest: roughly 11 ft. A PFAS must be rigged so free fall is no more than 6 ft and the worker cannot contact a lower level. Fixes include an overhead or ridge anchor with a shorter connection, or a self-retracting lifeline or lanyard rated for foot-level anchorage.
+WB: Lanyards are allowed on steep roofs when the PFAS is rigged correctly.
+WC: 1,800 lb is the maximum arresting force on the worker, not the anchorage strength. Anchorage is 5,000 lb per worker, or designed with a safety factor of 2 by a qualified person.
+WD: A shock absorber limits the arresting force, but it does not cure excess free fall or the risk of hitting a lower level.
+SRC: 29 CFR 1926.502(d)(16)(iii); (d)(15)
+
+### Q
+S: 1
+T: PFAS after a fall
+Q: A roofer slips, and his PFAS stops the fall. He is uninjured and is quickly helped back onto the roof. What should happen to his harness and lanyard?
+A: Remove them from service until a competent person inspects them and determines they are undamaged
+B: The worker may put them back on if he sees no visible damage
+C: Replace only the lanyard; harnesses are not affected by a fall
+D: Continue using them for the rest of the shift, then send them for inspection
+ANS: A
+EXP: Components subjected to impact loading must be removed from service immediately. They may not be used again until a competent person inspects them and determines they are undamaged and suitable for reuse. Many manufacturers require destroying equipment that arrested a fall.
+WB: The worker is not necessarily a competent person, and internal damage may not be visible.
+WC: Harness webbing and stitching can also be damaged in an arrest.
+WD: Continued use after an arrest is exactly what the rule prohibits.
+SRC: 29 CFR 1926.502(d)(19)
+
+### Q
+S: 1
+T: PFAS anchorage strength
+Q: A PFAS anchorage is not designed by a qualified person. What minimum load must it support per employee attached?
+KEEP
+A: 1,800 lb
+B: 3,000 lb
+C: 3,600 lb
+D: 5,000 lb
+ANS: D
+EXP: Anchorages for PFAS must support at least 5,000 lb per employee attached. The alternative is an anchorage designed, installed, and used as part of a complete PFAS with a safety factor of at least two, under the supervision of a qualified person.
+WA: 1,800 lb is the maximum arresting force allowed on the body with a harness.
+WB: 3,000 lb applies to self-retracting lifelines that limit free fall to 2 ft or less, and to positioning-device anchorages.
+WC: 3,600 lb is the proof-test load for snaphooks and D-rings.
+SRC: 29 CFR 1926.502(d)(15)
+
+### Q
+S: 1
+T: Skylights as holes
+Q: Crew members will work near several plastic dome skylights while replacing a low-slope roof. How should the skylights be protected?
+A: With covers or screens able to support at least twice the imposed load, or with guardrails around them, or by PFAS
+B: The domes are adequate if they are polycarbonate rather than acrylic
+C: With a warning line set 6 ft from each skylight
+D: By painting the curbs a high-visibility color
+ANS: A
+EXP: Skylights are treated as holes. Employees must be protected from falling through them by covers, guardrails, or PFAS. Covers must support at least twice the weight of the employees, equipment, and materials that may be imposed, and must be secured and marked.
+WB: A skylight dome is not a cover, and falls through domes are a leading cause of roofing deaths.
+WC: Warning lines are not a permitted protection for holes.
+WD: Marking a curb is a warning, not fall protection.
+SRC: 29 CFR 1926.501(b)(4); 1926.502(i)
+
+### Q
+S: 1
+T: Material storage near roof edge
+Q: No guardrails are erected at the edge of a low-slope roof. During roofing work, how close to the edge may rolls and insulation be stored?
+KEEP
+A: No closer than 4 ft
+B: No closer than 6 ft
+C: No closer than 10 ft
+D: No closer than 15 ft
+ANS: B
+EXP: During roofing work, materials and equipment may not be stored within 6 ft of a roof edge unless guardrails are erected at the edge.
+WA: 4 ft is the storage distance used for overhand bricklaying, a different operation.
+WC: 10 ft relates to warning lines perpendicular to mechanical equipment travel, not storage.
+WD: 15 ft is not the rule, though storing farther back is permitted.
+SRC: 29 CFR 1926.502(j)
+
+### Q
+S: 1
+T: Debris removal
+Q: Tear-off debris must get from a roof edge 25 ft above grade to a dumpster outside the building's exterior wall. Which method complies with OSHA?
+A: An enclosed chute to the dumpster
+B: Dropping the debris into a barricaded area 6 ft from the wall
+C: Throwing the debris into the dumpster, with a ground-level spotter
+D: Dropping the debris after bagging it in contractor bags
+ANS: A
+EXP: When material is dropped more than 20 ft to any point outside the exterior walls of a building, an enclosed chute must be used.
+WB: Barricades (at least 42 in high and 6 ft back from the opening) apply when debris is dropped through holes in floors without chutes, not from roofs over 20 ft outside the walls.
+WC: A spotter does not replace the chute requirement.
+WD: Bagging does not change the drop-height rule.
+SRC: 29 CFR 1926.252(a)–(b)
+
+### Q
+S: 1
+T: Ladder setup calculation
+Q: An extension ladder leans against a gutter line 20 ft above level ground. Using OSHA's 4-to-1 rule, how far from the wall should the base of the ladder be?
+KEEP
+A: 3 ft
+B: 4 ft
+C: 5 ft
+D: 6 ft 8 in
+ANS: C
+EXP: The horizontal distance from the top support to the foot should be about one-quarter of the working length. That is commonly figured as one-quarter of the height to the support point: 20 ft ÷ 4 = 5 ft. The ladder rails must also extend 3 ft above the landing.
+WA: 3 ft is too steep, and the ladder could tip backward.
+WB: 4 ft would be correct for a 16-ft support height.
+WD: 6 ft 8 in is a 3-to-1 ratio. That is too shallow, and the base could kick out.
+SRC: 29 CFR 1926.1053(b)(5)(i), (b)(1)
+
+### Q
+S: 1
+T: Ladders near power
+Q: A worker must set a ladder where it could contact the service drop to the house. Which ladder choice is correct?
+A: A ladder with nonconductive (e.g., fiberglass) side rails, set and used so that clearance from the line is maintained
+B: A Type IA aluminum ladder, if it is tied off at the top
+C: A wooden ladder, which is always safe near energized lines
+D: An aluminum ladder with rubber feet, which insulate it from ground
+ANS: A
+EXP: Portable ladders must have nonconductive side rails if they are used where the employee or the ladder could contact exposed energized electrical equipment. Clearance from lines must still be maintained.
+WB: Duty rating and tying off do not make aluminum nonconductive.
+WC: Wood can conduct when wet or dirty. "Always safe" is false, and wood ladders are rarely used by roofers.
+WD: Rubber feet do not insulate the rails. Current flows through the worker.
+SRC: 29 CFR 1926.1053(b)(12); 1926.416
+
+### Q
+S: 1
+T: GFCI
+Q: On a construction site, which of these needs ground-fault circuit-interrupter protection (or an assured equipment grounding conductor program)?
+A: A temporary 120-volt, 20-amp receptacle the crew uses for saws and a compressor
+B: The building's permanent wiring, which is not being used by the crew
+C: A cordless drill's battery charger that is plugged into a GFCI outlet
+D: A 480-volt three-phase disconnect serving a rooftop unit
+ANS: A
+EXP: All 120-volt, single-phase, 15- and 20-ampere receptacle outlets on construction sites that are not part of the permanent wiring and are in use by employees must have GFCI protection, unless an assured equipment grounding conductor program is used.
+WB: The rule targets temporary receptacles used by employees, not the permanent wiring.
+WC: This charger is already on a GFCI outlet, so nothing more is required.
+WD: The GFCI rule is for 120-V single-phase 15/20-A receptacles, not 480-V disconnects.
+SRC: 29 CFR 1926.404(b)(1)
+
+### Q
+S: 1
+T: Overhead power line clearance
+Q: A materials conveyor will be set up near an overhead distribution line that the utility confirms is 13.2 kV. What is the minimum clearance to maintain from the line?
+KEEP
+A: 3 ft
+B: 6 ft
+C: 10 ft
+D: 50 ft
+ANS: C
+EXP: For lines rated 50 kV or less, the commonly required minimum clearance for equipment and unqualified workers is 10 ft. For cranes and derricks, 1926.1408 Table A gives 10 ft up to 50 kV. When the voltage is unknown, crane rules use 20 ft. The best practice is to have the utility de-energize or insulate the line.
+WA: 3 ft is far too close for an unqualified worker or equipment.
+WB: 6 ft is not the clearance for 13.2 kV lines.
+WD: 50 ft is more than required for this voltage, though larger clearances apply at very high voltages.
+SRC: 29 CFR 1926.1408 Table A; 1910.333(c)(3); 1926.416(a)(1)
+
+### Q
+S: 1
+T: Noise dose calculation
+Q: During a tear-off, a worker is exposed to 95 dBA for 4 hours and 100 dBA for 2 hours. Using OSHA's permissible times (95 dBA = 4 h, 100 dBA = 2 h), what is the noise dose, and is the exposure acceptable?
+KEEP
+A: 0.75; within the limit
+B: 1.00; exactly at the limit
+C: 1.50; over the limit
+D: 2.00; over the limit
+ANS: D
+EXP: Dose = C1/T1 + C2/T2 = 4/4 + 2/2 = 1.0 + 1.0 = 2.0. Any sum greater than 1.0 exceeds the permissible exposure, so controls and hearing protection are required.
+WA: 0.75 comes from using the wrong permissible times.
+WB: 1.00 counts only one of the two exposures.
+WC: 1.50 is an arithmetic error; each fraction equals 1.0.
+SRC: 29 CFR 1926.52(d) and Table D-2
+
+### Q
+S: 1
+T: Respiratory protection
+Q: A roofer will wear a tight-fitting half-face respirator while cutting fiber-cement panels. What must happen BEFORE the worker is fit-tested?
+A: A medical evaluation determining the worker is able to use the respirator
+B: An annual physical exam including a chest X-ray
+C: Three months of experience using respirators
+D: A written test on the Hazard Communication standard
+ANS: A
+EXP: Under the respiratory protection standard, the employer must provide a medical evaluation to determine the employee's ability to use a respirator before the employee is fit-tested or required to use it. Fit testing is then done before first use and at least annually.
+WB: A chest X-ray is not the prerequisite for respirator use.
+WC: No experience period is required; training is required.
+WD: HazCom training is separate and is not a prerequisite for fit testing.
+SRC: 29 CFR 1926.103 → 1910.134(e), (f)
+
+### Q
+S: 1
+T: Safety Data Sheets
+Q: A foreman wants to check the flash point of a solvent-based EPDM bonding adhesive. In which section of the 16-section Safety Data Sheet is it listed?
+KEEP
+A: Section 2 — Hazard identification
+B: Section 8 — Exposure controls/personal protection
+C: Section 9 — Physical and chemical properties
+D: Section 11 — Toxicological information
+ANS: C
+EXP: Section 9 lists physical and chemical properties, such as flash point, vapor pressure, and boiling point.
+WA: Section 2 lists the hazard classification, signal word, pictograms, and hazard statements.
+WB: Section 8 covers exposure limits, engineering controls, and PPE.
+WD: Section 11 covers health effects and toxicity data.
+SRC: 29 CFR 1910.1200 Appendix D (via 1926.59)
+
+### Q
+S: 1
+T: GHS label signal words
+Q: Two containers of roofing adhesive carry different signal words. Which signal word indicates the MORE severe hazard?
+A: Danger
+B: Warning
+C: Caution
+D: Notice
+ANS: A
+EXP: Under the GHS-aligned Hazard Communication Standard, "Danger" is used for the more severe hazard categories and "Warning" for the less severe.
+WB: "Warning" is the signal word for less severe hazards.
+WC: "Caution" is not a GHS signal word.
+WD: "Notice" is a sign term for non-hazard information, not a label signal word.
+SRC: 29 CFR 1910.1200(c) definitions ("signal word"); Appendix C
+
+### Q
+S: 1
+T: Asbestos — before tear-off
+Q: A 1970s built-up roof is to be torn off. Its black flashing cement and old felts are suspected of containing asbestos. What is the BEST first step?
+A: Have the suspect materials sampled and analyzed before disturbing them
+B: Wet the roof thoroughly and proceed, because roofing asbestos is nonfriable
+C: Use a power roof cutter with a dust bag to reduce the dust
+D: Re-cover the roof instead, so the asbestos never needs to be tested
+ANS: A
+EXP: Determine whether asbestos is present before disturbing it. If it is, removal is Class II work that requires specific methods (intact removal, wet methods, no dropping or throwing, isolating HVAC intakes) and a competent person. Environmental notification rules may also apply.
+WB: Wet methods are part of the procedure, but you can't pick the procedure until you know whether ACM is present. Nonfriable materials can become regulated when they are cut or abraded.
+WC: Power cutting can release fibers. Cutting ACM roofing requires misting and specific controls.
+WD: Re-covering is limited by code and doesn't remove the need to identify ACM that will be disturbed during the work.
+SRC: 29 CFR 1926.1101(g)(8)(ii), (k); NRCA asbestos guide (paywalled; not read)
+
+### Q
+S: 1
+T: Asbestos roofing removal methods
+Q: Asbestos-containing roofing material is being removed. Which practice is PROHIBITED?
+A: Dropping unwrapped removed material over the roof edge to the ground
+B: Lowering the material to the ground through a covered, dust-tight chute
+C: Wrapping or bagging the material before lowering it
+D: Keeping the roof-cutting machine blade continuously misted during use
+ANS: A
+EXP: Unwrapped or unbagged ACM roofing must be lowered by a covered, dust-tight chute, crane, or hoist, or it must be bagged or wrapped. It may never be dropped or thrown to the ground.
+WB: A dust-tight chute is an approved method.
+WC: Bagging or wrapping is an approved method.
+WD: Continuous misting of cutting machines is required.
+SRC: 29 CFR 1926.1101(g)(8)(ii)
+
+### Q
+S: 1
+T: Kettle fire
+Q: The asphalt in a kettle ignites. What is the BEST immediate action?
+A: Close the kettle lid, shut off the burner, and use an appropriate extinguisher if needed
+B: Spray water into the kettle to cool the asphalt
+C: Stir the asphalt so the burning surface is submerged
+D: Add cold asphalt to lower the temperature quickly
+ANS: A
+EXP: Closing the lid smothers the fire by cutting off oxygen. Shutting off the fuel removes the heat source. A B-rated extinguisher can handle any remaining flame.
+WB: Water on hot asphalt flashes to steam and sprays burning asphalt, making the fire far worse.
+WC: Stirring feeds oxygen and spreads the fire.
+WD: Adding material near an open fire exposes the worker and does not stop combustion.
+SRC: NRCA safety practice (NRCA Safety Manual — paywalled; not read); 29 CFR 1926.150
+
+### Q
+S: 1
+T: Torch-applied roofing fire watch
+Q: Under NRCA's CERTA (Certified Roofing Torch Applicator) program, how long must a fire watch continue after the last torch is turned off?
+KEEP
+A: 30 minutes
+B: 1 hour
+C: 2 hours
+D: Until the end of the shift only
+ANS: C
+EXP: CERTA requires a fire watch of at least 2 hours after torching ends, because smoldering fires in concealed spaces can take time to develop.
+WA: 30 minutes is too short under CERTA.
+WB: 1 hour appears in some fire codes, but CERTA requires 2 hours.
+WD: The shift may end sooner than 2 hours after torching; the watch is time-based.
+SRC: NRCA CERTA Student Manual (public NRCA document)
+
+### Q
+S: 1
+T: Heating asphalt
+Q: Which temperature must hot roofing asphalt NEVER reach in the kettle?
+A: Its flash point
+B: Its equiviscous temperature (EVT)
+C: Its softening point
+D: 350°F
+ANS: A
+EXP: Asphalt must never be heated to its flash point, where its vapors can ignite. Common practice keeps the kettle well below the flash point (often at least 25°F below). Application is done at the EVT ±25°F.
+WB: EVT is the target application temperature, so it must be reached.
+WC: The softening point (roughly 135–225°F) is far below application temperature and is necessarily exceeded.
+WD: A fixed 350°F isn't the rule. Many asphalts are applied near or above 400°F, depending on their EVT.
+SRC: NRCA practice; asphalt bill of lading/SDS (flash point, EVT, FBT)
+
+### Q
+S: 1
+T: Heat illness
+Q: On a hot afternoon a roofer becomes confused, stops sweating, and has hot, dry skin. What is the most likely condition, and the correct response?
+A: Heat stroke — call 911 and begin aggressive cooling immediately
+B: Heat cramps — have the worker stretch and drink an electrolyte drink
+C: Heat exhaustion — let the worker rest in the truck until the shift ends
+D: Mild dehydration — give water and return him to work in 15 minutes
+ANS: A
+EXP: Confusion and hot, dry skin with little sweating are signs of heat stroke, a medical emergency. Call 911 and cool the worker aggressively (shade, ice or cold water, fanning) while waiting.
+WB: Heat cramps involve painful muscle spasms without confusion.
+WC: Heat exhaustion typically shows heavy sweating and cool, clammy skin. Leaving a confused worker alone in a hot truck is dangerous.
+WD: Returning a confused worker to the roof ignores a life-threatening emergency.
+SRC: OSHA/NIOSH heat illness guidance; NRCA safety practice
+
+### Q
+S: 1
+T: OSHA injury reporting
+Q: A roofer falls, breaks a leg, and is admitted to the hospital overnight. How soon must the employer report the in-patient hospitalization to OSHA?
+KEEP
+A: Within 8 hours
+B: Within 24 hours
+C: Within 7 days
+D: Within 30 days
+ANS: B
+EXP: Work-related in-patient hospitalizations, amputations, and losses of an eye must be reported to OSHA within 24 hours. Fatalities must be reported within 8 hours.
+WA: 8 hours is the deadline for fatalities.
+WC: 7 calendar days is the deadline for entering a recordable case on the OSHA 300 log.
+WD: 30 days is not an OSHA reporting deadline.
+SRC: 29 CFR 1904.39; 1904.29
+
+### Q
+S: 2
+T: Material storage — roll goods
+Q: Glass-fiber ply felts and modified-bitumen rolls are delivered to the site. How should they be stored?
+A: On end (upright) on pallets off the ground, protected with breathable waterproof covers
+B: Lying flat and stacked so the rolls don't roll away
+C: On the ground under the factory plastic wrap
+D: On the roof deck mid-span between joists, to keep them close to the work
+ANS: A
+EXP: NRCA practice is to store rolls on end to prevent flattening and deformation (which cause wrinkles and fishmouths), off the ground, and protected from moisture with breathable covers.
+WB: Rolls stored flat deform.
+WC: Factory wrap is for shipping, not weather protection. Rolls on the ground pick up moisture.
+WD: Concentrated loads belong over structural supports, not mid-span.
+SRC: NRCA Roofing Manual practice (paywalled; not read); manufacturer storage instructions
+
+### Q
+S: 2
+T: Insulation storage
+Q: Pallets of polyiso insulation will sit on the job for a week before use. What is the BEST protection?
+A: Elevate the pallets and cover them with secured, breathable waterproof tarps
+B: Leave the factory shrink-wrap on; it is designed for outdoor storage
+C: Cover them tightly with black polyethylene sheet sealed to the ground
+D: Store them on the ground; the foil facers make the boards waterproof
+ANS: A
+EXP: Insulation must be kept dry, off the ground, and covered with secured, breathable waterproof covers. Wet insulation loses R-value, its facers delaminate, and it can't be installed.
+WB: Factory wrap is not weather protection, and it often has openings or tears.
+WC: Non-breathable plastic sealed to the ground traps condensation under the cover.
+WD: The facers don't protect the board edges, and ground contact wicks water in.
+SRC: NRCA practice; insulation manufacturer storage guidance
+
+### Q
+S: 2
+T: Re-cover limitations
+Q: A homeowner wants new asphalt shingles installed over a roof that already has two layers of asphalt shingles. What is the best course of action?
+A: Tear off the existing layers to the deck; a third layer isn't permitted under the model codes
+B: Install the new layer using longer nails
+C: Install a new layer if the existing roof is dry
+D: Install the new layer if the owner signs a waiver
+ANS: A
+EXP: The model codes prohibit a new covering over an existing one when two or more applications already exist, when the existing roof is water-soaked or deteriorated, or when it is slate, clay, cement, or asbestos-cement tile. NRCA also generally favors tear-off.
+WB: Longer nails don't overcome the code prohibition.
+WC: Being dry doesn't matter when there are already two layers.
+WD: An owner can't waive a code requirement.
+SRC: IRC R908.3.1.1 / IBC 1511.3.1.1 (2018/2021) [JURISDICTION]
+
+### Q
+S: 2
+T: Moisture survey confirmation
+Q: An infrared scan of a low-slope roof shows several warm areas after sunset. What is the BEST way to confirm whether the insulation in those areas is wet?
+A: Take core cuts at the suspect areas and at a known-dry reference area
+B: Rescan the roof at noon the next day
+C: Wait for the next rain and look for leaks inside
+D: Walk the roof and feel for soft spots only
+ANS: A
+EXP: Core cuts physically confirm the wetness and show the actual assembly. They are the standard verification for infrared, nuclear, and capacitance surveys. Patch each core immediately.
+WB: Midday sun heats the whole surface and masks the differences infrared relies on. Scans are done after sunset.
+WC: Waiting for a leak lets damage continue and still doesn't locate the wet insulation.
+WD: Soft spots can point to wet areas, but walking alone is unreliable and doesn't measure moisture.
+SRC: NRCA practice (moisture surveys); ASTM C1153 (infrared imaging of roofs)
+
+### Q
+S: 2
+T: LWIC deck base sheet
+Q: A new roof will go over a lightweight insulating concrete (LWIC) deck. How is the base sheet normally attached?
+A: Mechanically fastened with fasteners designed for LWIC, allowing moisture to vent
+B: Solid-mopped in hot asphalt to seal in the moisture
+C: Loose-laid under the insulation with no attachment
+D: Adhered with solvent-based contact adhesive
+ANS: A
+EXP: LWIC contains water that must be able to escape. Base sheets (often venting base sheets) are mechanically fastened with LWIC-specific fasteners, per the deck and roofing manufacturers.
+WB: Solid mopping traps moisture and can cause blistering and poor adhesion.
+WC: An unattached base sheet provides no wind resistance or securement.
+WD: Solvent contact adhesives are not the standard attachment to LWIC.
+SRC: NRCA practice; LWIC manufacturer instructions [MANUFACTURER]
+
+### Q
+S: 2
+T: Insulation compatibility with hot asphalt
+Q: Which insulation board should NOT be set directly in hot asphalt?
+A: Expanded polystyrene (EPS)
+B: Polyisocyanurate
+C: Perlite board
+D: Wood fiberboard
+ANS: A
+EXP: Polystyrene (EPS and XPS) melts when it contacts hot asphalt, and solvents attack it. It needs a compatible cover board, or it has to be attached mechanically or with approved adhesives.
+WB: Polyiso tolerates hot asphalt and is commonly set in it.
+WC: Perlite is compatible with hot asphalt and is often used as a cover board over foam.
+WD: Fiberboard is compatible with hot asphalt.
+SRC: Insulation manufacturer data; NRCA practice
+
+### Q
+S: 2
+T: PVC over asphalt
+Q: A PVC membrane will be installed as a re-cover over an existing smooth-surfaced asphalt BUR. What is REQUIRED between them?
+A: A separation layer or cover board approved by the PVC manufacturer
+B: A coat of asphalt primer to improve adhesion
+C: A layer of hot asphalt to adhere the PVC directly
+D: Nothing; PVC is chemically compatible with asphalt
+ANS: A
+EXP: Asphalt and PVC are incompatible. Oils and plasticizers migrate, making the PVC brittle. A manufacturer-approved separation sheet or cover board is required.
+WB: Priming the asphalt doesn't separate it from the PVC.
+WC: Adhering PVC directly in asphalt causes exactly the incompatibility problem.
+WD: PVC is not compatible with asphalt.
+SRC: PVC manufacturer requirements; NRCA practice
+
+### Q
+S: 2
+T: Galvanic corrosion
+Q: A copper counterflashing drains onto a galvanized steel gutter. What is the most likely long-term result?
+A: Accelerated corrosion of the galvanized gutter
+B: Accelerated corrosion of the copper counterflashing
+C: No reaction, because both metals are corrosion-resistant
+D: Green staining on the gutter, with no loss of metal
+ANS: A
+EXP: Runoff carrying copper ions attacks zinc (galvanizing) and aluminum, which are less noble. The gutter corrodes.
+WB: Copper is the more noble metal and is protected in this pairing.
+WC: The metals are dissimilar, and water provides the electrolyte.
+WD: Staining can occur, but the real concern is metal loss in the gutter.
+SRC: Galvanic series; NRCA architectural metal practice
+
+### Q
+S: 2
+T: Asphalt types
+Q: Which ASTM D312 roofing asphalt has the HIGHEST softening point and is intended for the steepest slopes?
+KEEP
+A: Type I
+B: Type II
+C: Type III
+D: Type IV
+ANS: D
+EXP: Type IV ("special steep," about 210–225°F softening point) resists flow on steeper slopes and in hot climates. Type I (135–151°F) is the dead-level asphalt.
+WA: Type I has the lowest softening point and is for dead-level roofs.
+WB: Type II (158–176°F) is for low slopes.
+WC: Type III (185–205°F) is the most common BUR asphalt, but not the highest.
+SRC: ASTM D312
+
+### Q
+S: 2
+T: Primer on concrete
+Q: Hot asphalt will be applied directly to a clean, dry concrete deck. What should be applied first?
+A: ASTM D41 asphalt primer
+B: A coat of roof cement
+C: A coal-tar pitch primer
+D: Water, so the asphalt spreads more evenly
+ANS: A
+EXP: Asphalt primer (ASTM D41) penetrates the concrete surface and binds surface dust, so hot asphalt bonds properly. It is also used on metal surfaces.
+WB: Roof cement is a trowel-grade material, not a primer.
+WC: Coal-tar products are incompatible with asphalt systems.
+WD: Water must never be on a surface receiving hot asphalt; it causes steam blistering and poor bond.
+SRC: ASTM D41; NRCA practice
+
+### Q
+S: 2
+T: Insulation R-value ranking
+Q: For the same thickness, which roof insulation typically provides the HIGHEST R-value?
+A: Polyisocyanurate
+B: Expanded polystyrene (EPS)
+C: Perlite board
+D: Mineral wool board
+ANS: A
+EXP: Polyiso has the highest R per inch of common roof insulations (about 5.6–5.7 LTTR), though its performance drops in cold weather.
+WB: EPS is roughly R-3.6 to 4.2 per inch.
+WC: Perlite is roughly R-2.6 to 2.8 per inch.
+WD: Mineral wool is roughly R-3.7 to 4.2 per inch.
+SRC: Manufacturer data (ASTM C1289, C578, C728, C726)
+
+### Q
+S: 2
+T: Vapor retarder location
+Q: A heated Illinois office building requires a roof vapor retarder. Where should it be placed?
+A: On the warm (interior) side of the insulation, below the insulation
+B: On top of the insulation, directly under the membrane
+C: Between two layers of insulation, at the midpoint
+D: Anywhere, because location does not matter
+ANS: A
+EXP: A vapor retarder goes on the warm-in-winter side of the insulation. That keeps interior moisture from reaching surfaces colder than its dew point. In a heated building, that's below the insulation, on the deck side.
+WB: A retarder under the membrane traps moisture inside the insulation, on the cold side.
+WC: A midpoint location can leave the lower layer's cold face below the dew point, depending on the design.
+WD: Location is critical.
+SRC: NRCA condensation guidance (paywalled; summary); building science practice
+
+### Q
+S: 2
+T: Vapor retarder classes
+Q: Which permeance defines a Class I vapor retarder?
+KEEP
+A: 0.1 perm or less
+B: More than 0.1 up to 1.0 perm
+C: More than 1.0 up to 10 perm
+D: More than 10 perm
+ANS: A
+EXP: Class I is 0.1 perm or less (e.g., polyethylene sheet, foil). Class II is more than 0.1 up to 1.0. Class III is more than 1.0 up to 10.
+WB: This range is Class II.
+WC: This range is Class III.
+WD: Above 10 perms, a material is considered vapor-permeable.
+SRC: IRC/IBC definitions (vapor retarder class) [JURISDICTION]
+
+### Q
+S: 2
+T: Estimating bundles
+Q: A gable roof has a plan area (including overhangs) of 48 ft × 32 ft and an 8:12 slope (slope factor 1.202). Add 10% waste and round up to whole squares before converting to bundles. At 3 bundles per square, how many bundles are needed?
+KEEP
+A: 57
+B: 60
+C: 63
+D: 66
+ANS: C
+EXP: Plan area = 48 × 32 = 1,536 sq ft. Roof area = 1,536 × 1.202 = 1,846.3 sq ft. Add 10% → 2,030.9 sq ft = 20.31 squares → round up to 21 squares. 21 × 3 = 63 bundles.
+WA: 57 bundles (19 squares) ignores the 10% waste.
+WB: 60 bundles (20 squares) rounds down instead of up.
+WD: 66 bundles (22 squares) over-rounds or adds extra waste.
+SRC: Standard estimating method (slope factor = √(rise² + 144)/12)
+
+### Q
+S: 2
+T: Nails per square
+Q: Standard 12 × 36 in three-tab shingles at a 5-in exposure are installed with 6 nails each for high wind. How many nails are needed per square?
+KEEP
+A: 320
+B: 400
+C: 480
+D: 540
+ANS: C
+EXP: Shingles per square = 14,400 sq in ÷ (5 in × 36 in) = 80. 80 × 6 nails = 480 nails.
+WA: 320 is the count at 4 nails per shingle.
+WB: 400 corresponds to 5 nails per shingle.
+WD: 540 would require 90 shingles per square, which is the wrong exposure math.
+SRC: Standard estimating method; manufacturer high-wind fastening
+
+### Q
+S: 2
+T: Hip length
+Q: A 6:12 hip roof has a common-rafter run of 14 ft. Using a hip/valley length factor of 1.5 for 6:12, how long is each hip (excluding overhang)?
+KEEP
+A: 15.7 ft
+B: 18.0 ft
+C: 19.8 ft
+D: 21.0 ft
+ANS: D
+EXP: Hip length = common run × hip factor = 14 × 1.5 = 21.0 ft. For 6:12, the factor is √(6² + 288)/12 = 18/12 = 1.5.
+WA: 15.7 ft is the common-rafter length (14 × 1.118), not the hip.
+WB: 18.0 ft misapplies the factor.
+WC: 19.8 ft is 14 × √2, which ignores the rise.
+SRC: Roof framing geometry; standard estimating method
+
+### Q
+S: 2
+T: Deck defect found during tear-off
+Q: During tear-off, the crew finds a 3 ft × 3 ft area of steel deck that is rusted through. What should the roofing contractor do?
+A: Stop work in that area, document the condition, and notify the owner or GC in writing so the deck can be repaired before it is roofed over
+B: Cover the hole with a piece of plywood and continue
+C: Fill the area with extra insulation layers so the membrane is supported
+D: Continue roofing; structural issues are not the roofer's concern
+ANS: A
+EXP: The roofer does not design or certify the structure but must not roof over an unsuitable deck. The best practice is to stop, document, and notify in writing, then proceed after an authorized repair (often a unit-price item).
+WB: An unauthorized plywood patch is not an engineered steel deck repair and may not carry loads or hold fasteners.
+WC: Insulation doesn't restore structural capacity.
+WD: The roofer is expected to verify that the deck is suitable to receive roofing.
+SRC: NRCA practice (deck suitability); standard specification language [INFERENCE]
+
+### Q
+S: 2
+T: Treated lumber and aluminum
+Q: A new ACQ pressure-treated wood nailer will be in direct contact with an aluminum drip edge. What is the concern, and how is it addressed?
+A: The copper-based treatment corrodes the aluminum; separate them or use a compatible metal
+B: The aluminum rots the wood; seal the wood with roof cement
+C: There is no concern, because treated wood is inert
+D: The nailer will shrink; use longer fasteners
+ANS: A
+EXP: Copper-based treatments such as ACQ and CA are corrosive to aluminum and to light galvanizing. Isolate them with a separation membrane, or use compatible metals and fasteners (hot-dip galvanized or stainless).
+WB: Aluminum does not rot wood.
+WC: Modern copper-based treatments are chemically active.
+WD: Shrinkage is not the compatibility issue this question describes.
+SRC: Treated-wood and fastener manufacturer guidance; IRC R317.3 [JURISDICTION]
+
+### Q
+S: 3
+T: Minimum slope — asphalt shingles
+Q: What is the minimum roof slope for asphalt shingles under the model codes and NRCA practice?
+KEEP
+A: 1:12
+B: 2:12
+C: 3:12
+D: 4:12
+ANS: B
+EXP: Asphalt shingles may be installed on slopes of 2:12 or greater. Slopes from 2:12 up to less than 4:12 need special (double) underlayment.
+WA: 1:12 is the minimum for mineral-surfaced roll roofing, not shingles.
+WC: 3:12 is the minimum for wood shingles, wood shakes, and metal shingles.
+WD: 4:12 is where normal single-layer underlayment applies, and it is the slate minimum.
+SRC: IRC R905.2.2 [JURISDICTION]; NRCA Steep-slope manual (paywalled)
+
+### Q
+S: 3
+T: Low-slope shingle underlayment
+Q: Asphalt shingles are being installed on a 3:12 roof. How should the felt underlayment be applied (no self-adhered membrane used)?
+A: Two layers: a 19-in starter strip at the eave, then 36-in sheets lapped 19 in
+B: One layer lapped 2 in at the head laps
+C: One layer lapped 6 in at the head laps
+D: No underlayment is needed under laminated shingles
+ANS: A
+EXP: For slopes from 2:12 up to less than 4:12, double coverage is required. Begin with a 19-in-wide strip at the eave, then lap each 36-in sheet 19 in over the previous one, so every point has two layers.
+WB: A single layer with 2-in laps is the method for 4:12 and steeper.
+WC: A single layer with a wider lap is still only one layer in most places.
+WD: Underlayment is required regardless of shingle type.
+SRC: IRC R905.1.1 [JURISDICTION]; manufacturer low-slope instructions
+
+### Q
+S: 3
+T: Eave sequence
+Q: Which sequence is correct at the EAVE of an asphalt shingle roof, following the model-code method?
+A: Deck → drip edge → underlayment over the drip edge flange → starter strip → shingles
+B: Deck → underlayment → drip edge over the underlayment → starter strip → shingles
+C: Deck → starter strip → drip edge → underlayment → shingles
+D: Deck → drip edge → shingles → underlayment
+ANS: A
+EXP: At the eave, the drip edge goes on the deck first and the underlayment laps over its flange. Water running down the underlayment then lands on the metal and drips clear.
+WB: This is the sequence for the RAKE, not the eave. At the eave it lets water get behind the flange.
+WC: The starter strip goes on top of the underlayment and drip edge.
+WD: Underlayment goes under the shingles, never over them.
+SRC: IRC R905.2.8.5 [JURISDICTION]; manufacturer instructions
+
+### Q
+S: 3
+T: Rake sequence
+Q: At the RAKE edge, how does the drip edge relate to the underlayment?
+A: The drip edge is installed over the underlayment
+B: The drip edge is installed under the underlayment
+C: No drip edge is used at rakes
+D: The drip edge is installed over the shingles
+ANS: A
+EXP: At rakes, the underlayment is installed first and the drip edge laps over it. That keeps wind-driven rain from getting under the underlayment edge.
+WB: Drip edge under the underlayment is the EAVE method.
+WC: Code and manufacturers call for drip edge at both eaves and rakes.
+WD: Shingles overlap the drip edge; the metal is never placed on top of them.
+SRC: IRC R905.2.8.5 [JURISDICTION]
+
+### Q
+S: 3
+T: Ice barrier extent
+Q: Where an ice barrier is required under the model code, how far up the roof must it extend?
+A: From the eave edge to a point at least 24 in inside the exterior wall line of the building
+B: From the eave edge to a point 12 in beyond the fascia
+C: 36 in up the roof, measured along the slope, regardless of overhang
+D: Only over the overhang, to the face of the exterior wall
+ANS: A
+EXP: The ice barrier (two layers of underlayment cemented together, or a self-adhering polymer-modified bitumen sheet) extends from the lowest edges of all roof surfaces to a point at least 24 in inside the exterior wall line.
+WB: Stopping 12 in past the fascia leaves the area over the heated space unprotected.
+WC: A fixed 36-in width may fall short on wide overhangs or steep slopes.
+WD: Ice dams back water up over the heated space, beyond the wall line.
+SRC: IRC R905.1.2 [JURISDICTION]
+
+### Q
+S: 3
+T: Ice barrier calculation
+Q: A 7:12 roof (slope factor 1.158) has an 18-in horizontal overhang. The ice barrier must extend 24 in horizontally inside the exterior wall line. What is the minimum ice-barrier width measured along the slope from the eave edge?
+KEEP
+A: 42.0 in
+B: 44.4 in
+C: 48.6 in
+D: 52.0 in
+ANS: C
+EXP: Horizontal distance = 18 + 24 = 42 in. Along the slope: 42 × 1.158 = 48.6 in. A single 36-in-wide ice-barrier course is not enough; you need two courses.
+WA: 42.0 in is the horizontal distance, not measured along the slope.
+WB: 44.4 in uses the wrong slope factor.
+WD: 52.0 in adds extra width that isn't required.
+SRC: IRC R905.1.2 [JURISDICTION]; slope-factor geometry
+
+### Q
+S: 3
+T: Shingle blow-off diagnosis
+Q: After a moderate windstorm, rows of laminated shingles installed last fall have blown off. Nail holes are visible above the sealant line of the underlying course. What is the most likely cause?
+A: High nailing — fasteners above the nailing zone missed the underlying course
+B: Inadequate attic ventilation
+C: Using starter strips at the eave
+D: Shingles from the same production lot
+ANS: A
+EXP: When nails are placed above the manufacturer's nailing zone, they don't pass through the shingle below, so each shingle has half the intended holding power. Combined with sealant strips that haven't sealed (common with fall installation), this is the classic cause of blow-offs.
+WB: Poor ventilation causes curling and premature aging, not rows of blow-offs with high nail holes.
+WC: Starter strips improve wind resistance at the eave.
+WD: Using one production lot prevents color shading and doesn't affect wind resistance.
+SRC: Manufacturer installation instructions; NRCA practice
+
+### Q
+S: 3
+T: Nail pops
+Q: Nail heads are pushing up under the shingles in several spots about a year after installation. Which installation error most commonly causes this?
+A: Underdriven nails, or deck movement from wet or unsupported sheathing
+B: Overdriven nails that cut through the shingle mat
+C: Too many nails per shingle
+D: Using galvanized nails
+ANS: A
+EXP: Underdriven nails, or nails backing out of a deck that shrinks and moves, lift the shingle above. That prevents sealing and eventually tears the shingle.
+WB: Overdriven nails cause cut-through and blow-offs, not raised heads.
+WC: The fastener count doesn't cause pops.
+WD: Galvanized nails are the standard corrosion-resistant fastener.
+SRC: Manufacturer installation instructions; NRCA practice
+
+### Q
+S: 3
+T: Fasteners per shingle
+Q: For a standard installation under the model code (not high-wind), what is the minimum number of fasteners per asphalt strip shingle?
+KEEP
+A: 2
+B: 3
+C: 4
+D: 6
+ANS: C
+EXP: The code minimum is 4 fasteners per strip shingle (2 per individual shingle). Manufacturers typically require 6 for high-wind areas and very steep slopes.
+WA: Two fasteners is the minimum for individual (not strip) shingles.
+WB: Three is not a code or manufacturer standard.
+WD: Six is the high-wind/steep-slope requirement, not the standard minimum.
+SRC: IRC R905.2.6 [JURISDICTION]; manufacturer instructions
+
+### Q
+S: 3
+T: Very steep slopes (mansard)
+Q: Laminated shingles are being installed on a mansard with a 24:12 slope. Beyond the standard application, what do manufacturers typically require?
+A: Six nails per shingle and hand-sealing each shingle with asphalt roof cement
+B: Four nails per shingle placed higher on the shingle
+C: Two layers of underlayment lapped 19 in
+D: No special requirements; steep slopes shed water faster
+ANS: A
+EXP: Above about 21:12, sealant strips alone may not hold because gravity pulls the shingles away. Manufacturers call for extra nails (typically 6) and hand-sealing with spots of roof cement.
+WB: Higher nailing reduces holding power; nails must stay in the nailing zone.
+WC: Double underlayment is the rule for LOW slopes (2:12 to below 4:12).
+WD: Very steep slopes need special fastening.
+SRC: Manufacturer steep-slope application instructions
+
+### Q
+S: 3
+T: Cold-weather installation
+Q: Shingles are installed in December at 30°F, and a windy week is forecast. What should the crew do to protect the new roof?
+A: Hand-seal the shingles with asphalt roof cement per the manufacturer, since the sealant strips won't activate until warm weather
+B: Nothing, because sealant strips activate in any temperature
+C: Add extra nails above the nailing zone
+D: Cover the entire roof with plastic sheeting until spring
+ANS: A
+EXP: Sealant strips need heat from the sun to bond. In cold weather, the shingles stay unsealed and vulnerable to wind until they seal. Hand-sealing gives immediate resistance.
+WB: Sealant strips are heat-activated.
+WC: Nails above the nailing zone miss the underlying course and reduce holding power.
+WD: Covering the roof with plastic is not a practical or recommended method.
+SRC: Manufacturer cold-weather application instructions
+
+### Q
+S: 3
+T: Valley type with laminated shingles
+Q: Which valley method do manufacturers generally NOT recommend for laminated (architectural) shingles?
+A: Woven valley
+B: Closed-cut valley
+C: Open metal (W-profile) valley
+D: Open valley with a metal liner and cut shingle edges set in cement
+ANS: A
+EXP: Laminated shingles are thick and stiff and don't bend smoothly through a woven valley. The result is bridging and voids. Closed-cut or open valleys are used instead.
+WB: Closed-cut is the most common valley for laminated shingles.
+WC: An open metal valley is appropriate for any shingle type.
+WD: This is an open metal valley, which is appropriate.
+SRC: Manufacturer installation instructions
+
+### Q
+S: 3
+T: Closed-cut valley sequence
+Q: A closed-cut valley joins a 4:12 porch roof and a 10:12 main roof. What is the recommended sequence?
+A: Run the shingles from the 4:12 plane across the valley first, then cut the 10:12 plane's shingles back from the valley centerline
+B: Run the shingles from the 10:12 plane across the valley first, then cut the 4:12 plane's shingles
+C: Weave both planes through the valley
+D: Cut both planes back 2 in from the centerline to form an open valley
+ANS: A
+EXP: Manufacturers generally have the lower-slope (or smaller) plane's shingles run across the valley first. The steeper plane's faster-flowing water then runs over the cut edge, not into it.
+WB: That reverses the recommended order and sends the steeper plane's water against the cut edge.
+WC: Weaving is a different valley method and isn't recommended for laminated shingles.
+WD: Cutting both sides makes an open valley, which needs a metal or roll-roofing liner.
+SRC: Manufacturer installation instructions [MANUFACTURER]
+
+### Q
+S: 3
+T: Closed-cut valley details
+Q: In a closed-cut valley, how are the cut-side shingles finished?
+A: Cut about 2 in back from the valley centerline, clip the upper corner at 45°, embed the edge in asphalt cement, and keep nails at least about 6 in from the centerline
+B: Cut exactly on the centerline, with nails driven through the valley center to hold the edge
+C: Cut 6 in back from the centerline, with no cement
+D: Leave the shingles uncut and fold them up the other plane
+ANS: A
+EXP: The cut side is trimmed about 2 in back from the centerline. The upper corner is clipped so water isn't directed under the shingle, and the edge is set in cement. No fasteners go within about 6 in of the centerline, where the most water flows.
+WB: Nails in the valley center are a classic cause of valley leaks.
+WC: 6 in is the distance to keep nails from the centerline, not the cut line, and the cement is part of the method.
+WD: Folding the shingles doesn't create a closed-cut valley.
+SRC: Manufacturer installation instructions [MANUFACTURER]
+
+### Q
+S: 3
+T: Open metal valley
+Q: Under the model code, what is the minimum width of a metal valley lining for an open valley with asphalt shingles?
+KEEP
+A: 12 in
+B: 16 in
+C: 24 in
+D: 36 in
+ANS: C
+EXP: The model code table for valley linings requires metal valley flashing at least 24 in wide.
+WA: 12 in is too narrow to carry the valley's water.
+WB: 16 in is too narrow for code metal valley linings.
+WD: 36 in is the common width for the valley UNDERLAYMENT, not the metal lining.
+SRC: IRC Table R905.2.8.2 [JURISDICTION]
+
+### Q
+S: 3
+T: Step flashing attachment
+Q: How should each piece of step flashing be fastened where a shingle roof meets a sidewall?
+A: One fastener in the roof leg near the top edge, into the deck; the wall leg is not nailed
+B: One fastener through the wall leg into the wall framing
+C: Fasteners through both legs so the piece can't move
+D: Sealant only, with no fasteners
+ANS: A
+EXP: Fastening the roof leg only, near the top where the next shingle covers it, lets the roof and wall move independently. The fastener stays covered, and the vertical leg stays free.
+WB: Nailing the wall leg ties the flashing to the wall and can tear it as the structures move.
+WC: Nailing both legs locks the flashing and invites cracking and leaks.
+WD: Sealant alone isn't a reliable attachment.
+SRC: NRCA steep-slope flashing practice; manufacturer instructions
+
+### Q
+S: 3
+T: Sidewall flashing error
+Q: A new shingle roof leaks along a sidewall. The installer used one continuous L-shaped flashing along the wall instead of step flashing. Why does this leak?
+A: Water running down the vertical leg and along the flashing gets into the shingle laps, because the flashing isn't interleaved with each course
+B: The continuous flashing was too thick
+C: Continuous flashing always causes condensation
+D: The flashing color attracted too much heat
+ANS: A
+EXP: Step flashing is woven into each course, so each piece sheds water onto the shingle below it. A continuous L-flashing carries water along its length and dumps it under the shingle laps.
+WB: Thickness is not the issue.
+WC: Condensation is unrelated to this flashing error.
+WD: Heat is irrelevant here.
+SRC: NRCA steep-slope flashing practice
+
+### Q
+S: 3
+T: Kickout flashing
+Q: The wall sheathing below the lower end of a roof-to-wall intersection is rotting where the eave meets a two-story wall. What missing component most likely caused this?
+A: A kickout (diverter) flashing at the bottom of the step flashing
+B: A cricket at the chimney
+C: A ridge vent
+D: Ice barrier at the rake
+ANS: A
+EXP: Where a roof-wall intersection ends before the wall does, a kickout flashing diverts water off the wall and into the gutter. Without it, water runs behind the cladding and rots the wall.
+WB: Crickets divert water around chimneys and wide penetrations, not at sidewall eaves.
+WC: A ridge vent doesn't affect water at a sidewall-eave intersection.
+WD: Ice barrier at the rake doesn't address water at the bottom of a sidewall.
+SRC: IRC R903.2.1 [JURISDICTION]; NRCA practice
+
+### Q
+S: 3
+T: Chimney cricket
+Q: A chimney measures 36 in across, perpendicular to the slope, on a 6:12 roof. What is required on its upslope side?
+A: A cricket (saddle)
+B: Only step flashing
+C: A pitch pan
+D: A continuous bead of sealant
+ANS: A
+EXP: A cricket or saddle is required on the ridge side of any chimney or penetration more than 30 in wide, measured perpendicular to the slope. It diverts water and debris around the chimney.
+WB: Step flashing alone leaves a dam where water and debris collect behind the chimney.
+WC: Pitch pans are low-slope membrane details, and a last resort even there.
+WD: Sealant is not a substitute for a cricket.
+SRC: IRC R903.2.2, R1003.20 [JURISDICTION]
+
+### Q
+S: 3
+T: Chimney counterflashing
+Q: Why is chimney flashing made of two parts, a base (step) flashing and a counterflashing set into the mortar joints?
+A: The roof and the chimney move independently; each part is attached to only one of them, and the counterflashing laps over the base flashing
+B: Two layers of metal are always required by code for fire resistance
+C: The counterflashing holds the shingles down in the wind
+D: The base flashing supports the chimney's weight
+ANS: A
+EXP: The chimney and the roof framing move differently through settlement, thermal movement, and shrinkage. The base flashing is fastened to the roof, and the counterflashing to the masonry. The lap lets them slide without tearing.
+WB: Fire resistance is not the reason for the two-part system.
+WC: The counterflashing does not hold shingles.
+WD: Flashing carries no structural load.
+SRC: NRCA practice (chimney flashing)
+
+### Q
+S: 3
+T: Plumbing vent flashing
+Q: How should the flange of a plumbing vent flashing be integrated with the shingles?
+A: The upper part of the flange goes under the shingles above; the lower part lies on top of the shingles below
+B: The whole flange goes under the shingles
+C: The whole flange goes on top of the shingles, sealed with cement
+D: The flange goes under the underlayment
+ANS: A
+EXP: Following the water-shedding rule, water coming down the roof flows over the shingles above and onto the flange, then off the flange onto the shingles below. It never flows under a lap.
+WB: A flange fully under the shingles traps water at its lower edge and directs it under the courses below.
+WC: A flange fully on top lets water run under its upper edge.
+WD: The flange must integrate with the shingles, not sit under the underlayment.
+SRC: NRCA practice; manufacturer instructions
+
+### Q
+S: 3
+T: Mixing exhaust vents
+Q: An attic has a new ridge vent, the original gable-end louvers, and a powered attic fan. The homeowner reports wind-driven snow entering at the ridge vent. What is the BEST recommendation?
+A: Use a single exhaust type with adequate soffit intake — for example, keep the ridge vent and remove or block the gable louvers and the powered fan
+B: Add a second powered fan
+C: Seal all soffit vents to stop drafts
+D: Add more gable louvers
+ANS: A
+EXP: Different exhaust vents in one attic short-circuit each other. The fan or a gable vent can pull air in through the ridge vent, drawing in snow and rain. Balanced soffit intake with one exhaust type is recommended.
+WB: A second fan worsens the short-circuiting.
+WC: Sealing the soffits removes the intake and makes the exhaust vents pull air (and weather) in through the ridge.
+WD: More gable louvers add to the short-circuiting.
+SRC: Shingle and ventilation manufacturer guidance; NRCA ventilation practice
+
+### Q
+S: 3
+T: Ventilation calculation
+Q: An attic floor measures 2,100 sq ft. Using the 1/300 ratio with half the net free area at the ridge, how many linear feet of ridge vent rated at 18 sq in of net free area per foot are needed?
+KEEP
+A: 14 ft
+B: 24 ft
+C: 28 ft
+D: 56 ft
+ANS: C
+EXP: Required NFA = 2,100 ÷ 300 = 7 sq ft = 1,008 sq in. Half is exhaust: 504 sq in. 504 ÷ 18 = 28 linear feet.
+WA: 14 ft is half the correct number, from splitting the exhaust twice.
+WB: 24 ft comes from a different attic area.
+WD: 56 ft puts all of the required NFA at the ridge.
+SRC: IRC R806.2 [JURISDICTION]; manufacturer NFA ratings
+
+### Q
+S: 3
+T: Ice dams
+Q: A house has recurring ice dams and interior leaks at the eaves every winter. What is the BEST long-term correction?
+A: Air-seal and insulate the attic floor and ensure balanced ventilation, so the roof deck stays cold
+B: Install heavier shingles at the eaves
+C: Remove the gutters
+D: Install a second layer of shingles at the eaves
+ANS: A
+EXP: Ice dams form when heat leaking into the attic melts snow, and the meltwater refreezes at the cold eave. Air sealing, insulation, and ventilation prevent the dam. An ice barrier reduces damage but doesn't stop dams from forming.
+WB: Shingle weight doesn't change the heat loss that causes the dam.
+WC: Removing gutters doesn't address the cause.
+WD: Extra shingle layers don't stop the dam, and re-cover limits may apply.
+SRC: NRCA condensation/ventilation guidance; building science practice
+
+### Q
+S: 3
+T: Tile minimum slope
+Q: Concrete tile is proposed for a 3:12 roof. Under the model code, is it permitted?
+A: Yes, because the minimum is 2½:12, but slopes from 2½:12 up to below 4:12 require double underlayment
+B: No, because the minimum slope for tile is 4:12
+C: Yes, with a single layer of underlayment
+D: No, because tile requires at least 6:12
+ANS: A
+EXP: Clay and concrete tile require a minimum slope of 2½:12. Between 2½:12 and 4:12, the code requires double underlayment.
+WB: 4:12 is the minimum for slate, not tile.
+WC: A single underlayment layer is for 4:12 and steeper.
+WD: 6:12 is not the tile minimum.
+SRC: IRC R905.3.2, R905.3.3 [JURISDICTION]
+
+### Q
+S: 3
+T: Tile — converting from asphalt
+Q: An owner wants to replace an asphalt shingle roof with concrete tile. What should be verified FIRST?
+A: That the roof structure can carry the added weight of tile
+B: That the tile color matches the neighborhood
+C: That the gutters are large enough
+D: That the attic has a ridge vent
+ANS: A
+EXP: Concrete and clay tile weigh several times more than asphalt shingles (often about 9–12 psf versus about 2–4 psf). The structure must be evaluated before the conversion.
+WB: Aesthetics are secondary to structural adequacy.
+WC: Gutter size is a secondary concern.
+WD: Ventilation is secondary to structure for this decision.
+SRC: Tile manufacturer guidance; NRCA practice
+
+### Q
+S: 3
+T: Slate exposure calculation
+Q: 24-in-long slates are installed with a 3-in headlap. What is the exposure?
+KEEP
+A: 9.0 in
+B: 10.5 in
+C: 12.0 in
+D: 21.0 in
+ANS: B
+EXP: Slate exposure = (length − headlap) ÷ 2 = (24 − 3) ÷ 2 = 10.5 in.
+WA: 9.0 in subtracts too much.
+WC: 12.0 in is half the length, which ignores the headlap.
+WD: 21.0 in forgets to divide by 2. Each course must be covered by the two courses above it.
+SRC: NRCA slate practice (Steep-slope manual — paywalled); standard slate formula
+
+### Q
+S: 3
+T: Slate fastening
+Q: Which fastening practice is correct for slate?
+A: Two copper (or stainless) nails per slate, driven so the slate hangs on the nails, not drawn tight
+B: Two electro-galvanized nails driven tight
+C: One nail at the center of the slate
+D: Roofing staples at the head of each slate
+ANS: A
+EXP: Slate lasts for generations and needs fasteners that last as long, such as copper or stainless steel. Driving nails tight cracks the slate. It should hang on the nails.
+WB: Electro-galvanized nails corrode long before the slate wears out, and tight nailing cracks slate.
+WC: Slate requires two nails.
+WD: Staples are not used for slate.
+SRC: NRCA slate practice; slate industry guidance
+
+### Q
+S: 3
+T: Slate grades
+Q: Under ASTM C406, what service life is expected for a Grade S1 roofing slate?
+KEEP
+A: 20–40 years
+B: 40–75 years
+C: More than 75 years
+D: 10–20 years
+ANS: C
+EXP: ASTM C406 grades roofing slate as S1 (service life over 75 years), S2 (40–75), and S3 (20–40).
+WA: 20–40 years is Grade S3.
+WB: 40–75 years is Grade S2.
+WD: 10–20 years is not an ASTM C406 grade.
+SRC: ASTM C406
+
+### Q
+S: 3
+T: Wood shake interlayment
+Q: Wood shakes are being installed over spaced sheathing. What is placed between the courses?
+A: An 18-in-wide strip of No. 30 felt interlayment in each course
+B: Nothing, because shakes are self-sealing
+C: A full self-adhered membrane under every course
+D: A 6-in strip of aluminum foil
+ANS: A
+EXP: Shakes are split and irregular, so they need an 18-in-wide No. 30 felt interlayment between courses. It is positioned above the butt a distance of twice the exposure, to block wind-driven rain.
+WB: Shakes are not self-sealing; the interlayment is required.
+WC: A full self-adhered membrane under each course would trap moisture and isn't the standard method.
+WD: Foil is not the specified interlayment.
+SRC: IRC R905.8.7 [JURISDICTION]; Cedar Shake & Shingle Bureau practice
+
+### Q
+S: 3
+T: Wood shingle spacing
+Q: What spacing is recommended between adjacent sawn wood shingles in the same course?
+KEEP
+A: No gap (butted tight)
+B: ¼ to ⅜ in
+C: ⅜ to ⅝ in
+D: 1 to 1½ in
+ANS: B
+EXP: Wood shingles are spaced ¼ to ⅜ in apart to allow for swelling when wet. Shakes use ⅜ to ⅝ in.
+WA: Tight shingles buckle when they swell.
+WC: ⅜ to ⅝ in is the spacing for shakes.
+WD: 1 to 1½ in is too wide. 1½ in is the minimum side-joint OFFSET between courses.
+SRC: IRC R905.7 [JURISDICTION]; CSSB practice
+
+### Q
+S: 3
+T: Metal roof minimum slopes
+Q: What is the model-code minimum slope for lapped, non-soldered metal roof panels installed WITHOUT applied lap sealant?
+KEEP
+A: ¼:12
+B: ½:12
+C: 3:12
+D: 4:12
+ANS: C
+EXP: Lapped, non-soldered seam metal panels without lap sealant need at least 3:12. With applied lap sealant, the minimum is ½:12. Standing-seam panels can go down to ¼:12.
+WA: ¼:12 is the standing-seam minimum.
+WB: ½:12 applies when lap sealant is used.
+WD: 4:12 is not the metal-panel threshold.
+SRC: IRC R905.10.2 [JURISDICTION]
+
+### Q
+S: 3
+T: Thermal movement calculation
+Q: A 30-ft copper panel sees a 120°F temperature swing. Copper's coefficient is 9.4 × 10⁻⁶ in/in/°F. How much does the panel expand and contract?
+KEEP
+A: 0.28 in
+B: 0.41 in
+C: 0.55 in
+D: 0.81 in
+ANS: B
+EXP: ΔL = α × L × ΔT = 9.4 × 10⁻⁶ × 360 in × 120°F = 0.406 in, or about 0.41 in. Details and clips must accommodate this movement.
+WA: 0.28 in uses the steel coefficient (6.5 × 10⁻⁶), which gives 0.281 in.
+WC: 0.55 in comes from using the wrong length or temperature swing.
+WD: 0.81 in is double the correct value.
+SRC: Thermal expansion formula; published coefficients of expansion
+
+### Q
+S: 3
+T: Cutting coated metal panels
+Q: What is the preferred way to cut prefinished (painted) steel roof panels on the job?
+A: Shears, nibblers, or a cutting tool that doesn't throw hot particles
+B: An abrasive cut-off wheel on a grinder
+C: A torch
+D: Any saw, as long as the crew wears eye protection
+ANS: A
+EXP: Abrasive cutting throws hot metal particles that burn the paint and zinc coating and embed in nearby panels, where they rust. Shears and nibblers cut cleanly without heat. Clean up the swarf the same day.
+WB: Abrasive wheels damage the coating and cause rust staining.
+WC: A torch destroys the coating and the panel edge.
+WD: PPE protects the worker, not the panel.
+SRC: Metal panel manufacturer instructions; NRCA metal practice
+
+### Q
+S: 4
+T: Low-slope minimum slope
+Q: What minimum slope do the model building codes require for single-ply and modified-bitumen roof membranes, and what does NRCA recommend designing for?
+KEEP
+A: ⅛ in per ft
+B: ¼ in per ft
+C: ½ in per ft
+D: 1 in per ft
+ANS: B
+EXP: Most membrane systems require a minimum slope of ¼:12 (2%) for positive drainage. Coal-tar BUR is the exception, with a ⅛:12 minimum.
+WA: ⅛:12 applies to coal-tar built-up roofs only.
+WC: ½:12 is more than the minimum.
+WD: 1:12 is more than the minimum.
+SRC: IBC 1507 [JURISDICTION]; NRCA Membrane manual (paywalled)
+
+### Q
+S: 4
+T: Ponding definition
+Q: Under NRCA's widely cited definition, water is considered "ponding" when it remains on a roof for how long after a rain, under conditions that allow drying?
+KEEP
+A: 12 hours
+B: 24 hours
+C: 48 hours
+D: 7 days
+ANS: C
+EXP: NRCA defines ponding as water that remains on the roof surface 48 hours after the end of a rain, under conditions conducive to drying.
+WA: 12 hours is too short.
+WB: 24 hours is not the NRCA benchmark.
+WD: 7 days is not the definition.
+SRC: NRCA definition (Membrane manual; widely published)
+
+### Q
+S: 4
+T: EPDM seams
+Q: How are field seams in a modern EPDM roof normally made?
+A: Clean and prime both surfaces, let the primer flash off, apply seam tape, and roll it
+B: Hot-air weld the overlap
+C: Torch the lap until bitumen bleeds out
+D: Mop the lap with hot asphalt
+ANS: A
+EXP: EPDM is a thermoset rubber, so it can't be re-melted or welded. Seams use primer and factory seam tape, rolled with a silicone roller.
+WB: Hot-air welding is for thermoplastics (TPO, PVC).
+WC: Torching is for modified bitumen.
+WD: Asphalt is incompatible with EPDM.
+SRC: EPDM manufacturer instructions; NRCA Membrane practice
+
+### Q
+S: 4
+T: Fully adhered EPDM
+Q: A fully adhered EPDM system uses solvent-based bonding (contact) adhesive. What is the correct procedure?
+A: Apply adhesive to both the membrane underside and the substrate, let it flash until tacky, then mate them and broom or roll
+B: Apply adhesive to the substrate only and immediately lay the wet membrane into it
+C: Apply adhesive to the membrane only
+D: Apply adhesive in beads 12 in apart, like insulation adhesive
+ANS: A
+EXP: Contact adhesives work by coating both surfaces and letting the solvent flash off until the adhesive is tacky but won't string. Then the surfaces are mated.
+WB: A wet, one-sided application traps solvent and bonds poorly (blistering).
+WC: One side only is not how contact adhesive works.
+WD: Bead application is for low-rise foam insulation adhesive, not EPDM bonding adhesive.
+SRC: EPDM manufacturer instructions
+
+### Q
+S: 4
+T: TPO weld test
+Q: A crew performs a test weld on TPO and peels the sample apart by hand. Which result indicates a GOOD weld?
+A: The membrane tears or delaminates outside the weld (the sheet fails, not the seam)
+B: The two sheets separate cleanly along the weld interface
+C: The membrane surface is brown and glossy along the seam
+D: The weld is ½ in wide
+ANS: A
+EXP: In a properly fused thermoplastic seam, the weld is stronger than the membrane. The peel sample fails in the membrane (film tearing or exposed scrim), not at the interface.
+WB: Clean separation at the interface is a cold (unfused) weld.
+WC: Browning and scorching suggest a burnt weld from too much heat.
+WD: Weld width must meet the manufacturer's minimum, commonly about 1½ in; ½ in is too narrow.
+SRC: TPO manufacturer welding instructions; NRCA practice
+
+### Q
+S: 4
+T: When to test weld
+Q: When should thermoplastic seam test welds be made?
+A: At the start of each day and whenever conditions change (temperature, wind, humidity, power source, or welder settings)
+B: Once, when the welder is first purchased
+C: Only when a seam fails inspection
+D: Once a week
+ANS: A
+EXP: Welding parameters depend on ambient and membrane conditions. Test welds at the start of the day and after any change keep the welder settings right.
+WB: Conditions change daily, so a one-time test isn't enough.
+WC: Testing only after a failure is reactive and lets bad seams get installed.
+WD: Weekly testing misses daily condition changes.
+SRC: Thermoplastic membrane manufacturer instructions
+
+### Q
+S: 4
+T: BUR blister cause
+Q: Six months after installation, a built-up roof has several soft, domed blisters between the plies. What is the most likely cause?
+A: Voids with trapped air or moisture between plies, from incomplete mopping or wet felts
+B: Too much aggregate
+C: Using Type III asphalt
+D: Too steep a slope
+ANS: A
+EXP: BUR blisters form where air or moisture is trapped in voids between plies. Sun heat expands it and lifts the plies. Complete moppings, brooming, and dry materials prevent them.
+WB: Aggregate protects the roof and doesn't cause interply blisters.
+WC: Type III is the most common BUR asphalt.
+WD: Slope is linked to slippage, not blistering.
+SRC: NRCA Membrane manual practice (paywalled); Repair Manual (paywalled)
+
+### Q
+S: 4
+T: BUR slippage
+Q: On a 1:12 built-up roof, the plies have slid downslope and exposed the laps at the top edge. What are the most likely causes?
+A: Asphalt with too low a softening point, excessive interply asphalt, and no backnailing
+B: Too few plies
+C: A flood coat that was too thin
+D: Insulation that was too thick
+ANS: A
+EXP: Slippage happens when interply asphalt softens and flows. Causes include too low a softening point (the wrong asphalt type), too much asphalt, overheating (which lowers the softening point), and a lack of mechanical backnailing on steeper slopes.
+WB: The ply count doesn't cause slippage.
+WC: A thin flood coat causes aggregate loss, not ply slippage.
+WD: Insulation thickness doesn't cause slippage.
+SRC: NRCA BUR practice; ASTM D312
+
+### Q
+S: 4
+T: Cant strips
+Q: For which roof systems are 45° cant strips normally installed at the base of walls and curbs?
+A: Built-up and modified-bitumen systems
+B: EPDM systems
+C: TPO and PVC systems
+D: Asphalt shingle systems
+ANS: A
+EXP: Bituminous plies and flashings crack if bent at a sharp 90° angle, so cants provide a gradual transition. Single-ply membranes are flexible enough to turn 90° without a cant.
+WB: EPDM does not need cant strips.
+WC: TPO and PVC do not need cant strips.
+WD: Shingle sidewalls use step flashing, not cant strips.
+SRC: NRCA Membrane manual details (paywalled)
+
+### Q
+S: 4
+T: Base flashing height
+Q: What minimum base flashing height, above the finished roof surface, does NRCA recommend at walls and curbs?
+KEEP
+A: 4 in
+B: 6 in
+C: 8 in
+D: 12 in
+ANS: C
+EXP: NRCA recommends base flashings at least 8 in above the finished roof surface, to stay above ponding, snow, and splash.
+WA: 4 in is the typical counterflashing lap, not the base flashing height.
+WB: 6 in is below NRCA's recommendation.
+WD: 12 in exceeds the minimum.
+SRC: NRCA Membrane manual (paywalled; widely published)
+
+### Q
+S: 4
+T: Pitch pans
+Q: A rooftop has an irregular steel angle penetration. Which statement about pitch pans is MOST accurate?
+A: They are a last resort, and the pourable sealer must be crowned to shed water and maintained regularly
+B: They are the preferred flashing for all round pipes
+C: They require no maintenance once filled
+D: They should be filled with water-based roof coating
+ANS: A
+EXP: Pitch pans depend on sealant, which shrinks and separates over time. NRCA considers them a last resort, used only when a curb or a prefabricated boot can't be used. Fill them with pourable sealer crowned to shed water, and inspect them regularly.
+WB: Round pipes are better flashed with prefabricated boots or flanged collars.
+WC: Pitch pans need ongoing maintenance.
+WD: Coatings are not pourable sealers and won't fill a pan properly.
+SRC: NRCA Membrane manual details (paywalled; widely published)
+
+### Q
+S: 4
+T: APP modified bitumen
+Q: What is the typical application method for APP (atactic polypropylene) modified bitumen?
+A: Torch-applied (heat-welded)
+B: Hot-mopped with Type I asphalt
+C: Hot-air welded, like TPO
+D: Ballasted, like EPDM
+ANS: A
+EXP: APP is a plastomeric modifier, and APP sheets are typically torch-applied. Some cold-applied APP products exist. SBS sheets are commonly hot-mopped, cold-applied, self-adhered, or torched.
+WB: APP is generally not hot-mopped. Hot mopping is typical of SBS.
+WC: Hot-air welding is a thermoplastic single-ply method.
+WD: Mod-bit is adhered or torched, not ballasted.
+SRC: Mod-bit manufacturer instructions; NRCA practice
+
+### Q
+S: 4
+T: Torch-applied laps
+Q: What does a uniform bleed-out of about ¼ to ½ in along a torch-applied mod-bit lap indicate?
+A: The bitumen was heated enough to flow and fuse the lap
+B: The sheet was overheated and must be removed
+C: The lap has a void underneath
+D: Too little heat was used
+ANS: A
+EXP: A consistent small bleed-out shows the bitumen reached flowing temperature and fused across the lap. No bleed-out suggests an unfused lap. Excessive bleed-out suggests overheating.
+WB: Overheating shows as excessive bleed-out and scorching, not a uniform ¼–½ in.
+WC: Voids are indicated by a missing bleed-out.
+WD: Too little heat shows as no bleed-out.
+SRC: Mod-bit manufacturer instructions; CERTA practice
+
+### Q
+S: 4
+T: Grease exposure
+Q: A restaurant's kitchen exhaust fan discharges grease onto the roof. Which membrane is generally the most resistant to grease and animal fats?
+A: PVC (specifically a grease-resistant formulation)
+B: EPDM
+C: Smooth-surfaced asphalt BUR
+D: Unprotected SBS mod-bit
+ANS: A
+EXP: PVC membranes, especially grease- and chemical-resistant formulations, resist fats and oils better than EPDM and asphaltic membranes. Grease containment at the fan is still recommended.
+WB: EPDM swells and degrades with oils and fats.
+WC: Asphalt is softened by oils and greases.
+WD: Asphaltic mod-bit is also attacked by grease.
+SRC: Membrane manufacturer chemical-resistance data
+
+### Q
+S: 4
+T: Leak water testing
+Q: When water-testing a low-slope roof to find a leak, where should testing begin?
+A: At the lowest suspect component, then work upward one area at a time
+B: At the highest point, flooding the whole roof at once
+C: Anywhere, as long as a hose is used
+D: Inside, by removing ceiling tiles only
+ANS: A
+EXP: Starting low and working up, one component at a time, means that when a leak appears, the water came from the area just tested, not from upslope water running down.
+WB: Flooding from the top wets everything downslope and makes it impossible to isolate the leak.
+WC: Random testing gives ambiguous results.
+WD: Interior observation helps, but it doesn't isolate the leak source on the roof.
+SRC: NRCA Repair Manual practice (paywalled); industry leak-investigation practice
+
+### Q
+S: 5
+T: License type — units
+Q: A company holding an Illinois LIMITED roofing license is asked to reroof a 12-unit apartment building. Which statement is correct?
+A: The job requires an UNLIMITED license, because the limited license covers only residential properties of 8 units or less
+B: The limited license covers all residential buildings, regardless of size
+C: The job is allowed if the company hires a subcontractor to install the flashing
+D: The job is allowed if the building is under 3 stories
+ANS: A
+EXP: A limited roofing license is for contractors whose business is limited to residential properties of 8 units or less. A 12-unit building exceeds that.
+WB: The limited license has an 8-unit cap.
+WC: Subcontracting part of the work doesn't expand the license scope.
+WD: The Act uses unit count, not stories.
+SRC: 225 ILCS 335/2(h)–(i)
+
+### Q
+S: 5
+T: License bond
+Q: What surety bond amount must an applicant for an UNLIMITED Illinois roofing license maintain?
+KEEP
+A: $5,000
+B: $10,000
+C: $25,000
+D: $50,000
+ANS: C
+EXP: The Act requires a continuous surety bond of $10,000 for a limited license and $25,000 for an unlimited license.
+WA: $5,000 is not a value in the Act.
+WB: $10,000 is the limited-license bond.
+WD: $50,000 is not the statutory amount.
+SRC: 225 ILCS 335/3(2)(d); 335/3.2; 68 Ill. Adm. Code 1460.30
+
+### Q
+S: 5
+T: Liability insurance
+Q: What minimum public liability and property damage insurance do the Illinois roofing rules require?
+A: $250,000 per occurrence for property damage and $500,000 per occurrence for personal injury
+B: $100,000 per person and $300,000 per occurrence
+C: $1,000,000 general aggregate only
+D: $50,000 property damage and $100,000 bodily injury
+ANS: A
+EXP: 68 Ill. Adm. Code 1460.20 requires $250,000 per occurrence for property damage and $500,000 per occurrence for personal injury or bodily harm. The policy can't be cancelled without 30 days' written notice to the Division.
+WB: $100,000/$300,000 matches part of the Home Repair and Remodeling Act's insurance provision, not the roofing rule.
+WC: The rule specifies per-occurrence amounts.
+WD: These amounts are lower than the roofing rule requires.
+SRC: 68 Ill. Adm. Code 1460.20
+
+### Q
+S: 5
+T: Bond termination
+Q: A roofing contractor's surety wants to terminate the license bond. What happens under the Act?
+A: The surety files a 60-day notice with the Department and the contractor; the license is cancelled without hearing on the termination date unless a new bond takes effect
+B: The surety may cancel immediately without notice
+C: The license continues until the next renewal, regardless of the bond
+D: The contractor gets a 1-year grace period to replace the bond
+ANS: A
+EXP: A surety may terminate the bond by filing a 60-day notice of termination with the Department and sending notice to the contractor. The license is cancelled without hearing on the termination date unless a new bond is filed to take effect then.
+WB: A 60-day notice is required.
+WC: The license can't continue without a bond in force.
+WD: The Act provides no grace period.
+SRC: 225 ILCS 335/3.2
+
+### Q
+S: 5
+T: Qualifying party employment
+Q: Under the current Act, which arrangement is NOT permitted for a company's qualifying party?
+A: Paying the qualifying party as an independent contractor on a Form 1099
+B: Paying the qualifying party as a W-2 employee with withholding and workers' compensation
+C: Having the qualifying party supervise installation operations
+D: Having the qualifying party be an officer of the corporation
+ANS: A
+EXP: The qualifying party must be an employee who receives compensation from, and is under the supervision and control of, the licensee. The employer deducts FICA and withholding and provides workers' compensation. The qualifying party may not receive a Form 1099 from the licensee.
+WB: This is exactly what the Act requires.
+WC: The qualifying party must have authority to supervise roofing installation operations.
+WD: A qualifying party may be an officer, partner, or manager.
+SRC: 225 ILCS 335/3(3.5); 335/2(g)
+
+### Q
+S: 5
+T: Qualifying party disassociation
+Q: A company's qualifying party quits. Within what time must both the company and the former qualifying party notify the Department in writing?
+KEEP
+A: 10 days
+B: 30 business days
+C: 60 days
+D: 7 months
+ANS: B
+EXP: Both the licensee and the qualifying party must notify the Department of the disassociation in writing, by mail or email, within 30 business days. Otherwise the license is placed on inoperative status.
+WA: 10 days is not the statutory period.
+WC: 60 days is the time to name a new qualifying party after notifying the Department.
+WD: 7 months is the time for the new qualifying party to pass the exam.
+SRC: 225 ILCS 335/4.6(c) (as amended by P.A. 104-427)
+
+### Q
+S: 5
+T: New qualifying party exam deadline
+Q: A newly designated qualifying party who hasn't passed the exam is approved by the Department. How long does that person have to pass it before the license becomes inoperative?
+KEEP
+A: 30 days
+B: 60 days
+C: 7 months
+D: 2 years
+ANS: C
+EXP: Within 7 months after Department approval, the newly designated qualifying party must take and pass the examination. Otherwise the license is automatically placed on inoperative status until the company requalifies.
+WA: 30 days is not the exam period.
+WB: 60 days is the deadline to name a new qualifying party.
+WD: 2 years is not in the Act.
+SRC: 225 ILCS 335/4.6(f)–(g); 68 Ill. Adm. Code 1460.11(e)
+
+### Q
+S: 5
+T: Qualifying party for two companies
+Q: An individual is the qualifying party for ABC Roofing (unlimited license). Under what condition may that person also serve as qualifying party for a second licensee?
+A: The second licensee holds the same type of license and shares common ownership or management of at least 25% (or is a licensed subsidiary)
+B: The second company is in a different county
+C: The second company holds a limited license
+D: Never, under any circumstances
+ANS: A
+EXP: A person may act as qualifying party for one additional licensee of the same type of licensure. There must be common ownership or management of at least 25%, or the second company must be a licensed subsidiary (at least 25% owned or managed).
+WB: Geography is irrelevant.
+WC: The additional licensee must hold the same TYPE of license.
+WD: The Act allows one additional licensee under the stated conditions.
+SRC: 225 ILCS 335/4.5(a)
+
+### Q
+S: 5
+T: Contract rescission
+Q: Under the Illinois Roofing Act, what rescission right must a roofing contract give the property owner?
+A: The right to rescind and receive a full refund of any deposit within 72 hours after entering the contract
+B: The right to rescind within 30 days
+C: The right to rescind only if an insurance claim is denied
+D: No rescission right is required if the owner pays a deposit
+ANS: A
+EXP: The contract must state the cancellation and refund policy. That includes a rescission clause allowing the owner to rescind within 72 hours after entering the contract and get a full refund of any deposit, plus a written statement that the owner may rescind.
+WB: 30 days is not the roofing-contract rescission period.
+WC: The insurance-denial cancellation right comes from the Home Repair and Remodeling Act. The Roofing Act separately requires the 72-hour clause.
+WD: The rescission clause is required.
+SRC: 225 ILCS 335/5.5(b)(6)
+
+### Q
+S: 5
+T: Insurance deductible
+Q: The homeowner will pay for the roof with insurance proceeds. What must the roofing contract state about the deductible?
+A: The contractor cannot pay, waive, rebate, or promise to pay, waive, or rebate any part of the insurance deductible
+B: The contractor may waive the deductible if the owner signs a waiver
+C: The contractor may rebate half the deductible
+D: The contract need not mention the deductible
+ANS: A
+EXP: The Act requires a written statement that, when insurance proceeds will pay for the work, the contractor cannot pay, waive, rebate, or promise to pay, waive, or rebate any part of the deductible. The Home Repair and Remodeling Act also bars advertising or promising such rebates.
+WB: The owner's consent doesn't make the practice lawful.
+WC: A partial rebate is still prohibited.
+WD: The statement is a required contract term.
+SRC: 225 ILCS 335/5.5(b)(7); 815 ILCS 513/18(b)
+
+### Q
+S: 5
+T: Trust statement
+Q: What must a roofing contract state, on its face and in bold type?
+A: That the contractor will hold in trust any payment from the owner until materials are delivered to the site or a majority of the work is performed
+B: That the contractor is not responsible for leaks
+C: The contractor's workers' compensation policy number
+D: That the owner waives all lien rights
+ANS: A
+EXP: Section 5.5(c) requires a bold-faced statement on the face of the contract. It says the contractor will hold in trust any owner payment until roofing materials are delivered or a majority of the work is performed.
+WB: A disclaimer of leak responsibility is not required and may be unenforceable.
+WC: The contract identifies the surety and liability insurer, but the bold statement is the trust statement.
+WD: Lien waivers are not a required contract statement.
+SRC: 225 ILCS 335/5.5(c)
+
+### Q
+S: 5
+T: Commercial vehicles
+Q: What is the civil penalty for failing to display the roofing license number and licensee name on commercial vehicles?
+KEEP
+A: $100
+B: $250 to $1,000
+C: $5,000
+D: $15,000
+ANS: B
+EXP: Section 5.1 requires the license number and name on all commercial vehicles used in offering roofing services. Violations carry a civil penalty of not less than $250 and not more than $1,000. The Department, the Attorney General, or local code enforcement may enforce it.
+WA: $100 is not the statutory penalty.
+WC: $5,000 is not the vehicle penalty.
+WD: $15,000 is the maximum fine for disciplinary violations under §9.1, not the vehicle penalty.
+SRC: 225 ILCS 335/5.1
+
+### Q
+S: 5
+T: Advertising violations
+Q: A licensee knowingly runs a radio ad that omits the license number, and it airs for 5 days. What is the consequence under Section 5?
+A: A Class A misdemeanor with a $1,000 fine, with each day the ad runs counted as a separate offense
+B: A warning letter only
+C: A single $250 civil penalty
+D: No penalty, because radio ads are exempt
+ANS: A
+EXP: Knowingly failing to display the license number and name in advertising is a Class A misdemeanor with a $1,000 fine. Each day an advertisement runs is a separate offense, and administrative discipline can also apply.
+WB: The statute provides criminal penalties, not just warnings.
+WC: $250 is the minimum for the vehicle-display violation.
+WD: Advertising rules apply to all advertisements.
+SRC: 225 ILCS 335/5(d)–(e)
+
+### Q
+S: 5
+T: Maximum discipline fine
+Q: Under the Act as amended effective August 15, 2025, what is the maximum fine the Department may impose for each violation in a disciplinary action?
+KEEP
+A: $1,000
+B: $5,000
+C: $10,000
+D: $15,000
+ANS: D
+EXP: P.A. 104-427 raised the maximum disciplinary fine to $15,000 per violation. It was previously $10,000.
+WA: $1,000 is the advertising misdemeanor fine and the top of the vehicle penalty range.
+WB: $5,000 is not the statutory figure.
+WC: $10,000 was the maximum before the 2025 amendment.
+SRC: 225 ILCS 335/9.1(1) (P.A. 104-427)
+
+### Q
+S: 5
+T: Grounds for discipline — leakage
+Q: Which of the following can be prima facie evidence of professional incompetence or gross negligence under the Act?
+A: A court judgment against the contractor relating to roof work that results in leakage within 90 days after completion
+B: A customer's online complaint about scheduling
+C: A roof that leaks 10 years after installation
+D: A bid that was higher than competitors'
+ANS: A
+EXP: Section 9.1 lists professional incompetence or gross negligence as grounds for discipline. Prima facie evidence may be a conviction or judgment relating to roof construction or repair that results in leakage within 90 days after the work is completed.
+WB: A scheduling complaint is not the statutory evidence standard.
+WC: A leak 10 years later is not the 90-day standard.
+WD: Pricing is not a ground for discipline.
+SRC: 225 ILCS 335/9.1(1)(d)
+
+### Q
+S: 5
+T: Margin pricing
+Q: A job's total cost (direct costs plus allocated overhead) is $32,000. The contractor wants a 20% profit MARGIN on the selling price. What should the price be?
+KEEP
+A: $38,400
+B: $38,720
+C: $40,000
+D: $42,667
+ANS: C
+EXP: Price = cost ÷ (1 − margin) = 32,000 ÷ 0.80 = $40,000. Check: profit of $8,000 ÷ $40,000 = 20%.
+WA: $38,400 is a 20% MARKUP on cost, which is only a 16.7% margin.
+WB: $38,720 doesn't come from the margin formula.
+WD: $42,667 uses a 25% margin (÷ 0.75).
+SRC: Standard financial management (NASCLA-type content)
+
+### Q
+S: 5
+T: Current ratio
+Q: A roofing company has current assets of $450,000 and current liabilities of $300,000. What is its current ratio?
+KEEP
+A: 0.67
+B: 1.33
+C: 1.50
+D: 2.50
+ANS: C
+EXP: Current ratio = current assets ÷ current liabilities = 450,000 ÷ 300,000 = 1.50.
+WA: 0.67 inverts the ratio.
+WB: 1.33 is a calculation error.
+WD: 2.50 is a calculation error.
+SRC: Standard financial ratios (NASCLA-type content)
+
+### Q
+S: 5
+T: FUTA calculation
+Q: A contractor has 12 employees, each earning more than $7,000 this year. The contractor qualifies for the full 5.4% state credit. What is the annual net FUTA tax?
+KEEP
+A: $84
+B: $504
+C: $5,040
+D: $7,560
+ANS: B
+EXP: FUTA is 6.0% of the first $7,000 per employee, less up to a 5.4% credit, for a net 0.6%. 0.006 × $7,000 = $42 per employee; × 12 = $504.
+WA: $84 covers only 2 employees.
+WC: $5,040 applies the full 6.0% rate without the credit.
+WD: $7,560 doesn't follow the FUTA formula.
+SRC: IRS Form 940 instructions; FUTA (26 U.S.C. 3301)
+
+### Q
+S: 5
+T: Form I-9 timing
+Q: A new roofer starts work on Monday. By when must the employer complete Section 2 of Form I-9, examining the employee's documents?
+A: Within 3 business days of the first day of work
+B: Before the job offer is made
+C: Within 30 days
+D: By the end of the first pay period, whenever it falls
+ANS: A
+EXP: The employee completes Section 1 by the first day of work. The employer completes Section 2 within 3 business days of the employee's first day of work.
+WB: I-9 documents are reviewed after hire, not before the offer.
+WC: 30 days is too long.
+WD: Pay periods vary, and the deadline is 3 business days.
+SRC: USCIS Form I-9 instructions; 8 CFR 274a.2
+
+### Q
+S: 5
+T: Payment bonds
+Q: On a public school roofing project, the contractor furnishes a payment bond. Whom does it primarily protect?
+A: Subcontractors and material suppliers who aren't paid by the contractor
+B: The contractor, if the owner doesn't pay
+C: The owner, if the roof leaks during the warranty period
+D: The surety, if the contractor goes bankrupt
+ANS: A
+EXP: A payment bond guarantees that subcontractors and suppliers get paid. That matters on public projects, where liens usually can't be placed on public property. A performance bond protects the owner against contractor default.
+WB: Bonds protect the obligee and claimants, not the principal (contractor).
+WC: Owner protection is the purpose of the performance bond, and warranty issues are separate.
+WD: The contractor must indemnify the surety; the bond doesn't protect the surety.
+SRC: Surety practice (NASCLA-type content); Illinois Public Construction Bond Act (30 ILCS 550)
+
+### Q
+S: 6
+T: FM uplift rating
+Q: A specification calls for an "FM Class 1-90" roof assembly. What does the "90" indicate?
+A: The assembly's wind-uplift resistance rating (in pounds per square foot) in FM testing
+B: The fire rating in minutes
+C: The minimum R-value
+D: The maximum roof slope in degrees
+ANS: A
+EXP: FM Approvals uplift classes (1-60, 1-75, 1-90, and so on) indicate the uplift pressure, in psf, the assembly withstood in testing. "Class 1" refers to the fire and wind classification.
+WB: The number is not a fire-endurance time.
+WC: It isn't an insulation value.
+WD: It isn't a slope.
+SRC: FM Approvals / FM Global Data Sheets 1-28, 1-29
+
+### Q
+S: 6
+T: Wind zones
+Q: Which area of a low-slope roof typically experiences the HIGHEST wind uplift pressure and needs the most enhanced attachment?
+A: The corners
+B: The field (center)
+C: The perimeter midpoints only
+D: Around drains
+ANS: A
+EXP: Wind uplift is highest at corners, next highest along perimeters, and lowest in the field. Attachment is increased in corner and perimeter zones.
+WB: The field has the lowest design pressure.
+WC: Perimeters are high, but corners are higher.
+WD: Drains are not a wind zone.
+SRC: ASCE 7; FM Global Data Sheet 1-28
+
+### Q
+S: 6
+T: Fastener back-out
+Q: A mechanically attached single-ply roof over a steel deck shows small "tents" in the membrane directly over some insulation fasteners, and one has punctured the membrane. What is the most likely cause?
+A: Fastener back-out from deck movement or fasteners that didn't properly engage the steel deck
+B: Too much adhesive
+C: Ponding water
+D: UV degradation
+ANS: A
+EXP: When screws don't engage the deck properly, or cyclic deck movement and vibration work them loose, they back out and push up through the insulation and into the membrane.
+WB: Adhesive quantity doesn't push fasteners up.
+WC: Ponding causes other damage, not tenting at fasteners.
+WD: UV damages the surface. It does not push fasteners up.
+SRC: NRCA practice; fastener manufacturer requirements (penetration through steel deck)
+
+### Q
+S: 6
+T: Insulation adhesive
+Q: Which method is commonly used to adhere polyiso insulation boards to a structural concrete deck without hot asphalt?
+A: Low-rise polyurethane foam adhesive, in beads or full coverage per the manufacturer's pattern
+B: Roofing staples
+C: Water-based latex paint
+D: Loose-laid boards, with no attachment and no ballast
+ANS: A
+EXP: Low-rise foam adhesives are widely used to adhere insulation to concrete and other substrates. Bead spacing is set by the manufacturer and the wind zone.
+WB: Staples can't attach insulation to concrete.
+WC: Paint is not an adhesive.
+WD: Loose-laid insulation needs ballast.
+SRC: Insulation adhesive manufacturer instructions
+
+### Q
+S: 6
+T: Natatorium
+Q: A new roof covers an indoor swimming pool with a steel deck. Which assembly feature is MOST critical?
+A: A continuous vapor retarder on the warm (interior) side of the insulation, installed over a substrate board and sealed at all edges and penetrations
+B: A reflective white membrane
+C: Ballast instead of adhesive
+D: Extra insulation fasteners in the field only
+ANS: A
+EXP: Pools create very high interior humidity. A continuous, sealed vapor retarder on the warm side keeps moisture out of the insulation. Over steel, it goes on a substrate board. Air leaks at the edges and penetrations must be sealed.
+WB: Reflectivity doesn't address the moisture drive.
+WC: Ballast doesn't control vapor.
+WD: Fasteners don't control vapor, and they add penetrations through the vapor retarder.
+SRC: NRCA condensation guidance (paywalled); building science practice
+
+### Q
+S: 6
+T: Cold storage
+Q: In a freezer warehouse kept at −10°F, which direction is the dominant vapor drive through the roof?
+A: From outside toward the cold interior
+B: From the interior toward the outside
+C: There is no vapor drive in cold storage
+D: Only upward, regardless of temperature
+ANS: A
+EXP: Vapor moves from warm, moist air toward cold, dry air. In cold storage the exterior is warmer and wetter, so the vapor retarder function belongs on the exterior (warm) side, often the membrane itself.
+WB: That's the normal direction for a heated building, which is reversed here.
+WC: A large temperature difference creates a strong vapor drive.
+WD: Vapor drive follows temperature and vapor pressure, not a fixed direction.
+SRC: Building science practice; NRCA condensation guidance (paywalled)
+
+### Q
+S: 6
+T: Structural standing seam clips
+Q: Why do structural standing-seam metal roof systems use sliding (expansion) clips?
+A: They allow the panels to expand and contract lengthwise with temperature changes, without tearing the fasteners
+B: They increase the fire rating
+C: They let the panels be installed without a fixed point
+D: They eliminate the need for end laps
+ANS: A
+EXP: Long metal panels move significantly with temperature. Sliding clips let the panel move while holding it down. A designated fixed point controls where movement starts.
+WB: Clips don't affect the fire rating.
+WC: Systems still have a fixed point; sliding clips work together with it.
+WD: End laps are still needed on long runs, per the manufacturer.
+SRC: Metal panel manufacturer design guides; NRCA Metal Panel manual (paywalled)
+
+### Q
+S: 6
+T: Metal building insulation
+Q: In a pre-engineered metal building, faced fiberglass blanket insulation is draped over the purlins under the roof panels. Which way should the vapor-retarder facing face?
+A: Toward the heated interior (warm side), with the facing seams sealed
+B: Toward the roof panels (cold side)
+C: Either way, because metal buildings don't condense
+D: It should be removed so the insulation can breathe
+ANS: A
+EXP: The facing is the vapor retarder, so it goes on the warm-in-winter side, facing the interior. Its seams are sealed or taped so moist interior air can't reach the cold metal panel and condense.
+WB: Facing the cold side traps moisture in the insulation.
+WC: Metal buildings are prone to condensation.
+WD: Removing the facing removes the vapor control.
+SRC: NAIMA / metal building insulation guidance; building science practice
+
+### Q
+S: 6
+T: SPF surface texture
+Q: A newly sprayed SPF roof surface looks like "popcorn," with deep voids between rounded nodules. What is the correct response?
+A: Reject the surface; remove the popcorn texture and respray before coating
+B: Apply a double coat of coating over it
+C: Accept it, because texture doesn't matter under a coating
+D: Cover it with gravel
+ANS: A
+EXP: Smooth, orange-peel, and coarse orange-peel textures are acceptable for coating. Popcorn and tree-bark textures aren't, because coatings can't fully cover the voids and water collects. The surface must be corrected.
+WB: Extra coating can't reliably fill deep voids.
+WC: Texture is a key SPF quality criterion.
+WD: Gravel doesn't fix a defective foam surface.
+SRC: SPF industry guidance; manufacturer specifications; NRCA SPF manual (paywalled)
+
+### Q
+S: 6
+T: SPF weather conditions
+Q: Under common SPF manufacturer guidance, which condition should stop spray foam application?
+A: The substrate surface temperature is within about 5°F of the dew point
+B: The sky is overcast but dry
+C: The air temperature is 70°F with light wind
+D: The substrate is clean, dry concrete
+ANS: A
+EXP: Moisture on the substrate ruins adhesion and causes blistering. Most manufacturers require the surface to be dry and at least about 5°F above the dew point.
+WB: Overcast, dry conditions don't by themselves prevent spraying.
+WC: 70°F with light wind is generally acceptable.
+WD: Clean, dry concrete is a suitable substrate.
+SRC: SPF manufacturer application guidance [MANUFACTURER]
+
+### Q
+S: 6
+T: Coating calculation
+Q: A roof coating is 50% solids by volume, and the specification requires 15 dry mils. One gallon over 100 sq ft yields about 16 wet mils. About how many gallons are needed for 80 squares, before waste?
+KEEP
+A: 75 gal
+B: 120 gal
+C: 150 gal
+D: 240 gal
+ANS: C
+EXP: Wet mils needed = 15 ÷ 0.50 = 30 wet mils. Gallons per square = 30 ÷ 16 ≈ 1.875. For 80 squares: 1.875 × 80 = 150 gal.
+WA: 75 gal treats dry mils as wet mils (15 ÷ 16 × 80).
+WB: 120 gal assumes 1.5 gal per square.
+WD: 240 gal assumes 3 gal per square.
+SRC: Coating calculation (1 gal = 231 cu in; 231 ÷ 14,400 sq in ≈ 0.016 in = 16 mils)
+
+### Q
+S: 6
+T: Protected membrane roof
+Q: In a protected membrane roof (PMR/IRMA), what insulation is placed ABOVE the membrane?
+A: Extruded polystyrene (XPS)
+B: Polyisocyanurate with paper facers
+C: Wood fiberboard
+D: Perlite board
+ANS: A
+EXP: In a PMR, the insulation is over the membrane and gets periodically wet. XPS is used because of its low water absorption. It is then covered with fabric and ballast or pavers.
+WB: Faced polyiso absorbs water and its facers degrade when wet.
+WC: Fiberboard absorbs water and would fail.
+WD: Perlite absorbs water and would fail.
+SRC: PMR manufacturer and NRCA practice
+
+### Q
+S: 6
+T: Waterproofing vs dampproofing
+Q: What distinguishes waterproofing from dampproofing on a below-grade wall?
+A: Waterproofing resists water under hydrostatic pressure; dampproofing only resists moisture without hydrostatic pressure
+B: Dampproofing is applied on the interior, and waterproofing on the exterior
+C: They are the same thing
+D: Waterproofing is only used on roofs
+ANS: A
+EXP: Waterproofing is designed to resist water under hydrostatic head. Dampproofing only retards moisture and vapor where there is no hydrostatic pressure.
+WB: Both are usually applied on the positive (exterior) side. Location isn't the distinction.
+WC: They are different in performance and use.
+WD: Waterproofing is used below grade and on plaza decks, as well as on roofs.
+SRC: NRCA Waterproofing Manual (2005, paywalled; not read); industry definitions
+
+### Q
+S: 6
+T: Occupied building fumes
+Q: A hot-asphalt BUR reroof is scheduled on an occupied hospital. What is the MOST important coordination step to protect the occupants?
+A: Coordinate with the owner to shut down or seal rooftop air intakes near the work, and schedule work to limit fumes entering the building
+B: Work only at night, without telling the owner
+C: Increase the kettle temperature so the asphalt cures faster
+D: Open all roof hatches for ventilation
+ANS: A
+EXP: Asphalt fumes and odors drawn into air intakes can affect occupants, especially in sensitive facilities. Coordinated intake shutdown or sealing, scheduling, and low-fume equipment are standard practice.
+WB: Working without owner coordination risks exposing occupants.
+WC: Hotter asphalt produces more fumes and raises the fire risk.
+WD: Open hatches let fumes into the building.
+SRC: NRCA practice; owner/facility coordination practice [INFERENCE]
+
+### Q
+S: 2
+T: Dew point and condensation
+Q: Condensation will form on the underside of a roof deck when the deck's surface temperature is:
+A: Below the dew point of the interior air that reaches it
+B: Above the interior air temperature
+C: Equal to the outdoor air temperature
+D: Above the dew point of the interior air
+ANS: A
+EXP: Water vapor condenses on any surface colder than the dew point of the air touching it. Controlling air leakage and vapor keeps moist interior air from reaching cold surfaces.
+WB: A surface warmer than the air can't collect condensation from that air.
+WC: Outdoor temperature alone doesn't decide it. What matters is the surface temperature compared with the dew point of the air reaching it.
+WD: Above the dew point, there is no condensation.
+SRC: Psychrometrics; NRCA condensation guidance (paywalled)
+
+### Q
+S: 2
+T: Rooftop material loading
+Q: Pallets of shingle bundles are being loaded onto a wood-framed roof with a boom truck. What is the BEST practice?
+A: Distribute the bundles in small stacks near the ridge or over bearing walls, rather than landing full pallets mid-span
+B: Land full pallets in the center of the roof to shorten carrying distances
+C: Stack all bundles at the eave so they are ready to install
+D: Put the pallets wherever the boom reaches, since the roof is designed for any construction load
+ANS: A
+EXP: A full pallet can put about 200 psf on a small area, far more than typical roof design loads. Spreading bundles near bearing points, and straddling the ridge where the manufacturer allows, protects the structure and keeps the load balanced.
+WB: Concentrated mid-span loads can overload the rafters or trusses.
+WC: Stacking at the eave concentrates the load on the overhang and creates a falling-object hazard at the edge.
+WD: Roofs are not designed for unlimited concentrated construction loads.
+SRC: NRCA material handling practice; manufacturer loading guidance
+
+### Q
+S: 3
+T: Tile underlayment role
+Q: On a clay or concrete tile roof, which layer serves as the primary long-term waterproofing?
+A: The underlayment beneath the tile
+B: The tile itself
+C: The mortar at the ridge
+D: The battens
+ANS: A
+EXP: Tile sheds most water, but wind-driven rain and snow get past it. The underlayment is the true waterproofing layer, so it must be durable, correctly lapped, and properly flashed.
+WB: Tile is water-shedding, not watertight.
+WC: Ridge mortar only secures and closes the ridge.
+WD: Battens hold the tile; they don't waterproof anything.
+SRC: Tile industry and NRCA tile practice
+
+### Q
+S: 6
+T: Rooftop equipment supports
+Q: New rooftop mechanical equipment will sit on raised supports over a membrane roof. How should the clearance under the equipment be set, per NRCA-style guidance?
+A: High enough for roofers to reach under and replace the roof. Wider equipment needs more clearance
+B: The same fixed 6-in clearance for all equipment sizes
+C: No clearance; set the equipment directly on the membrane
+D: As low as possible, to reduce wind loads
+ANS: A
+EXP: NRCA publishes minimum clearances that increase with equipment width, because a roofer must reach farther under wider units to install and repair flashings and membrane.
+WB: One fixed small clearance doesn't allow for wide units.
+WC: Setting equipment on the membrane damages it and blocks reroofing.
+WD: Clearance is driven by maintenance and reroofing access, not by minimizing height.
+SRC: NRCA Membrane manual (equipment support guidance; paywalled; principle widely published)

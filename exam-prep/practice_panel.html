@@ -1,0 +1,330 @@
+<section class="panel" role="tabpanel" id="practice" aria-labelledby="tab-practice">
+  <h1>Practice exams</h1>
+  <p class="px-lead">Two original 130-question mock exams, each matching the CTS split: 25 / 20 / 35 / 15 / 20 / 15. <strong>Exam mode</strong> is timed (2 h 30 min) and scores you by section when you submit. <strong>Study mode</strong> shows the answer and the reasoning after each question. These are not CTS questions, and a mock score doesn't predict your result.</p>
+
+  <div class="px-controls">
+    <div class="px-group" role="group" aria-label="Choose exam">
+      <button type="button" class="px-seg" id="px-m1" data-mock="mock1">Mock Exam 1</button>
+      <button type="button" class="px-seg" id="px-m2" data-mock="mock2">Mock Exam 2</button>
+    </div>
+    <div class="px-group" role="group" aria-label="Choose mode">
+      <button type="button" class="px-seg" id="px-exam" data-mode="exam">Exam mode</button>
+      <button type="button" class="px-seg" id="px-study" data-mode="study">Study mode</button>
+    </div>
+    <label class="px-filter" for="px-section">Section
+      <select id="px-section">
+        <option value="0">All 130 questions</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="px-status">
+    <span id="px-progress">0 of 130 answered</span>
+    <span id="px-timer" class="px-timer" hidden>2:30:00</span>
+  </div>
+
+  <div class="px-card" id="px-card">
+    <div class="px-meta"><span id="px-num">Question 1</span><span class="px-chip" id="px-sec">Section 1</span></div>
+    <p class="px-stem" id="px-stem"></p>
+    <div class="px-opts" id="px-opts" role="radiogroup" aria-label="Answer choices"></div>
+    <div class="px-feedback" id="px-feedback" hidden></div>
+    <div class="px-nav">
+      <button type="button" class="px-btn" id="px-prev">← Previous</button>
+      <button type="button" class="px-btn px-ghost" id="px-flag">Flag for review</button>
+      <button type="button" class="px-btn" id="px-next">Next →</button>
+    </div>
+  </div>
+
+  <details class="px-palette-wrap" open>
+    <summary>Question map <span class="px-legend"><i class="lg ans"></i>answered <i class="lg flag"></i>flagged <i class="lg ok"></i>correct <i class="lg bad"></i>missed</span></summary>
+    <div class="px-palette" id="px-palette"></div>
+  </details>
+
+  <div class="px-actions">
+    <button type="button" class="px-btn px-primary" id="px-submit">Submit exam and score it</button>
+    <button type="button" class="px-btn px-ghost" id="px-reset">Start this exam over</button>
+    <span class="px-confirm" id="px-confirm" hidden>Erase your answers for this exam? <button type="button" class="px-btn px-danger" id="px-reset-yes">Yes, start over</button> <button type="button" class="px-btn px-ghost" id="px-reset-no">Cancel</button></span>
+  </div>
+
+  <div class="px-results" id="px-results" hidden></div>
+</section>
+<style>
+.px-lead { max-width: 70ch; }
+.px-controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 16px 0 10px; }
+.px-group { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--surface); }
+.px-seg { font: 600 14px/1 var(--display); padding: 9px 12px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.px-seg + .px-seg { border-left: 1px solid var(--rule); }
+.px-seg[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.px-filter { font: 600 14px var(--display); display: flex; gap: 8px; align-items: center; flex: 1 1 260px; min-width: 0; }
+.px-filter select { font: 14px var(--body); padding: 7px 8px; border: 1px solid var(--rule); border-radius: 5px; background: var(--surface); color: var(--ink); width: 100%; min-width: 0; max-width: 100%; }
+.px-status { display: flex; justify-content: space-between; gap: 12px; font: 500 13px var(--mono); color: var(--muted); margin: 6px 0; flex-wrap: wrap; }
+.px-timer { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.px-timer.low { color: var(--accent); }
+.px-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 16px; display: grid; gap: 12px; }
+.px-meta { display: flex; justify-content: space-between; gap: 10px; align-items: center; font: 600 14px var(--display); flex-wrap: wrap; }
+.px-chip { font: 500 12px var(--mono); padding: 3px 8px; border-radius: 999px; background: var(--th-bg); color: var(--muted); }
+.px-stem { font-size: 17px; line-height: 1.55; margin: 0; max-width: none; }
+.px-opts { display: grid; gap: 8px; }
+.px-opt { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; text-align: left; font: 15.5px/1.45 var(--body); color: var(--ink); background: var(--bg); border: 1.5px solid var(--rule); border-radius: 6px; padding: 10px 12px; cursor: pointer; }
+.px-opt:hover { border-color: var(--accent); }
+.px-opt .ltr { font: 700 14px/1.6 var(--display); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--rule); }
+.px-opt[aria-checked="true"] { border-color: var(--ink); }
+.px-opt[aria-checked="true"] .ltr { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.px-opt.correct { border-color: #2E7D4F; background: color-mix(in srgb, #2E7D4F 12%, var(--bg)); }
+.px-opt.correct .ltr { background: #2E7D4F; border-color: #2E7D4F; color: #fff; }
+.px-opt.wrong { border-color: #B3412E; background: color-mix(in srgb, #B3412E 10%, var(--bg)); }
+.px-opt.wrong .ltr { background: #B3412E; border-color: #B3412E; color: #fff; }
+.px-opt:disabled { cursor: default; }
+.px-feedback { border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 8px; font-size: 15px; }
+.px-feedback .verdict { font: 700 16px var(--display); }
+.px-feedback .verdict.ok { color: #2E7D4F; }
+.px-feedback .verdict.bad { color: #B3412E; }
+.px-feedback ul { margin: 0; padding-left: 1.2em; }
+.px-feedback .src { font: 12.5px var(--mono); color: var(--muted); }
+.px-nav { display: flex; gap: 8px; justify-content: space-between; flex-wrap: wrap; }
+.px-btn { font: 600 14px var(--display); padding: 9px 14px; border-radius: 6px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); cursor: pointer; }
+.px-btn:hover { border-color: var(--accent); }
+.px-btn.px-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.px-btn.px-danger { background: #B3412E; color: #fff; border-color: #B3412E; }
+.px-btn.px-ghost { background: transparent; }
+.px-btn[aria-pressed="true"] { background: var(--memorize-bg); border-color: var(--memorize-rule); }
+.px-btn:focus-visible, .px-seg:focus-visible, .px-opt:focus-visible, .px-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.px-palette-wrap { margin: 14px 0; }
+.px-palette-wrap summary { font: 600 15px var(--display); cursor: pointer; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.px-legend { font: 12px var(--mono); color: var(--muted); display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.lg { display: inline-block; width: 10px; height: 10px; border-radius: 2px; border: 1px solid var(--rule); }
+.lg.ans { background: var(--ink); } .lg.flag { background: var(--memorize-rule); } .lg.ok { background: #2E7D4F; } .lg.bad { background: #B3412E; }
+.px-palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 5px; margin-top: 10px; }
+.px-cell { font: 600 12.5px var(--mono); padding: 7px 0; border-radius: 4px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; font-variant-numeric: tabular-nums; }
+.px-cell.ans { background: var(--ink); color: var(--bg); }
+.px-cell.flag { box-shadow: inset 0 -4px 0 var(--memorize-rule); }
+.px-cell.ok { background: #2E7D4F; color: #fff; border-color: #2E7D4F; }
+.px-cell.bad { background: #B3412E; color: #fff; border-color: #B3412E; }
+.px-cell.cur { outline: 2px solid var(--accent); outline-offset: 1px; }
+.px-cell.secstart { margin-left: 0; }
+.px-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 10px 0 18px; }
+.px-confirm { display: inline-flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 14px; }
+.px-results { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 16px; display: grid; gap: 14px; }
+.px-score { display: flex; flex-wrap: wrap; gap: 14px; align-items: baseline; }
+.px-score .big { font: 700 40px/1 var(--display); font-variant-numeric: tabular-nums; }
+.px-score .pass { font: 700 15px var(--display); padding: 4px 10px; border-radius: 999px; }
+.px-score .pass.yes { background: color-mix(in srgb, #2E7D4F 18%, var(--surface)); color: #2E7D4F; }
+.px-score .pass.no { background: color-mix(in srgb, #B3412E 16%, var(--surface)); color: #B3412E; }
+.px-bar { position: relative; height: 10px; background: var(--th-bg); border-radius: 5px; min-width: 90px; }
+.px-bar > span { position: absolute; inset: 0 auto 0 0; border-radius: 5px; background: var(--ink); }
+.px-bar > span.weak { background: #B3412E; }
+.px-bar > i { position: absolute; top: -3px; bottom: -3px; left: 70%; width: 2px; background: var(--accent); }
+.px-results table td:last-child { width: 32%; }
+.px-missed details { border-top: 1px solid var(--rule); padding: 8px 0; }
+.px-missed summary { cursor: pointer; font-weight: 600; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .px-opt.correct, :root:not([data-theme="light"]) .px-opt.wrong { color: var(--ink); } }
+</style>
+<script>
+(function () {
+  function start() {
+    var raw = document.getElementById('mockdata');
+    if (!raw) return;
+    var DATA = JSON.parse(raw.textContent);
+    var SECS = DATA.sections;
+    var LET = ['A', 'B', 'C', 'D'];
+    var EXAM_SECONDS = 150 * 60;
+    var $ = function (id) { return document.getElementById(id); };
+
+    function load(key, fallback) {
+      try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; }
+    }
+    function save(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) {} }
+
+    var ui = load('il105-px-ui', { mock: 'mock1', mode: 'study', section: 0 });
+    var states = {};
+    function st() {
+      var k = ui.mock + ':' + ui.mode;
+      if (!states[k]) states[k] = load('il105-px-' + k, { ans: {}, flag: {}, cur: 0, submitted: false, elapsed: 0 });
+      return states[k];
+    }
+    function persist() { save('il105-px-' + ui.mock + ':' + ui.mode, st()); save('il105-px-ui', ui); }
+
+    function list() {
+      var qs = DATA[ui.mock].map(function (q, i) { q.n = i; return q; });
+      if (ui.mode === 'study' && +ui.section) qs = qs.filter(function (q) { return q.s === +ui.section; });
+      return qs;
+    }
+
+    var sel = $('px-section');
+    Object.keys(SECS).forEach(function (k) {
+      var o = document.createElement('option');
+      o.value = k; o.textContent = 'Section ' + k + ': ' + SECS[k].name + ' (' + SECS[k].count + ')';
+      sel.appendChild(o);
+    });
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    function reveal(q) { return ui.mode === 'study' ? st().ans[q.n] !== undefined : st().submitted; }
+
+    function renderQuestion() {
+      var qs = list(), s = st();
+      if (s.cur >= qs.length) s.cur = 0;
+      var q = qs[s.cur];
+      $('px-num').textContent = 'Question ' + (q.n + 1) + ' of 130';
+      $('px-sec').textContent = 'Section ' + q.s + ': ' + SECS[q.s].name;
+      $('px-stem').textContent = q.q;
+      var box = $('px-opts'); box.innerHTML = '';
+      var chosen = s.ans[q.n], show = reveal(q);
+      q.o.forEach(function (txt, i) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'px-opt'; b.setAttribute('role', 'radio');
+        b.setAttribute('aria-checked', chosen === i ? 'true' : 'false');
+        b.innerHTML = '<span class="ltr">' + LET[i] + '</span><span>' + esc(txt) + '</span>';
+        if (show) {
+          b.disabled = true;
+          if (i === q.a) b.classList.add('correct');
+          else if (chosen === i) b.classList.add('wrong');
+        }
+        b.addEventListener('click', function () { choose(q, i); });
+        box.appendChild(b);
+      });
+      var fb = $('px-feedback');
+      if (show) {
+        var ok = chosen === q.a;
+        var html = '<div class="verdict ' + (ok ? 'ok' : 'bad') + '">' +
+          (chosen === undefined ? 'Not answered.' : ok ? 'Correct.' : 'Not quite.') +
+          ' Answer: ' + LET[q.a] + '</div><div>' + esc(q.e) + '</div><ul>';
+        Object.keys(q.w).sort().forEach(function (k) {
+          html += '<li><strong>' + LET[+k] + (chosen === +k ? ' (your choice)' : '') + ':</strong> ' + esc(q.w[k]) + '</li>';
+        });
+        html += '</ul><div class="src">Topic: ' + esc(q.t) + ' · Source: ' + esc(q.src) + '</div>';
+        fb.innerHTML = html; fb.hidden = false;
+      } else { fb.hidden = true; fb.innerHTML = ''; }
+      $('px-prev').disabled = s.cur === 0;
+      $('px-next').disabled = s.cur === qs.length - 1;
+      var fl = $('px-flag');
+      fl.setAttribute('aria-pressed', s.flag[q.n] ? 'true' : 'false');
+      fl.textContent = s.flag[q.n] ? 'Flagged' : 'Flag for review';
+      renderPalette(); renderStatus();
+    }
+
+    function renderPalette() {
+      var pal = $('px-palette'); pal.innerHTML = '';
+      var s = st();
+      list().forEach(function (q, idx) {
+        var c = document.createElement('button');
+        c.type = 'button'; c.className = 'px-cell'; c.textContent = q.n + 1;
+        c.title = 'Question ' + (q.n + 1) + ' · Section ' + q.s;
+        var a = s.ans[q.n];
+        if (reveal(q)) c.classList.add(a === q.a ? 'ok' : 'bad');
+        else if (a !== undefined) c.classList.add('ans');
+        if (s.flag[q.n]) c.classList.add('flag');
+        if (idx === s.cur) c.classList.add('cur');
+        c.addEventListener('click', function () { s.cur = idx; persist(); renderQuestion(); });
+        pal.appendChild(c);
+      });
+    }
+
+    function renderStatus() {
+      var s = st(), qs = list();
+      var n = qs.filter(function (q) { return s.ans[q.n] !== undefined; }).length;
+      var txt = n + ' of ' + qs.length + ' answered';
+      if (ui.mode === 'study') {
+        var right = qs.filter(function (q) { return s.ans[q.n] === q.a; }).length;
+        if (n) txt += ' · ' + right + ' correct (' + Math.round(100 * right / n) + '%)';
+      }
+      $('px-progress').textContent = txt;
+      $('px-submit').hidden = ui.mode !== 'exam' || s.submitted;
+      $('px-timer').hidden = ui.mode !== 'exam';
+      $('px-section').disabled = ui.mode === 'exam';
+      $('px-section').value = ui.mode === 'exam' ? '0' : String(ui.section);
+      ['px-m1', 'px-m2'].forEach(function (id) { $(id).setAttribute('aria-pressed', $(id).dataset.mock === ui.mock ? 'true' : 'false'); });
+      ['px-exam', 'px-study'].forEach(function (id) { $(id).setAttribute('aria-pressed', $(id).dataset.mode === ui.mode ? 'true' : 'false'); });
+      drawTimer();
+    }
+
+    function choose(q, i) {
+      var s = st();
+      if (reveal(q)) return;
+      s.ans[q.n] = i; persist(); renderQuestion();
+    }
+
+    function results() {
+      var s = st(), qs = DATA[ui.mock];
+      var per = {}, total = 0;
+      Object.keys(SECS).forEach(function (k) { per[k] = { c: 0, n: 0 }; });
+      qs.forEach(function (q, i) { per[q.s].n++; if (s.ans[i] === q.a) { per[q.s].c++; total++; } });
+      var pct = Math.round(1000 * total / 130) / 10;
+      var passed = total >= 91;
+      var h = '<h2 style="margin-top:0;border:0;padding:0">Results: ' + (ui.mock === 'mock1' ? 'Mock Exam 1' : 'Mock Exam 2') + '</h2>' +
+        '<div class="px-score"><span class="big">' + total + ' / 130</span><span>' + pct + '%</span>' +
+        '<span class="pass ' + (passed ? 'yes' : 'no') + '">' + (passed ? 'At or above the 70% benchmark (91)' : 'Below the 70% benchmark (91)') + '</span></div>' +
+        '<p style="margin:0;color:var(--muted)">A mock score doesn\'t predict your CTS result. Use the section rows to decide what to study next.</p>' +
+        '<div class="tablewrap"><table><thead><tr><th>Section</th><th>Score</th><th>%</th><th>vs. 70%</th></tr></thead><tbody>';
+      Object.keys(SECS).forEach(function (k) {
+        var r = per[k], p = r.n ? Math.round(100 * r.c / r.n) : 0;
+        h += '<tr><td>' + k + ' · ' + esc(SECS[k].name) + '</td><td>' + r.c + ' / ' + r.n + '</td><td>' + p + '%</td>' +
+          '<td><div class="px-bar"><span class="' + (p < 70 ? 'weak' : '') + '" style="width:' + p + '%"></span><i></i></div></td></tr>';
+      });
+      h += '</tbody></table></div><div class="px-missed"><h3>Questions you missed</h3>';
+      var missed = 0;
+      qs.forEach(function (q, i) {
+        if (s.ans[i] === q.a) return;
+        missed++;
+        var mine = s.ans[i] === undefined ? 'no answer' : 'you chose ' + LET[s.ans[i]];
+        h += '<details><summary>Q' + (i + 1) + ' · ' + esc(q.t) + ' (' + mine + '; answer ' + LET[q.a] + ')</summary>' +
+          '<p>' + esc(q.q) + '</p><p><strong>' + LET[q.a] + '. ' + esc(q.o[q.a]) + '</strong>: ' + esc(q.e) + '</p>';
+        if (s.ans[i] !== undefined && q.w[s.ans[i]]) h += '<p><strong>Why ' + LET[s.ans[i]] + ' is wrong:</strong> ' + esc(q.w[s.ans[i]]) + '</p>';
+        h += '<p class="src" style="font:12.5px var(--mono);color:var(--muted)">Source: ' + esc(q.src) + '</p></details>';
+      });
+      if (!missed) h += '<p>None. Every question correct.</p>';
+      h += '</div>';
+      var box = $('px-results'); box.innerHTML = h; box.hidden = false;
+    }
+
+    function renderResults() {
+      if (ui.mode === 'exam' && st().submitted) results(); else { $('px-results').hidden = true; $('px-results').innerHTML = ''; }
+    }
+
+    // timer (exam mode only; counts while the page is open)
+    var tick = null;
+    function drawTimer() {
+      var s = st(), left = Math.max(0, EXAM_SECONDS - s.elapsed);
+      var h = Math.floor(left / 3600), m = Math.floor(left % 3600 / 60), sec = left % 60;
+      var t = $('px-timer');
+      t.textContent = (s.submitted ? 'Submitted · ' : 'Time left ') + h + ':' + String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+      t.classList.toggle('low', left <= 600 && !s.submitted);
+    }
+    function runTimer() {
+      if (tick) clearInterval(tick);
+      tick = setInterval(function () {
+        if (ui.mode !== 'exam') return;
+        var s = st();
+        if (s.submitted || document.hidden) return;
+        s.elapsed++;
+        if (s.elapsed % 15 === 0) persist();
+        if (s.elapsed >= EXAM_SECONDS) { s.submitted = true; persist(); renderAll(); return; }
+        drawTimer();
+      }, 1000);
+    }
+
+    function renderAll() { renderQuestion(); renderResults(); }
+
+    $('px-prev').addEventListener('click', function () { var s = st(); if (s.cur > 0) { s.cur--; persist(); renderQuestion(); } });
+    $('px-next').addEventListener('click', function () { var s = st(); if (s.cur < list().length - 1) { s.cur++; persist(); renderQuestion(); } });
+    $('px-flag').addEventListener('click', function () { var s = st(), q = list()[s.cur]; s.flag[q.n] = !s.flag[q.n]; persist(); renderQuestion(); });
+    $('px-submit').addEventListener('click', function () { var s = st(); s.submitted = true; persist(); renderAll(); $('px-results').scrollIntoView({ block: 'start' }); });
+    $('px-reset').addEventListener('click', function () { $('px-confirm').hidden = false; });
+    $('px-reset-no').addEventListener('click', function () { $('px-confirm').hidden = true; });
+    $('px-reset-yes').addEventListener('click', function () {
+      states[ui.mock + ':' + ui.mode] = { ans: {}, flag: {}, cur: 0, submitted: false, elapsed: 0 };
+      persist(); $('px-confirm').hidden = true; renderAll();
+    });
+    ['px-m1', 'px-m2'].forEach(function (id) {
+      $(id).addEventListener('click', function () { ui.mock = $(id).dataset.mock; persist(); renderAll(); });
+    });
+    ['px-exam', 'px-study'].forEach(function (id) {
+      $(id).addEventListener('click', function () { ui.mode = $(id).dataset.mode; persist(); renderAll(); });
+    });
+    sel.addEventListener('change', function () { ui.section = +sel.value; st().cur = 0; persist(); renderAll(); });
+
+    renderAll(); runTimer();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>

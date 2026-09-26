@@ -5,6 +5,12 @@
 
 > These materials are original study aids. The mock exams are **not** CTS questions, leaked questions, or reconstructions of the live exam. A mock score does **not** predict your real result.
 
+## How to use this page
+1. **Study one guide tab a day** (1 · Safety through 6 · Non-Residential), in the order in the Schedule tab. Each topic ends with a **What to memorize** box (tan) and a **How to reason** box (blue).
+2. **Practice exams tab:** use **Study mode** to drill one section at a time. You see the answer and the reasoning for every choice right after you answer.
+3. When you've covered the guide, take **Mock Exam 1 in Exam mode**: timed at 2 h 30 min, scored by section when you submit. Take **Mock Exam 2** a week later.
+4. Your answers are saved in this browser, so you can stop and come back.
+
 ## Running table of contents
 | Part | File | Contents | Status |
 |---|---|---|---|
@@ -12,25 +18,28 @@
 | 1B | `02-diagnosis-why-practice-tests-failed.md` | Why generic prep failed; the nine skills the exam demands | ✅ Done |
 | 2 | `03-guide-sec1-safety.md` | Guide §1 Safety & Employee Protection (25 Q) | ✅ Done |
 | 3 | `04-guide-sec2-prep-materials.md` | Guide §2 Roofing Preparation & Materials (20 Q) | ✅ Done |
-| 4 | `05-guide-sec3-steep-slope.md` | Guide §3 Steep-Slope Systems (35 Q) | ⏳ Next |
-| 5 | `06-guide-sec4-low-slope.md` | Guide §4 Low-Slope Systems (15 Q) | ⏳ |
-| 6 | `07-guide-sec5-rules-business.md` | Guide §5 Rules, Regulations & Business Practices (20 Q) | ⏳ |
-| 7 | `08-guide-sec6-non-residential.md` | Guide §6 Non-Residential Systems (15 Q) | ⏳ |
-| 8 | `09-mock-exam-1.md` + `10-mock-exam-1-key.md` | Mock Exam 1 (130 Q) + audited key | ⏳ |
-| 9 | `11-mock-exam-2.md` + `12-mock-exam-2-key.md` | Mock Exam 2 (130 Q) + audited key | ⏳ |
-| 10 | `13-score-sheets.md` | Section score sheets, 70% benchmark | ⏳ |
+| 4 | `05-guide-sec3-steep-slope.md` | Guide §3 Steep-Slope Systems (35 Q) | ✅ Done |
+| 5 | `06-guide-sec4-low-slope.md` | Guide §4 Low-Slope Systems (15 Q) | ✅ Done |
+| 6 | `07-guide-sec5-rules-business.md` | Guide §5 Rules, Regulations & Business Practices (20 Q) | ✅ Done |
+| 7 | `08-guide-sec6-non-residential.md` | Guide §6 Non-Residential Systems (15 Q) | ✅ Done |
+| 8 | `09-mock-exam-1.md` + `10-mock-exam-1-key.md` | Mock Exam 1 (130 Q) + audited key | ✅ Done |
+| 9 | `11-mock-exam-2.md` + `12-mock-exam-2-key.md` | Mock Exam 2 (130 Q) + audited key | ✅ Done |
+| 10 | `13-score-sheets.md` | Section score sheets, 70% benchmark | ✅ Done |
 | — | `14-study-schedule.md` | Provisional schedule to Nov 4 | ✅ Provisional |
+| — | `study.html` | **The whole package on one page**, including interactive practice exams (timed exam mode + study mode, scored by section) | ✅ Done |
 
-## Running question count (mock exams)
+## Question count (mock exams): complete
+Each exam's answer key is balanced across A–D (about 32–33 of each). Every item has an explanation, a reason each wrong choice is wrong, a topic, and a source or an inference note.
+
 | Section | Blueprint | Mock 1 written | Mock 2 written |
 |---|---|---|---|
-| 1 Safety & Employee Protection | 25 | 0 | 0 |
-| 2 Roofing Preparation & Materials | 20 | 0 | 0 |
-| 3 Steep-Slope Roofing Systems | 35 | 0 | 0 |
-| 4 Low-Slope Roofing Systems | 15 | 0 | 0 |
-| 5 Rules, Regulations & Business Practices | 20 | 0 | 0 |
-| 6 Non-Residential Roofing Systems | 15 | 0 | 0 |
-| **Total** | **130** | **0** | **0** |
+| 1 Safety & Employee Protection | 25 | 25 | 25 |
+| 2 Roofing Preparation & Materials | 20 | 20 | 20 |
+| 3 Steep-Slope Roofing Systems | 35 | 35 | 35 |
+| 4 Low-Slope Roofing Systems | 15 | 15 | 15 |
+| 5 Rules, Regulations & Business Practices | 20 | 20 | 20 |
+| 6 Non-Residential Roofing Systems | 15 | 15 | 15 |
+| **Total** | **130** | **130** | **130** |
 
 ## Flag legend used throughout
 - **[OSHA-V]**: checked against current OSHA text.
