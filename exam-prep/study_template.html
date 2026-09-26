@@ -1,0 +1,213 @@
+<title>Illinois 105 Roofing Retake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #F3F4F2;
+  --surface: #FFFFFF;
+  --ink: #1B2127;
+  --muted: #5B656D;
+  --rule: #D7DBD7;
+  --accent: #A85A22;        /* copper flashing */
+  --accent-ink: #FFFFFF;
+  --memorize-bg: #FBF1E7;
+  --memorize-rule: #E4C3A3;
+  --reason-bg: #EAF0F4;
+  --reason-rule: #B8CAD7;
+  --caution-bg: #FBEDEA;
+  --caution-rule: #E3B6AC;
+  --th-bg: #E9ECE8;
+  --code-bg: #ECEEEB;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #14181B;
+    --surface: #1B2126;
+    --ink: #E4E8E6;
+    --muted: #9AA5AC;
+    --rule: #2E363C;
+    --accent: #E08A4E;
+    --accent-ink: #14181B;
+    --memorize-bg: #2A2119;
+    --memorize-rule: #5C4128;
+    --reason-bg: #1C262E;
+    --reason-rule: #34495A;
+    --caution-bg: #2C1D1B;
+    --caution-rule: #5E3A33;
+    --th-bg: #232A30;
+    --code-bg: #242B31;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #14181B;
+  --surface: #1B2126;
+  --ink: #E4E8E6;
+  --muted: #9AA5AC;
+  --rule: #2E363C;
+  --accent: #E08A4E;
+  --accent-ink: #14181B;
+  --memorize-bg: #2A2119;
+  --memorize-rule: #5C4128;
+  --reason-bg: #1C262E;
+  --reason-rule: #34495A;
+  --caution-bg: #2C1D1B;
+  --caution-rule: #5E3A33;
+  --th-bg: #232A30;
+  --code-bg: #242B31;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 0 64px;
+}
+.wrap { max-width: 820px; margin: 0 auto; }
+
+header.top { padding-block: 28px 16px; display: grid; gap: 12px; }
+.eyebrow {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+h1.name {
+  font-family: var(--display); font-weight: 700; font-size: clamp(28px, 6vw, 40px); line-height: 1.1;
+  margin: 0; text-wrap: balance;
+}
+.dates { display: flex; flex-wrap: wrap; gap: 10px; }
+.date {
+  display: grid; gap: 2px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+  min-width: 150px; flex: 1 1 150px;
+}
+.date .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.date .val { font-family: var(--display); font-weight: 600; font-size: 20px; font-variant-numeric: tabular-nums; }
+.date .sub { font-size: 13px; color: var(--muted); }
+.date.urgent .val { color: var(--accent); }
+
+nav.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--rule);
+  margin-inline: -16px; padding: 8px 16px;
+  display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin;
+}
+.tab {
+  flex: 0 0 auto; font-family: var(--display); font-weight: 600; font-size: 15px;
+  padding: 7px 12px; border-radius: 5px; border: 1px solid var(--rule);
+  background: var(--surface); color: var(--ink); cursor: pointer; white-space: nowrap;
+}
+.tab:hover { border-color: var(--accent); }
+.tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.tab:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.panel { padding-block: 20px 8px; scroll-margin-top: 64px; }
+.panel h1 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1.15; margin: 8px 0 12px; text-wrap: balance; }
+.panel h2 { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1.2; margin: 36px 0 10px; padding-top: 14px; border-top: 2px solid var(--ink); text-wrap: balance; }
+.panel h3 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 24px 0 8px; text-wrap: balance; }
+.panel h4 { font-family: var(--display); font-weight: 600; font-size: 16px; margin: 18px 0 6px; }
+.panel p, .panel li { max-width: 68ch; }
+.panel ul, .panel ol { padding-left: 1.3em; }
+.panel li { margin: 3px 0; }
+.panel hr { border: 0; border-top: 1px solid var(--rule); margin: 28px 0; }
+.panel a { color: var(--accent); word-break: break-word; }
+.panel code { font-family: var(--mono); font-size: .88em; background: var(--code-bg); padding: 1px 5px; border-radius: 3px; word-break: break-word; }
+.panel strong { font-weight: 600; }
+
+.tablewrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; line-height: 1.45; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+th { background: var(--th-bg); font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: .01em; }
+tr:last-child td { border-bottom: 0; }
+
+.callout { margin: 18px 0; padding: 12px 16px; border-radius: 6px; border: 1px solid var(--rule); background: var(--surface); }
+.callout p { margin: 6px 0; max-width: none; }
+.callout.memorize { background: var(--memorize-bg); border-color: var(--memorize-rule); }
+.callout.reason { background: var(--reason-bg); border-color: var(--reason-rule); }
+.callout.caution { background: var(--caution-bg); border-color: var(--caution-rule); }
+.callout strong:first-child { font-family: var(--display); letter-spacing: .04em; }
+
+footer.foot { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Illinois Roofing Qualifying Party Exam · CTS 105 · Residential, Commercial &amp; Industrial</div>
+    <h1 class="name">Illinois 105 Roofing Retake</h1>
+    <div class="dates">
+      <div class="date urgent"><span class="lbl">Register by</span><span class="val">Wed, Oct 7, 2026</span><span class="sub" id="d-reg">CTS deadline</span></div>
+      <div class="date"><span class="lbl">Exam</span><span class="val">Wed, Nov 4, 2026</span><span class="sub" id="d-exam">Hillside or Springfield</span></div>
+      <div class="date"><span class="lbl">Target</span><span class="val">91 / 130</span><span class="sub">70% to pass · last score 55%</span></div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Study parts">
+<!--TABS-->
+  </nav>
+
+  <main>
+<!--PANELS-->
+  </main>
+
+  <footer class="foot">Original study material. The mock exams are not CTS questions, and a mock score does not predict your result. More parts are added as they're written.</footer>
+</div>
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+  if (!tabs.length) return;
+
+  function show(id, scroll) {
+    var found = panels.some(function (p) { return p.id === id; });
+    if (!found) id = panels[0].id;
+    panels.forEach(function (p) { p.hidden = p.id !== id; });
+    tabs.forEach(function (t) {
+      var on = t.dataset.target === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      if (on && t.scrollIntoView) t.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
+    try { localStorage.setItem('il105-tab', id); } catch (e) {}
+    if (scroll) {
+      var nav = document.querySelector('nav.tabs');
+      window.scrollTo(0, nav.offsetTop);
+    }
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { show(t.dataset.target, true); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      var n = tabs[(i + d + tabs.length) % tabs.length];
+      n.focus(); show(n.dataset.target, false);
+    });
+  });
+
+  var start = (location.hash || '').slice(1);
+  if (!start) { try { start = localStorage.getItem('il105-tab') || ''; } catch (e) {} }
+  show(start || panels[0].id, false);
+
+  function daysUntil(y, m, d) {
+    var now = new Date(); now.setHours(0, 0, 0, 0);
+    return Math.round((new Date(y, m - 1, d) - now) / 86400000);
+  }
+  function label(n, what) {
+    if (n > 1) return n + ' days left ' + what;
+    if (n === 1) return '1 day left ' + what;
+    if (n === 0) return 'Today';
+    return 'Passed';
+  }
+  var r = document.getElementById('d-reg'), x = document.getElementById('d-exam');
+  if (r) r.textContent = label(daysUntil(2026, 10, 7), 'to register');
+  if (x) x.textContent = label(daysUntil(2026, 11, 4), '· Hillside or Springfield');
+})();
+</script>

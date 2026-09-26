@@ -1,0 +1,1915 @@
+<title>Illinois 105 Roofing Retake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #F3F4F2;
+  --surface: #FFFFFF;
+  --ink: #1B2127;
+  --muted: #5B656D;
+  --rule: #D7DBD7;
+  --accent: #A85A22;        /* copper flashing */
+  --accent-ink: #FFFFFF;
+  --memorize-bg: #FBF1E7;
+  --memorize-rule: #E4C3A3;
+  --reason-bg: #EAF0F4;
+  --reason-rule: #B8CAD7;
+  --caution-bg: #FBEDEA;
+  --caution-rule: #E3B6AC;
+  --th-bg: #E9ECE8;
+  --code-bg: #ECEEEB;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #14181B;
+    --surface: #1B2126;
+    --ink: #E4E8E6;
+    --muted: #9AA5AC;
+    --rule: #2E363C;
+    --accent: #E08A4E;
+    --accent-ink: #14181B;
+    --memorize-bg: #2A2119;
+    --memorize-rule: #5C4128;
+    --reason-bg: #1C262E;
+    --reason-rule: #34495A;
+    --caution-bg: #2C1D1B;
+    --caution-rule: #5E3A33;
+    --th-bg: #232A30;
+    --code-bg: #242B31;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #14181B;
+  --surface: #1B2126;
+  --ink: #E4E8E6;
+  --muted: #9AA5AC;
+  --rule: #2E363C;
+  --accent: #E08A4E;
+  --accent-ink: #14181B;
+  --memorize-bg: #2A2119;
+  --memorize-rule: #5C4128;
+  --reason-bg: #1C262E;
+  --reason-rule: #34495A;
+  --caution-bg: #2C1D1B;
+  --caution-rule: #5E3A33;
+  --th-bg: #232A30;
+  --code-bg: #242B31;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 0 64px;
+}
+.wrap { max-width: 820px; margin: 0 auto; }
+
+header.top { padding-block: 28px 16px; display: grid; gap: 12px; }
+.eyebrow {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+h1.name {
+  font-family: var(--display); font-weight: 700; font-size: clamp(28px, 6vw, 40px); line-height: 1.1;
+  margin: 0; text-wrap: balance;
+}
+.dates { display: flex; flex-wrap: wrap; gap: 10px; }
+.date {
+  display: grid; gap: 2px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+  min-width: 150px; flex: 1 1 150px;
+}
+.date .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.date .val { font-family: var(--display); font-weight: 600; font-size: 20px; font-variant-numeric: tabular-nums; }
+.date .sub { font-size: 13px; color: var(--muted); }
+.date.urgent .val { color: var(--accent); }
+
+nav.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--rule);
+  margin-inline: -16px; padding: 8px 16px;
+  display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin;
+}
+.tab {
+  flex: 0 0 auto; font-family: var(--display); font-weight: 600; font-size: 15px;
+  padding: 7px 12px; border-radius: 5px; border: 1px solid var(--rule);
+  background: var(--surface); color: var(--ink); cursor: pointer; white-space: nowrap;
+}
+.tab:hover { border-color: var(--accent); }
+.tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.tab:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.panel { padding-block: 20px 8px; scroll-margin-top: 64px; }
+.panel h1 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1.15; margin: 8px 0 12px; text-wrap: balance; }
+.panel h2 { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1.2; margin: 36px 0 10px; padding-top: 14px; border-top: 2px solid var(--ink); text-wrap: balance; }
+.panel h3 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 24px 0 8px; text-wrap: balance; }
+.panel h4 { font-family: var(--display); font-weight: 600; font-size: 16px; margin: 18px 0 6px; }
+.panel p, .panel li { max-width: 68ch; }
+.panel ul, .panel ol { padding-left: 1.3em; }
+.panel li { margin: 3px 0; }
+.panel hr { border: 0; border-top: 1px solid var(--rule); margin: 28px 0; }
+.panel a { color: var(--accent); word-break: break-word; }
+.panel code { font-family: var(--mono); font-size: .88em; background: var(--code-bg); padding: 1px 5px; border-radius: 3px; word-break: break-word; }
+.panel strong { font-weight: 600; }
+
+.tablewrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; line-height: 1.45; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+th { background: var(--th-bg); font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: .01em; }
+tr:last-child td { border-bottom: 0; }
+
+.callout { margin: 18px 0; padding: 12px 16px; border-radius: 6px; border: 1px solid var(--rule); background: var(--surface); }
+.callout p { margin: 6px 0; max-width: none; }
+.callout.memorize { background: var(--memorize-bg); border-color: var(--memorize-rule); }
+.callout.reason { background: var(--reason-bg); border-color: var(--reason-rule); }
+.callout.caution { background: var(--caution-bg); border-color: var(--caution-rule); }
+.callout strong:first-child { font-family: var(--display); letter-spacing: .04em; }
+
+footer.foot { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Illinois Roofing Qualifying Party Exam · CTS 105 · Residential, Commercial &amp; Industrial</div>
+    <h1 class="name">Illinois 105 Roofing Retake</h1>
+    <div class="dates">
+      <div class="date urgent"><span class="lbl">Register by</span><span class="val">Wed, Oct 7, 2026</span><span class="sub" id="d-reg">CTS deadline</span></div>
+      <div class="date"><span class="lbl">Exam</span><span class="val">Wed, Nov 4, 2026</span><span class="sub" id="d-exam">Hillside or Springfield</span></div>
+      <div class="date"><span class="lbl">Target</span><span class="val">91 / 130</span><span class="sub">70% to pass · last score 55%</span></div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Study parts">
+<button class="tab" role="tab" id="tab-start" data-target="start" aria-controls="start">Start here</button>
+<button class="tab" role="tab" id="tab-blueprint" data-target="blueprint" aria-controls="blueprint">Exam blueprint</button>
+<button class="tab" role="tab" id="tab-diagnosis" data-target="diagnosis" aria-controls="diagnosis">Why I missed</button>
+<button class="tab" role="tab" id="tab-schedule" data-target="schedule" aria-controls="schedule">Schedule</button>
+<button class="tab" role="tab" id="tab-safety" data-target="safety" aria-controls="safety">1 · Safety</button>
+  </nav>
+
+  <main>
+<section class="panel" role="tabpanel" id="start" aria-labelledby="tab-start"><h1>Illinois 105 RCI (Unlimited) Roofing Exam: Retake Prep Package</h1>
+<p><strong>Built for:</strong> the Illinois Residential, Commercial &amp; Industrial Roofing Examination (unlimited license; CTS profession 105, test code 03). 130 questions, 2½ hours, pass at 70.
+<strong>Target sitting:</strong> <strong>Wed, Nov 4, 2026</strong> (register by <strong>Oct 7, 2026</strong>).</p>
+<aside class="callout note">
+<p>These materials are original study aids. The mock exams are <strong>not</strong> CTS questions, leaked questions, or reconstructions of the live exam. A mock score does <strong>not</strong> predict your real result.</p>
+</aside>
+<h2>Running table of contents</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>File</th>
+<th>Contents</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1A</td>
+<td><code>01-source-audit-and-blueprint.md</code></td>
+<td>Source audit, what I read and what I couldn't, verified blueprint, admin rules, next date</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>1B</td>
+<td><code>02-diagnosis-why-practice-tests-failed.md</code></td>
+<td>Why generic prep failed; the nine skills the exam demands</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>03-guide-sec1-safety.md</code></td>
+<td>Guide §1 Safety &amp; Employee Protection (25 Q)</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>04-guide-sec2-prep-materials.md</code></td>
+<td>Guide §2 Roofing Preparation &amp; Materials (20 Q)</td>
+<td>⏳ Next</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>05-guide-sec3-steep-slope.md</code></td>
+<td>Guide §3 Steep-Slope Systems (35 Q)</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>06-guide-sec4-low-slope.md</code></td>
+<td>Guide §4 Low-Slope Systems (15 Q)</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>07-guide-sec5-rules-business.md</code></td>
+<td>Guide §5 Rules, Regulations &amp; Business Practices (20 Q)</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>08-guide-sec6-non-residential.md</code></td>
+<td>Guide §6 Non-Residential Systems (15 Q)</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>09-mock-exam-1.md</code> + <code>10-mock-exam-1-key.md</code></td>
+<td>Mock Exam 1 (130 Q) + audited key</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>11-mock-exam-2.md</code> + <code>12-mock-exam-2-key.md</code></td>
+<td>Mock Exam 2 (130 Q) + audited key</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>13-score-sheets.md</code></td>
+<td>Section score sheets, 70% benchmark</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>14-study-schedule.md</code></td>
+<td>Provisional schedule to Nov 4</td>
+<td>✅ Provisional</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Running question count (mock exams)</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Blueprint</th>
+<th>Mock 1 written</th>
+<th>Mock 2 written</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Safety &amp; Employee Protection</td>
+<td>25</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2 Roofing Preparation &amp; Materials</td>
+<td>20</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3 Steep-Slope Roofing Systems</td>
+<td>35</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4 Low-Slope Roofing Systems</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>5 Rules, Regulations &amp; Business Practices</td>
+<td>20</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>6 Non-Residential Roofing Systems</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>130</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2>Flag legend used throughout</h2>
+<ul>
+<li><strong>[OSHA-V]</strong>: checked against current OSHA text.</li>
+<li><strong>[OSHA]</strong>: OSHA citation; verify the paragraph at ecfr.gov.</li>
+<li><strong>[IL-V]</strong>: checked against the current Illinois Act/Rules.</li>
+<li><strong>[NRCA-P]</strong>: NRCA practice from public NRCA material. The manuals themselves were not accessible to me.</li>
+<li><strong>[JURISDICTION]</strong>: depends on the local code adoption.</li>
+<li><strong>[MANUFACTURER]</strong>: depends on the product's installation instructions.</li>
+<li><strong>[EDITION]</strong>: may differ between the 2018–2021 NRCA volumes that CTS lists and the current 2023–2026 volumes, or between pre- and post-Aug-2025 Illinois law.</li>
+<li><strong>INFERENCE</strong>: my reasoning, not a sourced fact.</li>
+</ul></section>
+<section class="panel" role="tabpanel" id="blueprint" aria-labelledby="tab-blueprint"><h1>Part 1A — Source Audit and Verified Exam Blueprint</h1>
+<p>Illinois Roofing Qualifying Party Examination: <strong>Residential, Commercial &amp; Industrial (Unlimited license)</strong>, CTS profession code 105, test code 03</p>
+<p>Prepared 2026-09-26. Read the status labels carefully. They show what I read in a primary source and what I only inferred.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VERIFIED (primary)</strong></td>
+<td>I read the text in the official source, through a search/extraction tool (see the access note below).</td>
+</tr>
+<tr>
+<td><strong>VERIFIED (secondary)</strong></td>
+<td>The fact comes from a reputable secondary source that quotes the primary one. I could not open the primary directly.</td>
+</tr>
+<tr>
+<td><strong>NOT READ</strong></td>
+<td>The source is paywalled or blocked. I have <strong>not</strong> read it and I make no claims about its contents.</td>
+</tr>
+<tr>
+<td><strong>INFERENCE</strong></td>
+<td>My own reasoning. It is not a quotation from any source.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Access note (important for trust)</h3>
+<p>This work environment's network policy blocked direct downloads from <code>continentaltesting.net</code>, <code>continentaltestinginc.com</code>, <code>idfpr.illinois.gov</code>, <code>ilga.gov</code>, <code>osha.gov</code>, and <code>ecfr.gov</code>. I read those pages with a web-search/extraction tool that returns the live page text. That text is how I read the CTS study guide, the CTS roofing page, the Act, the rules, and OSHA 1926.502. I did <strong>not</strong> see the PDFs' visual layout, so <strong>page numbers for the CTS guide are approximate</strong> (the PDF is short, about 8–10 pages, with three "Parts"). If you want me to cite exact PDF page numbers, upload the PDF and I'll pin every citation to a page.</p>
+<hr />
+<h2>1. Sources I consulted</h2>
+<h3>1.1 Exam-governing documents</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Source</th>
+<th>Edition / date</th>
+<th>Status</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td><strong>CTS, "Illinois Roofing Industry Licensure Examinations" (Roofer Study Guide)</strong></td>
+<td>© May 2021 (footer of Part I)</td>
+<td>VERIFIED (primary)</td>
+<td><code>https://www.continentaltesting.net/downloads/5-21-Roofer-Study-Guide.pdf</code> (the CTS page link <code>File/Download?name=Roofer-Study-Guide</code> serves the same document)</td>
+</tr>
+<tr>
+<td>S2</td>
+<td><strong>CTS profession page "105 – Roofing Contractors"</strong> (dates, fees, notices, links to S1 and S3)</td>
+<td>live page, read 2026-09-26</td>
+<td>VERIFIED (primary)</td>
+<td><code>https://www.continentaltesting.net/Profession/Index/60</code></td>
+</tr>
+<tr>
+<td>S3</td>
+<td><strong>CTS "Instructions for the Roofer Examination"</strong> (linked from S2)</td>
+<td>—</td>
+<td><strong>NOT READ.</strong> The link is on S2, but no search tool returned its text. I make no claims about its contents. Please upload it if you have it.</td>
+<td>linked from S2</td>
+</tr>
+<tr>
+<td>S4</td>
+<td><strong>IDFPR application form RF-QP</strong>, "Application for the Roofing Contractors Qualifying Party Examination" (IL486-1971, rev. 01/21)</td>
+<td>01/21</td>
+<td>VERIFIED (primary)</td>
+<td><code>https://idfpr.illinois.gov/content/dam/soi/en/web/idfpr/renewals/apply/forms/rf-qp.pdf</code></td>
+</tr>
+<tr>
+<td>S5</td>
+<td><strong>Illinois Roofing Industry Licensing Act, 225 ILCS 335</strong> (current text, as amended by <strong>P.A. 104-427, eff. 8-15-2025</strong>; repeal date now <strong>Jan 1, 2031</strong>)</td>
+<td>2025</td>
+<td>VERIFIED (primary) for the sections cited in the study guide</td>
+<td><code>https://www.ilga.gov/Legislation/ILCS/Articles?ActID=1346&amp;ChapterID=24</code></td>
+</tr>
+<tr>
+<td>S6</td>
+<td><strong>68 Ill. Adm. Code Part 1460</strong> (roofing rules)</td>
+<td>amended 45 Ill. Reg. 3009, eff. 3-12-2021</td>
+<td>VERIFIED (primary) for §§1460.5, .11, .20, .50, .80. <strong>§1460.40 (renewal date) and §1460.12 (exam, 70 pass) are VERIFIED (secondary).</strong></td>
+<td><code>https://www.ilga.gov/agencies/JCAR/EntirePart?titlepart=06801460</code></td>
+</tr>
+<tr>
+<td>S7</td>
+<td><strong>P.A. 104-427</strong> (SB 2503, 104th GA), the 2025 amendments</td>
+<td>eff. 8-15-2025</td>
+<td>VERIFIED (primary)</td>
+<td><code>https://www.ilga.gov/Legislation/PublicActs/PrinterFriendly/104-0427</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3>1.2 The nine references CTS names (S1, Part II, "Study Materials for Illinois Roofing Contractor Examinations")</h3>
+<p>CTS states: <em>"These references support all questions on the Illinois Roofing Contractor examinations."</em> (S1, Part II). They are listed exactly as CTS prints them:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>CTS listing (verbatim title/edition)</th>
+<th>Current edition as of Sept 2026</th>
+<th>Access status for me</th>
+<th>Exam relevance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>Illinois Roofing Industry Licensing Act and Rules, IDFPR</td>
+<td>Act as amended 8-15-2025; Rules as amended 3-12-2021</td>
+<td><strong>Read</strong> (S5, S6, S7)</td>
+<td>Section 5</td>
+</tr>
+<tr>
+<td>R2</td>
+<td><em>The NRCA Roofing Manual</em>, Four Volumes, <strong>2018–2021</strong> ("oldest volume usually updated annually")</td>
+<td><strong>Newer set now published:</strong> Membrane Roof Systems <strong>2023</strong>; Metal Panel &amp; SPF <strong>2024</strong>; Steep-slope <strong>2025</strong>; Architectural Metal Flashing &amp; Condensation/Air Leakage Control <strong>2026</strong> (NRCA announcements, Jan 2026 / Feb 2025)</td>
+<td><strong>NOT READ (paywalled; $395 per volume nonmember).</strong> I read NRCA's public summaries only.</td>
+<td>Sections 2, 3, 4, 6</td>
+</tr>
+<tr>
+<td>R3</td>
+<td><em>The NRCA Safety Manual</em>, Third Edition (2012)</td>
+<td>3rd ed.</td>
+<td><strong>NOT READ (paywalled)</strong></td>
+<td>Section 1</td>
+</tr>
+<tr>
+<td>R4</td>
+<td><em>NRCA Pocket Guide to Safety</em> (2015)</td>
+<td>—</td>
+<td><strong>NOT READ (paywalled)</strong></td>
+<td>Section 1</td>
+</tr>
+<tr>
+<td>R5</td>
+<td><em>The NRCA Waterproofing Manual</em> (2005)</td>
+<td>2005</td>
+<td><strong>NOT READ (paywalled)</strong></td>
+<td>Section 6 (likely)</td>
+</tr>
+<tr>
+<td>R6</td>
+<td><em>A Practical Guide to Handling Asbestos-Containing Materials</em>, NRCA</td>
+<td>—</td>
+<td><strong>NOT READ (paywalled)</strong></td>
+<td>Sections 1, 2</td>
+</tr>
+<tr>
+<td>R7</td>
+<td><em>Repair Manual for Low-Slope Membrane Roof Systems</em>, 2nd Ed. (2018)</td>
+<td>2nd ed.</td>
+<td><strong>NOT READ (paywalled)</strong></td>
+<td>Sections 4, 6</td>
+</tr>
+<tr>
+<td>R8</td>
+<td><em>NASCLA Contractors Guide to Business, Law and Project Management</em>, 12th Ed., 2017</td>
+<td>(NASCLA publishes state editions; later editions exist)</td>
+<td><strong>NOT READ (paywalled)</strong></td>
+<td>Section 5</td>
+</tr>
+<tr>
+<td>R9</td>
+<td>Atcheson, Daniel, <em>Roofing Construction and Estimating</em> (1995)</td>
+<td>1995 (out of print)</td>
+<td><strong>NOT READ</strong></td>
+<td>Sections 2, 5 (estimating)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Consequence (INFERENCE):</strong> 7 of the 9 named references are paywalled books I cannot open. For their subject matter I rely on the public primary sources that those books themselves teach from:</p>
+<ul>
+<li><strong>OSHA 29 CFR 1926</strong> (Subparts E, K, L, M, X, Z; §1926.1101 asbestos; §1926.1153 silica). The NRCA safety books are built on these. <strong>VERIFIED (primary)</strong> for §1926.502 fall-protection criteria. Other OSHA citations are from the CFR text as I know it and are marked where you should double-check.</li>
+<li><strong>NRCA public material</strong> (Professional Roofing articles, NRCA's CERTA torch-safety manual, which is public on NRCA's site).</li>
+<li><strong>Model codes (IRC/IBC)</strong> for dimensions. <strong>Illinois has no statewide residential building code.</strong> Local jurisdictions adopt codes, so every code dimension is flagged <strong>[JURISDICTION]</strong>.</li>
+<li><strong>Manufacturer installation instructions</strong> for system-specific numbers. Flagged <strong>[MANUFACTURER]</strong>.</li>
+</ul>
+<p>I will <strong>never</strong> write "NRCA says X" as a quotation. Where I attribute a practice to NRCA, I label it "NRCA practice (from public NRCA material / widely published; verify in manual)". I only use that label for well-established points.</p>
+<h3>1.3 Edition-mismatch warning (INFERENCE, but important)</h3>
+<ul>
+<li>The CTS guide is dated <strong>May 2021</strong> and lists the <strong>2018–2021</strong> NRCA volumes. Every NRCA volume has since been superseded (2023–2026). The <strong>CTS item bank may still be keyed to the older editions.</strong> On most fundamentals (flashing heights, laps, slopes, asphalt types) the editions agree. Where later editions changed guidance, I flag it <strong>[EDITION]</strong>.</li>
+<li>The <strong>Illinois Act changed on Aug 15, 2025 (P.A. 104-427).</strong> Maximum discipline fines and unlicensed-practice civil penalties rose from <strong>$10,000 to $15,000</strong> per violation. The qualifying-party and contract rules were also rewritten. An item written before 2025 would carry the old numbers. <strong>Learn both. Current law is $15,000.</strong> See the "how to reason" box in Section 5 of the guide.</li>
+</ul>
+<hr />
+<h2>2. Verify which exam you took</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Exam (CTS name)</th>
+<th>License</th>
+<th>Questions</th>
+<th>Time</th>
+<th>Who may take it</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Illinois <strong>Residential</strong> Roofing</td>
+<td>Limited (residential, <strong>8 units or less</strong>)</td>
+<td>80</td>
+<td>90 min</td>
+<td>anyone eligible</td>
+<td>S1 Part I &amp; II; S4 (test code 01)</td>
+</tr>
+<tr>
+<td>Illinois <strong>Commercial and Industrial</strong> Roofing (upgrade)</td>
+<td>upgrade to Unlimited</td>
+<td>80</td>
+<td>90 min</td>
+<td><strong>only</strong> candidates who already hold the Residential (limited) license</td>
+<td>S1 Part I &amp; II; S2; S4 (test code 02)</td>
+</tr>
+<tr>
+<td><strong>Illinois Residential, Commercial and Industrial Roofing</strong></td>
+<td><strong>Unlimited</strong></td>
+<td><strong>130</strong></td>
+<td><strong>2½ hours</strong></td>
+<td>anyone eligible</td>
+<td>S1 Part I &amp; II; S4 (test code 03)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Your exam is the third row.</strong> You described a 130-question, unlimited exam, and it matches: 130 questions and 2½ hours. Everything in this package is built for <strong>test code 03 (RCI)</strong>.</p>
+<aside class="callout caution">
+<p>Caution: one third-party prep site (Illinois Roofing Institute blog, "How to Prep for the IL Roofing Exam," 2025) prints the unlimited distribution as 25 / <strong>30</strong> / <strong>25</strong> / 15 / 20 / 15. <strong>That does not match CTS.</strong> Use the CTS numbers below. Mis-weighted prep material is one plausible reason earlier practice tests felt off.</p>
+</aside>
+<hr />
+<h2>3. Verified exam blueprint (RCI / Unlimited)</h2>
+<h3>3.1 Content outline. Source: S1, Part II, "Test Content and Recommended Study Materials" (approx. p. 3–4)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>§</th>
+<th>Content area (CTS wording)</th>
+<th>Residential (limited)</th>
+<th><strong>RCI (unlimited): YOUR EXAM</strong></th>
+<th>C&amp;I upgrade</th>
+<th>% of RCI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Safety &amp; Employee Protection</td>
+<td>25</td>
+<td><strong>25</strong></td>
+<td>15</td>
+<td>19.2%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Roofing Preparation &amp; Materials</td>
+<td>12</td>
+<td><strong>20</strong></td>
+<td>10</td>
+<td>15.4%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Steep-Slope Roofing Systems</td>
+<td>20</td>
+<td><strong>35</strong></td>
+<td>15</td>
+<td>26.9%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Low-Slope Roofing Systems</td>
+<td>8</td>
+<td><strong>15</strong></td>
+<td>10</td>
+<td>11.5%</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Rules, Regulations &amp; Business Practices</td>
+<td>15</td>
+<td><strong>20</strong></td>
+<td>15</td>
+<td>15.4%</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Non-Residential Roofing Systems</td>
+<td>none</td>
+<td><strong>15</strong></td>
+<td>15</td>
+<td>11.5%</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Total</strong></td>
+<td>80</td>
+<td><strong>130</strong></td>
+<td>80</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Your figures (25/20/35/15/20/15) match the current official CTS PDF exactly.</strong> CTS also states: <em>"Sections 1-5 appear in all tests; Section 6 … applies only to commercial and industrial roofing."</em> (S1, Part II).</p>
+<p>Note: Sections 4 and 6 together are 30 questions (23%) of low-slope/commercial content. Section 3, steep-slope, is the single largest block at 35.</p>
+<h3>3.2 Administration facts</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Verified fact</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Question format</td>
+<td><em>"All questions on these examinations are multiple choice with one correct answer. Choose the </em><em>BEST</em><em> answer to each question."</em></td>
+<td>S1, Part III (Sample Test intro)</td>
+</tr>
+<tr>
+<td>Time limit</td>
+<td>RCI: <strong>2½ hours</strong> (≈ 69 seconds per question)</td>
+<td>S1, Part I</td>
+</tr>
+<tr>
+<td>Passing grade</td>
+<td><strong>70 or higher</strong> receives a PASS notice and a licensure application</td>
+<td>S1, Part I ("Success/Failure"); Rule §1460.12 (secondary)</td>
+</tr>
+<tr>
+<td>Failing</td>
+<td>Below 70 → FAILURE notice <strong>and an application for re-examination</strong>. <em>"there is no limit to the number of times you can take these tests"</em> as long as your employment, education, and application remain valid</td>
+<td>S1, Part I ("Failure/Re-examination")</td>
+</tr>
+<tr>
+<td>What to bring</td>
+<td><strong>Two sharpened No. 2 black-lead pencils.</strong> Optional: a <strong>non-programmable, non-printing, solar- or battery-powered portable or pocket calculator.</strong> <strong>No power source</strong> is provided. <em>"No other types of calculators, computers, electronics, markers or writing tools will be permitted."</em></td>
+<td>S1, Part I ("What to Bring to the Exam")</td>
+</tr>
+<tr>
+<td>Reference books in the exam room</td>
+<td><strong>None.</strong> The bulletin allows only the items above, so the exam is closed-book.</td>
+<td>S1, Part I (inference from the exhaustive list)</td>
+</tr>
+<tr>
+<td>Missed exam</td>
+<td>No make-ups, <strong>no refunds</strong>. Re-register for the next date. Failure to appear forfeits the fee (Act §3.5; Rule §1460.80(a)(2))</td>
+<td>S1, Part I; S5; S6</td>
+</tr>
+<tr>
+<td>Fee</td>
+<td><strong>$248</strong> per exam (all three types)</td>
+<td>S2</td>
+</tr>
+<tr>
+<td>Sites</td>
+<td>Hillside, IL and Springfield, IL</td>
+<td>S2</td>
+</tr>
+<tr>
+<td>Admission notice</td>
+<td>Mailed ≈ 3 weeks before the exam (CTS FAQ). If you don't have it <strong>7 days</strong> before, call CTS</td>
+<td>CTS FAQ page</td>
+</tr>
+<tr>
+<td>Contact</td>
+<td>Scott Miller, smiller@continentaltesting.net, (708) 354-9911 ext. 126</td>
+<td>S2</td>
+</tr>
+</tbody>
+</table></div>
+<h3>3.3 Next exam date. Check this first</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Exam date</th>
+<th>Registration deadline</th>
+<th>Sites</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wed, Nov 4, 2026 (RES/COMM/INDUST)</strong></td>
+<td><strong>Wed, Oct 7, 2026</strong></td>
+<td>Hillside, Springfield</td>
+<td>S2, read 2026-09-26</td>
+</tr>
+</tbody>
+</table></div>
+<p>S2 also states: <em>"Do not re-apply to take an exam until you have received your Official Result Letter from Continental Testing Services, Inc."</em> <strong>If you already have the letter that shows your 55, you can re-apply now.</strong> Your deadline is <strong>11 days from today.</strong> Missing it pushes you to the next posted date, which CTS had not yet listed when I checked.</p>
+<h3>3.4 The nine references: what each most likely feeds (INFERENCE)</h3>
+<p>CTS does not map references to sections. This mapping is my inference from the titles and the section names:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Exam section</th>
+<th>Most likely supporting references</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Safety</td>
+<td>R3 NRCA Safety Manual, R4 Pocket Guide, R6 Asbestos guide (all built on OSHA 29 CFR 1926)</td>
+</tr>
+<tr>
+<td>2 Prep &amp; Materials</td>
+<td>R2 (all volumes: decks, underlayments, insulation, material storage), R9 Atcheson (estimating), R6</td>
+</tr>
+<tr>
+<td>3 Steep-slope</td>
+<td>R2 <em>Steep-slope Roof Systems</em>; R2 <em>Architectural Metal Flashing … Condensation &amp; Air Leakage Control</em> (ventilation); R2 <em>Metal Panel</em></td>
+</tr>
+<tr>
+<td>4 Low-slope</td>
+<td>R2 <em>Membrane Roof Systems</em>, R7 Repair Manual</td>
+</tr>
+<tr>
+<td>5 Rules/Business</td>
+<td>R1 Act &amp; Rules, R8 NASCLA guide, R9 Atcheson (estimating/overhead)</td>
+</tr>
+<tr>
+<td>6 Non-residential</td>
+<td>R2 <em>Membrane</em>, R2 <em>Metal Panel &amp; SPF</em>, R5 Waterproofing Manual, R7 Repair Manual</td>
+</tr>
+</tbody>
+</table></div>
+<h3>3.5 What "70" means for you (arithmetic, not a prediction)</h3>
+<ul>
+<li>70% of 130 = <strong>91 correct</strong>. If your 55 was a raw percentage, you answered about 0.55 × 130 ≈ <strong>71–72</strong> correctly. You need about <strong>+20 more correct answers.</strong></li>
+<li><strong>INFERENCE:</strong> I don't know whether CTS reports a raw percentage or a scaled score. If your letter shows section-level results, send it and I will compute exactly where the 20 points can come from.</li>
+<li>One way to find the 20 points (illustrative only): +6 in Safety, +6 in Rules/Business, +5 in Steep-slope, +3 in Low-slope/Non-res. Safety and Rules/Business together are 45 questions (35% of the exam). They are the most rule-based, and for most candidates the fastest to raise.</li>
+</ul></section>
+<section class="panel" role="tabpanel" id="diagnosis" aria-labelledby="tab-diagnosis"><h1>Part 1B — Why Generic Practice Tests Failed You</h1>
+<p>Scope rules for this document:</p>
+<ul>
+<li><strong>VERIFIED</strong> means the claim is grounded in the CTS bulletin (S1), the Act and Rules, or OSHA text.</li>
+<li><strong>INFERENCE</strong> means my reasoning about likely question <em>styles</em>. I have <strong>no access to live CTS questions.</strong> Nothing here is a "real exam question."</li>
+</ul>
+<hr />
+<h2>1. Verified facts that shape what the exam demands</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Verified fact</th>
+<th>Source</th>
+<th>What it implies (INFERENCE)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Choose the <strong>BEST</strong> answer." One correct answer, but the other options are meant to be plausible.</td>
+<td>S1, Part III</td>
+<td>Several options may be <em>partly</em> true. You must rank them. Recall of isolated facts is not enough.</td>
+</tr>
+<tr>
+<td>The questions are "supported by" <strong>NRCA manuals</strong>, the NRCA Safety Manual and Pocket Guide, the NRCA Repair Manual, the NRCA Waterproofing Manual, NASCLA, and Atcheson</td>
+<td>S1, Part II</td>
+<td>The "right" answer is the <strong>reference's</strong> answer, often an NRCA <em>recommended practice</em>. It is not the local building inspector's minimum and not "how my crew does it."</td>
+</tr>
+<tr>
+<td>35 of 130 questions are steep-slope; 30 are low-slope plus non-residential</td>
+<td>S1, Part II</td>
+<td>Commercial membrane content is <strong>23%</strong> of your exam. Residential-flavored prep under-trains it.</td>
+</tr>
+<tr>
+<td>20 questions are "Rules, Regulations <strong>&amp; Business Practices</strong>"</td>
+<td>S1, Part II</td>
+<td>The NASCLA book is a national business/law text (organization types, payroll taxes, contracts, liens, insurance, financial statements, OSHA recordkeeping). Illinois-license trivia is only part of this section.</td>
+</tr>
+<tr>
+<td>No reference books in the room; a non-programmable calculator is allowed</td>
+<td>S1, Part I</td>
+<td>Expect arithmetic: areas, squares, pitch factors, material counts, markup vs. margin, ratios.</td>
+</tr>
+<tr>
+<td>The Illinois Act was substantially amended <strong>8-15-2025</strong></td>
+<td>P.A. 104-427</td>
+<td>Older prep material (and maybe some CTS items) uses pre-2025 numbers ($10,000 fines, "land-based" phone). You need both versions.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>2. Nine skills a recall-only guide doesn't train</h2>
+<p>Each skill below shows a <strong>sample stem style I wrote myself</strong> to illustrate the skill. These are not CTS questions.</p>
+<h3>2.1 Picking the <em>best</em> answer among true statements</h3>
+<ul>
+<li><strong>The trap:</strong> three options are acceptable and one is <em>most</em> correct per the reference. Example of the pattern: several OSHA-permitted options for a low-slope roof, but only one fits the stated roof width or equipment.</li>
+<li><strong>How to win:</strong> read the stem for <strong>limiters</strong>: "on a roof 50 ft or less in width," "when mechanical equipment is used," "NRCA recommends," "minimum," "maximum," "first," "most likely." The limiter decides the answer.</li>
+</ul>
+<h3>2.2 Sequencing roof work</h3>
+<ul>
+<li>Examples: order of underlayment and drip edge at eave vs. rake. Order of base flashing, counterflashing, and cap flashing. Closed-cut valley: which plane's shingles go first. Tear-off, deck inspection, deck repair, dry-in. BUR: base sheet, plies, flood coat, aggregate.</li>
+<li><strong>How to win:</strong> use the <strong>water-shedding rule.</strong> Every upper component laps <em>over</em> the component below it. Exceptions (for example, underlayment over the eave drip edge) are exactly what tests ask about. Memorize them.</li>
+</ul>
+<h3>2.3 Diagnosing installation errors (the "most likely cause")</h3>
+<ul>
+<li>Examples: shingle blow-off → high nailing or unsealed strips. Blisters in BUR → trapped moisture or air between plies. Membrane shrinkage pulling at the perimeter. EPDM seam failure → dirty or unprimed laps. Wet insulation at a wall base → failed counterflashing.</li>
+<li><strong>How to win:</strong> match the <em>symptom's location and timing</em> to the <em>mechanism</em>. A leak only during wind-driven rain points to flashing/laps. Ceiling stains in cold weather with no rain points to condensation or air leakage.</li>
+</ul>
+<h3>2.4 Material compatibility</h3>
+<ul>
+<li>Examples: PVC vs. asphalt, EPDM vs. petroleum, polystyrene vs. hot asphalt and solvents, coal tar vs. asphalt, copper runoff onto galvanized or aluminum, and treated lumber vs. aluminum.</li>
+<li><strong>How to win:</strong> keep a single "never touch" table in memory (Guide §2 and §4).</li>
+</ul>
+<h3>2.5 Safety <em>decisions</em>, not just safety <em>numbers</em></h3>
+<ul>
+<li>Examples: which fall-protection <em>system</em> is permitted in a given situation; what to do after a fall arrest; when a safety monitor alone is legal; what's wrong with an anchorage at foot level.</li>
+<li><strong>How to win:</strong> know the <em>structure</em> of 29 CFR 1926.501(b) (which paragraph covers which situation), then the §1926.502 criteria.</li>
+</ul>
+<h3>2.6 Estimating calculations</h3>
+<ul>
+<li>Examples: plan area → pitch factor → squares → waste → bundles. Ridge/hip linear feet. Felt rolls. Ventilation NFA. Asphalt pounds per square. Thermal movement. Markup vs. margin. Labor burden.</li>
+<li><strong>How to win:</strong> write units on every line. Most wrong answers on calculation items are <em>unit</em> errors or <em>markup/margin</em> confusion.</li>
+</ul>
+<h3>2.7 Low-slope details</h3>
+<ul>
+<li>Examples: base flashing height, cant strips (when and why), counterflashing lap, drain/sump detailing, pitch-pan limits, ponding definition, positive-drainage slope, seam laps and weld widths, wind zones (field/perimeter/corner).</li>
+<li><strong>How to win:</strong> learn the NRCA <em>detail logic</em> (why each piece exists). Then numbers are easier to recall.</li>
+</ul>
+<h3>2.8 Commercial systems</h3>
+<ul>
+<li>Examples: fully adhered vs. mechanically attached vs. ballasted. Insulation attachment. Cover boards. Vapor retarders (when and where). Steel deck attachment. Waterproofing (below-grade and plaza) vs. roofing. SPF and coatings.</li>
+</ul>
+<h3>2.9 Illinois-specific and business rules</h3>
+<ul>
+<li>Illinois: limited vs. unlimited, the <strong>8-units-or-less</strong> line, bond <strong>$10,000 / $25,000</strong>, insurance <strong>$250,000 PD / $500,000 BI</strong> (Rule 1460.20), license number on <strong>contracts, bids, ads, and commercial vehicles</strong>, contract contents (<strong>72-hour rescission</strong>, deductible statement, trust statement in bold), qualifying-party rules (one QP, <strong>30 business days</strong>, <strong>60 days</strong>, <strong>7 months</strong>), fines.</li>
+<li>National business (NASCLA-type): FICA/FUTA, I-9, W-2/1099, record retention, lien basics, bonds, insurance types, balance sheet and income statement, ratios, markup vs. margin, OSHA 300 log.</li>
+</ul>
+<hr />
+<h2>3. Specific ways a generic AI study guide goes wrong (INFERENCE, based on common errors)</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Failure mode</th>
+<th>Why it costs points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wrong blueprint weighting</strong>, for example following the third-party table that prints 30/25 instead of 20/35</td>
+<td>Steep-slope under-studied, materials over-studied</td>
+</tr>
+<tr>
+<td><strong>Code minimum presented as "the answer"</strong></td>
+<td>The references are NRCA (best practice). When NRCA and a code minimum differ, pick the reference's figure. Code-only answers can be distractors.</td>
+</tr>
+<tr>
+<td><strong>Invented precision.</strong> Numbers stated confidently without a source, some wrong</td>
+<td>A single wrong "memorize this" figure costs several items</td>
+</tr>
+<tr>
+<td><strong>Obvious distractors</strong> (e.g., "never use fall protection")</td>
+<td>You learn to eliminate silly options, not to choose between close ones</td>
+</tr>
+<tr>
+<td><strong>Illinois trivia overload</strong></td>
+<td>The Act is maybe 5–10 items. The rest of Section 5 is business/law/estimating</td>
+</tr>
+<tr>
+<td><strong>Residential bias</strong></td>
+<td>30 items are commercial/low-slope</td>
+</tr>
+<tr>
+<td><strong>Pre-2025 Illinois numbers</strong>, or post-2025 ones without the older values</td>
+<td>Either way you can be caught out</td>
+</tr>
+<tr>
+<td><strong>No "why."</strong> Answer keys without reasoning</td>
+<td>You can't transfer knowledge to a differently worded stem</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>4. Answer-choice tactics for "BEST answer" items (INFERENCE, general test craft)</h2>
+<ol>
+<li><strong>Find the limiter word first</strong> (minimum, maximum, first, most likely, NRCA-recommended, OSHA-required, Illinois).</li>
+<li><strong>Classify the question's authority.</strong> Is it asking OSHA law, NRCA practice, manufacturer instruction, Illinois law, or business math? Then answer from <em>that</em> authority.</li>
+<li><strong>Eliminate "partially right, wrong scope."</strong> For example, an OSHA rule that exists but applies to scaffolds, not roofs.</li>
+<li><strong>Between two close options, prefer the one that protects water-shedding or life-safety <em>without exception</em>.</strong></li>
+<li><strong>Absolute words</strong> ("always," "never") are neither automatically wrong nor automatically right. OSHA and NRCA really do use "never" in places (never ride a material hoist; never heat asphalt above its flash point).</li>
+<li><strong>Calculation items:</strong> estimate the magnitude first so you can spot a unit error in the options.</li>
+<li><strong>Time budget:</strong> 150 min ÷ 130 ≈ 69 s per item. Do a first pass in ~100 minutes, flag hard items, and use the remaining ~50 minutes for flagged items and calculations. Never leave a blank. Unanswered items score as wrong (as reported by prep providers; CTS's scoring rules for blanks are not stated in S1).</li>
+</ol>
+<hr />
+<h2>5. What I need from you to sharpen this diagnosis</h2>
+<ol>
+<li><strong>Your official result letter.</strong> If it shows section scores, I will re-weight the whole plan to your weak sections.</li>
+<li><strong>Your memory of the questions.</strong> Not verbatim, just the <em>types</em>. For example: "a lot of math on BUR asphalt," "questions about what's required in a contract," "detail questions about flashing heights," "OSHA numbers," "NASCLA-type tax questions," "terminology I'd never heard." Also tell me which sections felt hardest and where you ran short of time.</li>
+</ol></section>
+<section class="panel" role="tabpanel" id="schedule" aria-labelledby="tab-schedule"><h1>Provisional Study Schedule: through the Nov 4, 2026 exam</h1>
+<p><strong>Status: PROVISIONAL.</strong> I'll re-weight this once I see your result letter (section scores, if it has them) and your description of the questions you remember.</p>
+<h2>Deadlines (verified on the CTS roofing page, 2026-09-26)</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>As soon as possible, and by Wed Oct 7, 2026</strong></td>
+<td>Submit the <strong>re-examination application</strong> and $248 to CTS for the <strong>Nov 4, 2026 RES/COMM/INDUST</strong> exam. CTS says not to re-apply until you have your Official Result Letter. If you have it, apply now.</td>
+</tr>
+<tr>
+<td>~Oct 14 (≈3 weeks out)</td>
+<td>Admission notice should arrive (CTS FAQ). If you don't have it by <strong>Oct 28</strong> (7 days out), call CTS at (708) 354-9911.</td>
+</tr>
+<tr>
+<td>Wed Nov 4, 2026</td>
+<td>Exam at Hillside or Springfield. Bring two No. 2 pencils and a <strong>non-programmable, non-printing, battery/solar calculator</strong>. Put in a <strong>fresh battery</strong>; no outlets are provided.</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Time budget</h2>
+<p>About 5½ weeks. Plan on <strong>~12 hours/week</strong>: 1.5 h on weekdays, 3 h on Saturday, and a 1.5-h review on Sunday. That's ≈ 65 hours total. Adjust if you have more time.</p>
+<h2>Weighting logic (INFERENCE, pending your letter)</h2>
+<ul>
+<li><strong>Safety (25) + Rules/Business (20) = 45 items.</strong> These are the most rule-based sections, and they respond fastest to memorization. They come first.</li>
+<li><strong>Steep-slope (35)</strong> is the biggest single section. It gets the most calendar time.</li>
+<li><strong>Low-slope (15) + Non-res (15) = 30</strong> commercial items. Residential roofers usually lose the most points here.</li>
+<li><strong>Materials/Prep (20)</strong> is woven through the steep-slope and low-slope weeks.</li>
+</ul>
+<h2>Week-by-week</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Week</th>
+<th>Dates</th>
+<th>Focus</th>
+<th>Deliverables from me</th>
+<th>Your checkpoints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Sep 27 – Oct 3</td>
+<td><strong>Safety (Guide §1)</strong> and <strong>Illinois Act/Rules (Guide §5, Part A)</strong></td>
+<td>§1 (done), §5</td>
+<td>File the CTS application. Make flashcards from every "What to memorize" box. Self-quiz the §1 tables until 90%+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Oct 4 – Oct 10</td>
+<td><strong>Steep-slope (Guide §3)</strong> and <strong>Materials/Prep (Guide §2)</strong></td>
+<td>§2, §3</td>
+<td>Draw from memory: eave/rake drip edge and underlayment, closed-cut valley, step and counter flashing, chimney cricket. Work every §2/§3 calculation by hand</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Oct 11 – Oct 17</td>
+<td><strong>Low-slope (Guide §4)</strong>, <strong>Non-residential (Guide §6)</strong>, <strong>Business/estimating (Guide §5, Part B)</strong></td>
+<td>§4, §6</td>
+<td>Draw from memory: base flashing and counterflashing at a parapet, a roof drain, a pipe boot, and a curb. Build the "never touch" compatibility table from memory</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Oct 18 – Oct 24</td>
+<td><strong>Mock Exam 1</strong> (timed, 150 min, on a Saturday) → score by section → re-study the two weakest sections</td>
+<td>Mock 1 + key + score sheet</td>
+<td>Send me your section scores and the questions you missed. I'll adapt Mock 2 and the review plan</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Oct 25 – Oct 31</td>
+<td><strong>Mock Exam 2</strong> (timed) → targeted review</td>
+<td>Mock 2 + key (adapted)</td>
+<td>Re-take the missed items from both mocks cold</td>
+</tr>
+<tr>
+<td>Taper</td>
+<td>Nov 1 – Nov 3</td>
+<td>Memorize-box review only; light calculation drills; sleep</td>
+<td>—</td>
+<td>Pack pencils and calculator; check the route to the test site</td>
+</tr>
+<tr>
+<td>Exam</td>
+<td><strong>Nov 4</strong></td>
+<td>Pacing: ~100 min first pass, flag hard items, then ~50 min for flagged items and calculations. Answer every item</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Daily routine (weekday, 90 min)</h2>
+<ol>
+<li><strong>15 min:</strong> flashcards (previous days' memorize boxes).</li>
+<li><strong>45 min:</strong> new guide section, read actively and redo the worked examples on paper.</li>
+<li><strong>20 min:</strong> 10–15 practice items on today's topic (from the mocks after week 4; before that, the "common wrong answers" tables serve as practice).</li>
+<li><strong>10 min:</strong> write down 3 things you got wrong or didn't know. Review them tomorrow.</li>
+</ol>
+<h2>What changes when you send your letter</h2>
+<p>If the letter shows section percentages, I will:</p>
+<ul>
+<li>move your two weakest sections to the front and give them about 40% of the remaining hours;</li>
+<li>add extra drill questions (beyond the two mocks) for those sections;</li>
+<li>shorten time on any section where you scored ≥ 75%.</li>
+</ul></section>
+<section class="panel" role="tabpanel" id="safety" aria-labelledby="tab-safety"><h1>Study Guide — Section 1: Safety &amp; Employee Protection (25 questions, 19% of exam)</h1>
+<p><strong>Primary law:</strong> OSHA 29 CFR Part 1926 (Construction). Illinois private-sector employers are under <strong>federal OSHA</strong>. Illinois OSHA (the state plan) covers state and local government employees only.
+<strong>CTS references for this section (NOT READ, paywalled):</strong> NRCA Safety Manual (3rd ed. 2012), NRCA Pocket Guide to Safety (2015), NRCA Asbestos guide. The OSHA text they teach is quoted or cited below.</p>
+<p><strong>Flag key:</strong></p>
+<ul>
+<li><strong>[OSHA-V]</strong>: verified against the current 1926.502 text.</li>
+<li><strong>[OSHA]</strong>: CFR citation from the standard as I know it. Verify the paragraph number at ecfr.gov if you want certainty.</li>
+<li><strong>[NRCA-P]</strong>: NRCA practice from public NRCA material.</li>
+<li><strong>[JURISDICTION] / [MANUFACTURER] / [EDITION]</strong>: the value depends on the local code, the manufacturer, or the reference edition.</li>
+</ul>
+<hr />
+<h2>1.1 Fall protection: the framework (the most-tested safety topic)</h2>
+<h3>Plain English</h3>
+<p>Anyone working <strong>6 ft or more above a lower level</strong> on a construction site needs fall protection. What counts as acceptable depends on the <strong>roof slope</strong>, the <strong>type of work</strong>, and whether it's <strong>residential construction</strong>.</p>
+<h3>Terms you must recognize (29 CFR 1926.500(b) definitions) [OSHA]</h3>
+<ul>
+<li><strong>Low-slope roof:</strong> slope <strong>≤ 4 in 12</strong> (vertical to horizontal).</li>
+<li><strong>Steep roof:</strong> slope <strong>&gt; 4 in 12</strong>.</li>
+<li><strong>Roofing work:</strong> hoisting, storage, application, and removal of roofing materials and equipment, including related insulation, sheet metal, and vapor-barrier work. It <strong>does not</strong> include constructing the roof deck.</li>
+<li><strong>Unprotected sides and edges:</strong> any side or edge where there is no wall or guardrail at least 39 in high.</li>
+<li><strong>Hole:</strong> a gap or void <strong>2 in or more</strong> in its least dimension.</li>
+<li><strong>Competent person</strong> (1926.32(f)): capable of identifying hazards <strong>and</strong> has authority to take prompt corrective measures.</li>
+<li><strong>Qualified person</strong> (1926.32(m)): has a recognized degree, certificate, or professional standing, or extensive knowledge, training, and experience, and can solve problems relating to the subject.</li>
+</ul>
+<h3>Which paragraph applies? (1926.501(b)) [OSHA]</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Paragraph</th>
+<th>Permitted protection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Any unprotected side/edge ≥ 6 ft</td>
+<td>(b)(1)</td>
+<td>Guardrail, safety net, or personal fall arrest system (PFAS)</td>
+</tr>
+<tr>
+<td>Holes, <strong>including skylights</strong></td>
+<td>(b)(4)</td>
+<td>Covers, guardrails, or PFAS. Skylights count as holes.</td>
+</tr>
+<tr>
+<td><strong>Roofing work on low-slope roofs</strong> with edges ≥ 6 ft above lower level</td>
+<td><strong>(b)(10)</strong></td>
+<td>Guardrail, safety net, or PFAS, <strong>or a combination</strong> of: warning line + guardrail; warning line + safety net; warning line + PFAS; <strong>warning line + safety monitoring</strong>. <strong>On roofs 50 ft or less in width, safety monitoring alone is permitted.</strong></td>
+</tr>
+<tr>
+<td><strong>Steep roofs</strong> with edges ≥ 6 ft</td>
+<td><strong>(b)(11)</strong></td>
+<td>Guardrail <strong>with toeboards</strong>, safety net, or PFAS. <strong>No warning lines, no safety monitor.</strong></td>
+</tr>
+<tr>
+<td><strong>Residential construction</strong> ≥ 6 ft</td>
+<td><strong>(b)(13)</strong></td>
+<td>Guardrail, safety net, or PFAS. If the employer can show these are <strong>infeasible or create a greater hazard</strong>, a written <strong>fall protection plan</strong> per 1926.502(k) may be used.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>What the roofer sees and what the question tests:</strong> a 3-story flat roof, 40 ft wide, reroof crew → (b)(10), and monitor-only is legal because width ≤ 50 ft. A 6:12 house roof → (b)(11) or (b)(13) → PFAS is the typical answer. "Slide guards/roof brackets alone" are <strong>not</strong> conventional fall protection. OSHA's old interim residential guidance that allowed slide guards was rescinded (STD 03-11-002, 2010). [OSHA]</p>
+<h3>Common wrong answers and why they tempt</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Wrong answer</th>
+<th>Why it's tempting</th>
+<th>Why it's wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Warning line alone" on a low-slope roof</td>
+<td>Warning lines are roof-specific</td>
+<td>A warning line only marks an area; outside it (and at the edge) you need another system. It is never a stand-alone system</td>
+</tr>
+<tr>
+<td>"Safety monitor alone" on a 75-ft-wide low-slope roof</td>
+<td>Monitors are allowed on low-slope roofs</td>
+<td>Alone only if width ≤ 50 ft. Otherwise it must be combined with a warning line</td>
+</tr>
+<tr>
+<td>"Safety monitor" on a 6:12 roof</td>
+<td>Workers are close to the edge</td>
+<td>(b)(11) permits only guardrail + toeboards, net, or PFAS</td>
+</tr>
+<tr>
+<td>"Fall protection starts at 10 ft"</td>
+<td>That's the <strong>scaffold</strong> threshold (1926.451(g))</td>
+<td>Roofs/edges: <strong>6 ft</strong></td>
+</tr>
+<tr>
+<td>"Low slope means under 3:12"</td>
+<td>Industry sometimes calls ≤3:12 low slope</td>
+<td>OSHA's line is <strong>4:12</strong>. 4:12 itself is low-slope (≤)</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>1.2 Warning lines, safety monitors, guardrails, nets, covers [OSHA-V for 1926.502]</h2>
+<h3>Warning line systems (1926.502(f))</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Distance from roof edge, <strong>no mechanical equipment</strong></td>
+<td><strong>≥ 6 ft</strong></td>
+</tr>
+<tr>
+<td>With mechanical equipment</td>
+<td><strong>≥ 6 ft</strong> from edges <strong>parallel</strong> to direction of equipment travel; <strong>≥ 10 ft</strong> from edges <strong>perpendicular</strong> to it</td>
+</tr>
+<tr>
+<td>Height of line (lowest point incl. sag / highest point)</td>
+<td><strong>34 in min / 39 in max</strong></td>
+</tr>
+<tr>
+<td>Flagging</td>
+<td>High-visibility material at <strong>≤ 6-ft intervals</strong></td>
+</tr>
+<tr>
+<td>Stanchion strength</td>
+<td>Must resist <strong>16 lb</strong> applied horizontally, <strong>30 in</strong> above surface, toward the edge, without tipping</td>
+</tr>
+<tr>
+<td>Rope/wire/chain tensile strength</td>
+<td><strong>≥ 500 lb</strong></td>
+</tr>
+<tr>
+<td>Access paths</td>
+<td>Access, materials handling, storage, and hoisting areas connect to the work area by a <strong>path formed by two warning lines</strong>. When the path is not in use, close it with a rope/wire/chain equal in strength and height, or offset it so no one can walk straight into the work area</td>
+</tr>
+<tr>
+<td>No work between line and edge</td>
+<td>Unless protected by another system (guardrail, net, PFAS, or safety monitor)</td>
+</tr>
+<tr>
+<td>Mechanical equipment (1926.502(f)(3))</td>
+<td>Used or stored <strong>only</strong> where employees are protected by warning line, guardrail, or PFAS. <strong>Not in a monitor-only area</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3>Safety monitoring systems (1926.502(h))</h3>
+<p>The monitor must be a <strong>competent person</strong> who:</p>
+<ul>
+<li>recognizes fall hazards and warns employees when they are unaware of a hazard or acting unsafely;</li>
+<li>is on the <strong>same walking/working surface</strong> and within <strong>visual sighting distance</strong>;</li>
+<li>is <strong>close enough to communicate orally</strong>;</li>
+<li>has <strong>no other responsibilities</strong> that could take the monitor's attention away.</li>
+</ul>
+<p>Other rules:</p>
+<ul>
+<li><strong>No mechanical equipment</strong> is used or stored in monitored areas on low-slope roofs.</li>
+<li><strong>Only employees doing roofing work</strong> (or covered by a fall protection plan) may be in a monitored area.</li>
+<li>Employees must comply promptly with the monitor's warnings.</li>
+</ul>
+<h3>Guardrail systems (1926.502(b))</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Top rail height</td>
+<td><strong>42 in ± 3 in</strong> (39–45 in)</td>
+</tr>
+<tr>
+<td>Midrail</td>
+<td>Midway between top rail and surface (for a 42-in top rail, ≈ 21 in)</td>
+</tr>
+<tr>
+<td>Top rail strength</td>
+<td><strong>200 lb</strong> outward/downward within 2 in of top edge; under that load it may not deflect below <strong>39 in</strong></td>
+</tr>
+<tr>
+<td>Midrail strength</td>
+<td><strong>150 lb</strong></td>
+</tr>
+<tr>
+<td>Toeboard</td>
+<td><strong>3½ in</strong> high min; <strong>50 lb</strong> strength; required where objects could fall. <strong>Required on steep roofs</strong> in (b)(11)</td>
+</tr>
+<tr>
+<td>Wire rope top rail</td>
+<td>Flagged at ≤ 6 ft; ≥ ¼ in diameter</td>
+</tr>
+<tr>
+<td>At hoisting areas</td>
+<td>Chain, gate, or removable section across the access opening when hoisting is not taking place</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Safety nets (1926.502(c))</h3>
+<ul>
+<li>As close as practicable under the work surface, and <strong>never more than 30 ft below</strong> it.</li>
+<li>Horizontal extension beyond the edge: <strong>8 ft</strong> (net ≤ 5 ft below), <strong>10 ft</strong> (5–10 ft below), <strong>13 ft</strong> (&gt; 10 ft below).</li>
+<li>Drop test: <strong>400-lb bag of sand</strong>, 30 ± 2 in diameter.</li>
+<li>Mesh openings: ≤ <strong>36 sq in</strong> and ≤ <strong>6 in</strong> on a side.</li>
+</ul>
+<h3>Covers (1926.502(i))</h3>
+<ul>
+<li>Support <strong>at least twice</strong> the weight of employees, equipment, and materials that may be imposed.</li>
+<li><strong>Secured</strong> against displacement.</li>
+<li>Marked <strong>"HOLE" or "COVER"</strong> (or color-coded).</li>
+<li>Vehicle-traffic covers: twice the axle load.</li>
+<li><strong>Skylights:</strong> screens or covers rated for the load, or guardrails, or PFAS. <strong>A plastic skylight dome is NOT a cover.</strong></li>
+</ul>
+<h3>Falling-object protection and materials near edges (1926.502(j)) [OSHA]</h3>
+<ul>
+<li>During roofing work, materials and equipment <strong>must not be stored within 6 ft of a roof edge unless guardrails are erected at the edge.</strong></li>
+<li>Materials piled near a roof edge must be stable and self-supporting.</li>
+<li>(Contrast: the <strong>4-ft</strong> storage rule in 1926.502(j) is for <strong>overhand bricklaying/masonry</strong>, a common distractor.)</li>
+</ul>
+<hr />
+<h2>1.3 Personal fall arrest systems (PFAS) (1926.502(d)) [OSHA]</h2>
+<h3>Plain English</h3>
+<p>A harness, a connector (lanyard, self-retracting lifeline, or rope grab on a lifeline), and an anchor. It stops a fall that has already started. <strong>Positioning</strong> and <strong>restraint</strong> are different: they keep you from falling (or limit it to 2 ft).</p>
+<h3>Numbers to memorize</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Component / criterion</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Anchorage</strong></td>
+<td><strong>5,000 lb per employee attached</strong>, OR designed, installed, and used as part of a complete PFAS with a <strong>safety factor of at least 2</strong>, under supervision of a <strong>qualified person</strong></td>
+</tr>
+<tr>
+<td>Connectors (D-rings, snaphooks)</td>
+<td>Min tensile <strong>5,000 lb</strong>; proof-tested to <strong>3,600 lb</strong></td>
+</tr>
+<tr>
+<td>Snaphooks</td>
+<td><strong>Locking type</strong> only (non-locking prohibited since 1998)</td>
+</tr>
+<tr>
+<td>Lanyards and vertical lifelines</td>
+<td>Min breaking strength <strong>5,000 lb</strong></td>
+</tr>
+<tr>
+<td>Self-retracting lifelines/lanyards that limit free fall to ≤ 2 ft</td>
+<td><strong>3,000 lb</strong> min; otherwise 5,000 lb</td>
+</tr>
+<tr>
+<td>Vertical lifelines</td>
+<td><strong>One employee per lifeline</strong></td>
+</tr>
+<tr>
+<td><strong>Max arresting force</strong> (with body harness)</td>
+<td><strong>1,800 lb</strong></td>
+</tr>
+<tr>
+<td><strong>Max deceleration distance</strong></td>
+<td><strong>3.5 ft</strong></td>
+</tr>
+<tr>
+<td><strong>Max free fall</strong></td>
+<td><strong>6 ft</strong>, and the worker must <strong>not contact any lower level</strong></td>
+</tr>
+<tr>
+<td>Body belts</td>
+<td><strong>Not permitted</strong> as part of a PFAS (since Jan 1, 1998). Allowed only for positioning</td>
+</tr>
+<tr>
+<td>After a fall</td>
+<td>Remove from service until <strong>inspected by a competent person</strong> and found undamaged</td>
+</tr>
+<tr>
+<td>Rescue</td>
+<td>Employer must provide for <strong>prompt rescue</strong> or assure self-rescue</td>
+</tr>
+<tr>
+<td>Inspection</td>
+<td><strong>Before each use</strong>, for wear, damage, and deterioration</td>
+</tr>
+<tr>
+<td>Attachment points</td>
+<td>Not to guardrails or hoists unless they meet anchorage criteria</td>
+</tr>
+<tr>
+<td>Positioning device systems (1926.502(e))</td>
+<td>Free fall ≤ <strong>2 ft</strong>; anchorage ≥ <strong>2× potential impact load or 3,000 lb</strong>, whichever is greater</td>
+</tr>
+</tbody>
+</table></div>
+<h3>What the roofer sees / decision tested</h3>
+<ul>
+<li>A roof anchor nailed through the sheathing only (not into a rafter/truss) → <strong>inadequate anchorage.</strong> Manufacturer instructions typically require fastening into framing <strong>[MANUFACTURER]</strong>.</li>
+<li>A 6-ft shock-absorbing lanyard clipped to an anchor at the worker's <strong>feet</strong> → free fall ≈ 6 ft + D-ring height (≈ 5 ft) ≈ <strong>11 ft &gt; 6-ft limit.</strong> Correct fix: rig the anchor overhead, shorten the lanyard, or use an SRL/lanyard rated for foot-level anchorage. The best answer depends on the options, but the flaw is the <strong>free-fall distance</strong>.</li>
+<li>A worker fell and was arrested with no injury. <strong>Best next step:</strong> rescue promptly, then remove the harness and lanyard from service until a competent person inspects them. Do not simply reuse them.</li>
+</ul>
+<h3>Worked calculation: required clearance below the anchor</h3>
+<p><em>This is an industry method (ANSI/ASSP Z359 and manufacturer charts), not an OSHA formula. OSHA sets only the 6-ft free fall, 3.5-ft deceleration, and no-contact rules.</em></p>
+<p>Worker with a 6-ft shock-absorbing lanyard, anchor at the D-ring level (≈ 5 ft above feet):</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free fall (lanyard length, anchor at D-ring height)</td>
+<td>6.0 ft</td>
+</tr>
+<tr>
+<td>Deceleration distance (OSHA max)</td>
+<td>3.5 ft</td>
+</tr>
+<tr>
+<td>Harness stretch / D-ring shift (industry allowance)</td>
+<td>1.0 ft</td>
+</tr>
+<tr>
+<td>D-ring to bottom of feet</td>
+<td>5.0 ft</td>
+</tr>
+<tr>
+<td>Safety margin (industry)</td>
+<td>2.0 ft</td>
+</tr>
+<tr>
+<td><strong>Total clearance needed below anchor</strong></td>
+<td><strong>17.5 ft</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>If the lower level is only 14 ft below the anchor, this system would let the worker strike the ground. Use an SRL, which reduces free fall to ≤ 2 ft (verify with the manufacturer's clearance chart).</p>
+<h3>Common wrong answers</h3>
+<ul>
+<li>"Anchorage 3,000 lb." That is the SRL (≤ 2 ft free fall) and positioning figure, not the general anchorage.</li>
+<li>"Free fall 4 ft." No; the limit is 6 ft.</li>
+<li>"Body belt is fine for arrest." Prohibited since 1998.</li>
+<li>"Two workers can share one vertical lifeline." Prohibited.</li>
+</ul>
+<!-- box -->
+
+<aside class="callout memorize">
+<p><strong>WHAT TO MEMORIZE</strong>
+6 ft trigger · 4:12 line (≤ low, &gt; steep) · 50-ft width monitor-only · warning line 6 ft / 10 ft (equipment perpendicular) · 34–39 in line height · flags every 6 ft · 16 lb @ 30 in · 500 lb line
+Guardrail 42 ± 3 in, 200 lb / 150 lb midrail, toeboard 3½ in / 50 lb
+Anchorage 5,000 lb per person (or SF 2 by qualified person) · 1,800 lb arrest force · 3.5 ft decel · 6 ft free fall · SRL 3,000 lb · connectors 5,000 / 3,600 proof
+Net ≤ 30 ft below; 400-lb drop test · Covers 2× load, "HOLE"/"COVER" · no storage within 6 ft of edge without guardrail</p>
+</aside>
+<!-- box -->
+
+<aside class="callout reason">
+<p><strong>HOW TO REASON THROUGH IT</strong>
+1) Is the edge ≥ 6 ft? 2) What is the slope: ≤ 4:12 or &gt; 4:12? 3) Is it "roofing work" on a low-slope roof? If so, the menu is wider. 4) Roof width ≤ 50 ft? 5) Is mechanical equipment in use? 6) Is it residential construction? Then consider the fall protection plan path. 7) For a PFAS question, check anchorage, free fall, clearance, and component rules in that order.</p>
+</aside>
+<hr />
+<h2>1.4 Training and fall protection plans [OSHA]</h2>
+<ul>
+<li><strong>1926.503:</strong> the employer trains each employee exposed to fall hazards, through a <strong>competent person</strong>. Training covers hazard recognition, procedures for erecting, maintaining, disassembling, and inspecting systems, the monitor and warning-line roles, handling and storage of materials, and each employee's role.</li>
+<li><strong>Written certification record:</strong> employee name, <strong>date</strong> of training, and <strong>signature</strong> of the trainer or employer.</li>
+<li><strong>Retraining</strong> when: workplace changes make prior training obsolete, fall protection systems change, or an employee shows inadequate understanding or skill.</li>
+<li><strong>Fall protection plan (1926.502(k)):</strong> allowed only for leading-edge work, precast concrete, and <strong>residential construction</strong>, when conventional protection is infeasible or creates a greater hazard. Requirements:</li>
+<li>prepared by a <strong>qualified person</strong>, site-specific, kept current, with a copy <strong>at the jobsite</strong>;</li>
+<li>changes approved by a qualified person, and implementation supervised by a <strong>competent person</strong>;</li>
+<li>must document <strong>why</strong> conventional fall protection is infeasible, identify <strong>controlled access zones</strong>, and use a <strong>safety monitoring system</strong> where no other measure is used;</li>
+<li>the employer must identify each employee designated to work in controlled access zones;</li>
+<li>serious injuries and near misses require investigation and a plan review.</li>
+</ul>
+<hr />
+<h2>1.5 Ladders (29 CFR 1926 Subpart X) [OSHA]</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Value / cite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>When a ladder/stairway is required</td>
+<td>At a break in elevation of <strong>19 in or more</strong> with no ramp, runway, embankment, or hoist (1926.1051(a))</td>
+</tr>
+<tr>
+<td>Extension above landing</td>
+<td>Side rails at least <strong>3 ft above</strong> the upper landing surface; if not possible, secure the ladder at top and provide a grab device (1926.1053(b)(1))</td>
+</tr>
+<tr>
+<td>Angle (non-self-supporting)</td>
+<td>Horizontal distance from top support to foot ≈ <strong>¼ of working length</strong> (the <strong>4:1 rule</strong>) (1926.1053(b)(5)(i))</td>
+</tr>
+<tr>
+<td>Load capacity (portable)</td>
+<td>Support at least <strong>4×</strong> max intended load (extra-heavy-duty type 1A metal or plastic: 3.3×) (1926.1053(a)(1))</td>
+</tr>
+<tr>
+<td>Rung spacing (portable)</td>
+<td><strong>10–14 in</strong> center-to-center (1926.1053(a)(3)(i))</td>
+</tr>
+<tr>
+<td>Stepladders</td>
+<td>Do <strong>not</strong> use the top or top step as a step (1926.1053(b)(13)). Do not use a closed stepladder as a straight ladder</td>
+</tr>
+<tr>
+<td>Near electrical equipment</td>
+<td><strong>Nonconductive side rails</strong> where the worker or ladder could contact exposed energized equipment (1926.1053(b)(12))</td>
+</tr>
+<tr>
+<td>Use</td>
+<td>Face the ladder; at least <strong>one hand</strong> grasping; no load that could cause loss of balance (b)(20)-(22)</td>
+</tr>
+<tr>
+<td>Footing</td>
+<td>Stable, level surface unless secured; secure or barricade in traffic areas</td>
+</tr>
+<tr>
+<td>Defects</td>
+<td>Tag <strong>"Do Not Use"</strong> and remove from service (b)(16)</td>
+</tr>
+<tr>
+<td>Training</td>
+<td>By a competent person (1926.1060)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Industry duty ratings (ANSI A14, not OSHA): Type <strong>IAA 375 lb</strong>, <strong>IA 300 lb</strong>, <strong>I 250 lb</strong>, II 225 lb, III 200 lb. Roofers carrying bundles need <strong>IA or IAA</strong>. [JURISDICTION: ANSI consensus standard]</p>
+<h3>Worked calculation: ladder setup</h3>
+<p>Eave height 16 ft above grade. How far out should the foot be, and what working length is needed?</p>
+<ol>
+<li>Foot distance = 16 ft ÷ 4 = <strong>4 ft</strong> from the wall.</li>
+<li>Length to the eave = √(16² + 4²) = √(256 + 16) = √272 = <strong>16.49 ft</strong>.</li>
+<li>Add 3 ft extension above the landing → <strong>≈ 19.5 ft</strong> working length.</li>
+<li>Extension ladders lose length to section overlap (ANSI: ~3 ft overlap for ladders up to 36 ft). A <strong>24-ft</strong> extension ladder gives ≈ 21 ft working length, so it works. A 20-ft ladder gives ≈ 17 ft, which is too short.</li>
+</ol>
+<h3>Common wrong answers</h3>
+<ul>
+<li>"Extend 3 rungs" or "extend 36 in above the gutter" (36 in = 3 ft <strong>is</strong> correct. The trap is "3 rungs," which is only ~3 ft if rungs are 12 in apart, and is not the rule's wording).</li>
+<li>"1:3 angle." No, it's 1:4.</li>
+<li>"Aluminum ladder near power lines." Prohibited when contact is possible.</li>
+</ul>
+<hr />
+<h2>1.6 Scaffolds, roof brackets, hoists, and debris chutes [OSHA]</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Key rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scaffold fall protection</td>
+<td>Required at <strong>10 ft</strong> (1926.451(g)). Don't confuse with the 6-ft roof rule</td>
+</tr>
+<tr>
+<td>Scaffold capacity</td>
+<td>Support own weight + <strong>4×</strong> max intended load (1926.451(a)(1))</td>
+</tr>
+<tr>
+<td>Platform planks</td>
+<td>Extend over the support centerline <strong>≥ 6 in</strong>, and (for platforms ≤ 10 ft long) <strong>≤ 12 in</strong> unless cleated or restrained (1926.451(b)(4)-(5))</td>
+</tr>
+<tr>
+<td>Supported scaffold height-to-base &gt; <strong>4:1</strong></td>
+<td>Must be tied, guyed, or braced (1926.451(c)(1))</td>
+</tr>
+<tr>
+<td>Competent person</td>
+<td>Inspects scaffolds <strong>before each shift</strong> and after any occurrence that could affect integrity (1926.451(f)(3))</td>
+</tr>
+<tr>
+<td>Roof-bracket scaffolds</td>
+<td>Fitted to the pitch; secured by nailing or anchorage, not relying on friction (1926.452(h))</td>
+</tr>
+<tr>
+<td><strong>Debris chutes</strong></td>
+<td>Material dropped <strong>more than 20 ft</strong> outside the exterior walls must go through an <strong>enclosed chute</strong> (1926.252(a))</td>
+</tr>
+<tr>
+<td>Dropping through floor holes without chutes</td>
+<td>Barricades <strong>≥ 42 in high</strong> and <strong>≥ 6 ft</strong> back from the projected edge of the opening above, with warning signs (1926.252(b))</td>
+</tr>
+<tr>
+<td>Material hoists</td>
+<td><strong>No riding</strong> unless designed for personnel (1926.552(b)). Rated load capacity posted</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>1.7 Electrical hazards [OSHA]</h2>
+<h3>Plain English</h3>
+<p>Roofers are killed by <strong>overhead power lines</strong> (ladders, metal panels, conveyors, and hoists touching lines) and by <strong>damaged cords and tools</strong>.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Work near energized parts</td>
+<td>Don't permit work where contact is possible unless the circuit is <strong>de-energized and grounded</strong> or <strong>guarded</strong> (1926.416(a)(1))</td>
+</tr>
+<tr>
+<td>Clearance from overhead lines (unqualified workers / equipment)</td>
+<td>Commonly <strong>10 ft for lines up to 50 kV</strong>, more for higher voltage (cranes/derricks: 1926.1408 Table A; general industry: 1910.333(c)(3), +4 in per 10 kV over 50 kV). <strong>Treat every line as energized</strong> until the utility confirms otherwise</td>
+</tr>
+<tr>
+<td>GFCI</td>
+<td>All <strong>120-V, single-phase, 15- and 20-A</strong> receptacle outlets on construction sites that are not part of the permanent wiring need <strong>GFCI protection</strong>, or an <strong>assured equipment grounding conductor program</strong> (1926.404(b)(1))</td>
+</tr>
+<tr>
+<td>Cords</td>
+<td>Worn or frayed cords must not be used (1926.416(e)(1)). Use hard or extra-hard usage cords; no fastening with staples or hanging by nails</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>Double-insulated or grounded; don't remove the ground prong</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Jobsite decision:</strong> a crew is carrying a 30-ft metal ridge cap under a service drop. Best action: stop, reroute the carry, keep ≥ 10 ft, and call the utility to de-energize or insulate if clearance can't be maintained. "Wear rubber gloves" is <strong>not</strong> a substitute for clearance.</p>
+<hr />
+<h2>1.8 Power tools, pneumatic nailers, and material handling [OSHA / NIOSH]</h2>
+<ul>
+<li><strong>Pneumatic tools:</strong> secured to the hose by a positive means to prevent disconnection (1926.302(b)(1)). Compressed air may be used for cleaning only when reduced to <strong>less than 30 psi</strong>, and only with effective chip guarding and PPE (1926.302(b)(4)).</li>
+<li><strong>Nail guns (OSHA/NIOSH "Nail Gun Safety," 2011):</strong> a <strong>full sequential trigger</strong> is the safest. <strong>Contact (bump) triggers</strong> roughly double the injury risk (double-fire and unintended fire). Other practices: never bypass the safety, disconnect air when clearing jams or moving, never point at people, and keep a hand away from the nail path.</li>
+<li><strong>Lifting / ergonomics [NRCA-P]:</strong> use hoists or conveyors for bundles, lift with the legs, carry one bundle at a time, and use team lifts for rolls.</li>
+<li><strong>Conveyors / ladder hoists:</strong> lockout, guards on pinch points, and nobody under the load.</li>
+</ul>
+<hr />
+<h2>1.9 Personal protective equipment and noise [OSHA]</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Hazard</th>
+<th>Standard</th>
+<th>Key point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General PPE</td>
+<td>1926.28, 1926.95</td>
+<td>Employer provides and pays for required PPE (with limited exceptions, e.g., ordinary safety-toe footwear)</td>
+</tr>
+<tr>
+<td>Head</td>
+<td>1926.100</td>
+<td>Hard hats where there is a danger of head impact, falling objects, or electrical shock (ANSI Z89.1)</td>
+</tr>
+<tr>
+<td>Eye/face</td>
+<td>1926.102</td>
+<td>Required for flying particles, molten materials, chemicals (ANSI Z87.1). <strong>Hot asphalt → face shield + safety glasses</strong></td>
+</tr>
+<tr>
+<td>Hearing</td>
+<td>1926.52 / 1926.101</td>
+<td>PEL <strong>90 dBA for 8 h</strong>; the time halves for every <strong>5 dB</strong> increase (95 dBA 4 h, 100 dBA 2 h, 105 dBA 1 h, 110 dBA 30 min, 115 dBA 15 min max). Above the table → controls plus a hearing conservation program</td>
+</tr>
+<tr>
+<td>Respiratory</td>
+<td>1926.103 → 1910.134</td>
+<td>Written program, <strong>medical evaluation before fit testing</strong>, <strong>fit test before first use and annually</strong>, training</td>
+</tr>
+<tr>
+<td>Hot work / asphalt</td>
+<td>NRCA-P</td>
+<td>Long sleeves, gloves with gauntlets, boots (not low shoes), pant legs outside boots so hot material can't run inside</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Worked calculation: noise dose (1926.52 method)</h3>
+<p>A roofer runs a power roof cutter at 100 dBA for 1 h and works near a compressor at 95 dBA for 3 h. Permitted times: 100 dBA = 2 h, 95 dBA = 4 h.
+Dose = C₁/T₁ + C₂/T₂ = 1/2 + 3/4 = 0.50 + 0.75 = <strong>1.25</strong>. That is <strong>greater than 1.0</strong>, so the exposure exceeds the PEL.</p>
+<hr />
+<h2>1.10 Hazard communication and hazardous materials</h2>
+<h3>Hazard Communication (1926.59 → 1910.1200, GHS-aligned) [OSHA]</h3>
+<ul>
+<li><strong>SDS: 16 sections</strong> in a fixed order. Examples: Sec. 2 Hazard ID, Sec. 4 First aid, Sec. 7 Handling/storage, Sec. 8 Exposure controls/PPE, Sec. 9 Physical/chemical properties (e.g., <strong>flash point</strong>).</li>
+<li><strong>Label elements:</strong> product identifier, <strong>signal word</strong>, hazard statement(s), pictogram(s), precautionary statement(s), and name/address/phone of the manufacturer or importer.</li>
+<li><strong>Signal words:</strong> <strong>"Danger"</strong> for the more severe hazards, <strong>"Warning"</strong> for the less severe.</li>
+<li>The employer needs a <strong>written hazcom program</strong>, a chemical inventory, SDSs <strong>readily accessible</strong> on every shift, and training before the initial assignment and when a new hazard is introduced.</li>
+<li><strong>[EDITION]</strong> OSHA updated the HCS in 2024 (effective July 19, 2024, with phased compliance dates in 2026–2027). The core elements above are unchanged.</li>
+</ul>
+<h3>Asbestos in roofing (1926.1101) [OSHA]. Reference R6 covers this (NOT READ)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PEL</td>
+<td><strong>0.1 f/cc</strong> 8-h TWA; excursion limit <strong>1.0 f/cc</strong> averaged over <strong>30 min</strong></td>
+</tr>
+<tr>
+<td>Class of work</td>
+<td>Removal of asbestos-containing roofing is <strong>Class II</strong> work</td>
+</tr>
+<tr>
+<td>Roofing-specific methods (1926.1101(g)(8)(ii))</td>
+<td>Remove <strong>intact</strong> to the extent feasible. Use <strong>wet methods</strong> where feasible and not a safety hazard. <strong>Continuously mist</strong> cutting machines. <strong>Never drop or throw</strong> material; lower it in a dust-tight chute, crane, or hoist, or bag or wrap it. Transfer to a closed receptacle. <strong>Isolate or shut down roof-level HVAC air intakes</strong></td>
+</tr>
+<tr>
+<td>PACM</td>
+<td>Thermal system insulation and surfacing materials in buildings built <strong>no later than 1980</strong> are "presumed asbestos-containing" unless tested. Asphalt and vinyl flooring from that era is also treated as ACM unless shown otherwise. Old roofing felts, flashing cements, mastics, and asbestos-cement shingles are classic suspects: <strong>test before tear-off.</strong></td>
+</tr>
+<tr>
+<td>Supervision</td>
+<td>A <strong>competent person</strong> for Class II work, with the required training</td>
+</tr>
+<tr>
+<td>Environmental</td>
+<td>EPA <strong>NESHAP</strong> (40 CFR 61 Subpart M) and <strong>Illinois EPA</strong> notification rules can apply to demolition/renovation. Nonfriable roofing that is sanded, ground, cut, or abraded can become regulated asbestos-containing material. <strong>[JURISDICTION]</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Decision tested:</strong> the best first step before tearing off a 1970s built-up roof with black flashing cement → <strong>have suspect materials sampled and tested by a qualified inspector/lab.</strong> Wetting and continuing is not the right first step, and neither is assuming it's fine because roofing asbestos is "nonfriable."</p>
+<h3>Respirable crystalline silica (1926.1153) [OSHA]</h3>
+<ul>
+<li>PEL <strong>50 µg/m³</strong> 8-h TWA; action level <strong>25 µg/m³</strong>.</li>
+<li>Roofing triggers: cutting <strong>concrete/clay tile</strong>, <strong>fiber-cement</strong> products, and masonry at chimneys and parapets.</li>
+<li><strong>Table 1</strong> lists engineering controls (e.g., saws with integrated water delivery, or dust collection for fiber-cement saws) and the respirator required by task duration. Following Table 1 exactly exempts the employer from exposure assessment for that task.</li>
+<li>A <strong>written exposure control plan</strong> and a <strong>competent person</strong> are required. Specific Table 1 entries: <strong>[verify in 1926.1153 Table 1]</strong>.</li>
+</ul>
+<h3>Lead (1926.62) [OSHA]</h3>
+<ul>
+<li>PEL <strong>50 µg/m³</strong>; action level <strong>30 µg/m³</strong>.</li>
+<li>Relevant to old lead flashings, lead-painted surfaces, and cutting or soldering lead.</li>
+</ul>
+<hr />
+<h2>1.11 Hot work: asphalt kettles, torches, propane, and fire</h2>
+<h3>Hot asphalt [NRCA-P]</h3>
+<ul>
+<li><strong>EVT (equiviscous temperature):</strong> the temperature at which asphalt reaches the viscosity for proper application. Apply at <strong>EVT ± 25°F</strong> (mopping; mechanical spreader EVTs differ). Asphalt that is too cool gives poor adhesion and heavy moppings. Asphalt that is too hot drains off, loses properties, and increases fume and fire risk.</li>
+<li><strong>Flash point (FP):</strong> never heat asphalt to or above its flash point. The common industry rule is to keep kettle temperature <strong>at least 25°F below FP</strong>; check the bill of lading or SDS <strong>[MANUFACTURER]</strong>.</li>
+<li><strong>Finished blowing temperature (FBT)</strong>, listed on the bill of lading: do not hold asphalt above the FBT for extended periods.</li>
+<li><strong>Kettle safety:</strong> a trained operator stays with the kettle. Keep lids closed (close them to smother a kettle fire; <strong>never use water</strong> on an asphalt fire). Keep the kettle level, away from building openings and air intakes, with an extinguisher nearby. Use a thermometer, and keep the kettle away from combustibles. <strong>[JURISDICTION]</strong> Fire codes (e.g., IFC §303) add separation distances and extinguisher ratings, and generally prohibit kettles on roofs.</li>
+<li><strong>Burn first aid [NRCA-P]:</strong> cool with cool (not ice-cold) water. <strong>Do not</strong> try to peel asphalt off the skin or use solvents on it. Get medical care.</li>
+</ul>
+<h3>Torch-applied roofing: NRCA CERTA program (public NRCA document)</h3>
+<ul>
+<li><strong>Fire watch: minimum 2 hours after the last torch is turned off</strong>, by a trained, dedicated watcher.</li>
+<li><strong>Never torch directly</strong> onto a combustible deck, or at or into concealed spaces, flutes, gaps, or wood nailers where heat can enter. Use a <strong>torch-safe</strong> method (e.g., a self-adhered or mechanically fastened base, or heat-welding tools) at flashings and penetrations <strong>[NRCA-P / CERTA]</strong>.</li>
+<li>Keep <strong>multiple 4A:60B:C</strong> (or similar) extinguishers close to torching. Check the current CERTA manual for exact counts and distances <strong>[EDITION]</strong>.</li>
+<li>Propane cylinders: upright, secured, and away from torching and heat. Shut off cylinder valves when not in use. Check hoses and regulators for leaks with soapy water, <strong>never a flame</strong>.</li>
+</ul>
+<h3>OSHA fire protection (1926.150–.153) [OSHA]</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Building-area extinguishers</td>
+<td>At least one <strong>2A</strong>-rated unit per <strong>3,000 sq ft</strong>, travel distance <strong>≤ 100 ft</strong> (1926.150(c)(1)(i))</td>
+</tr>
+<tr>
+<td>Flammable liquids/gas</td>
+<td>At least one <strong>10B</strong> unit within <strong>50 ft</strong> of where more than 5 gal of flammable/combustible liquid or 5 lb of flammable gas is used (1926.150(c)(1)(iv))</td>
+</tr>
+<tr>
+<td>LP-gas</td>
+<td><strong>No storage of LP-gas containers inside buildings</strong> (1926.153(j)). Outdoor storage separation depends on quantity (e.g., 501–6,000 lb → 10 ft)</td>
+</tr>
+<tr>
+<td>Flammable liquids</td>
+<td>Approved containers; safety cans for ≤ 5 gal handling</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>1.12 Heat, cold, first aid, recordkeeping, and inspections</h2>
+<h3>Heat stress [NRCA-P / OSHA guidance]</h3>
+<ul>
+<li>Illnesses: <strong>heat cramps → heat exhaustion</strong> (heavy sweating, cool clammy skin, weakness) <strong>→ heat stroke</strong> (hot skin, confusion, possibly no sweating: <strong>call 911</strong>, cool aggressively).</li>
+<li>Controls: water, rest, shade, <strong>acclimatization</strong> (NIOSH: new workers ≤ 20% of a normal day's exposure on day 1, increasing gradually), buddy system, and early morning scheduling.</li>
+<li><strong>[EDITION/JURISDICTION]</strong> OSHA proposed a federal heat standard in 2024. As of this writing I have <strong>not verified</strong> a final rule. The General Duty Clause applies either way.</li>
+</ul>
+<h3>First aid (1926.50) [OSHA]</h3>
+<ul>
+<li>Medical personnel must be available. In the absence of an infirmary, clinic, or hospital in near proximity, a person with a <strong>valid first-aid certificate</strong> must be on site.</li>
+<li>First-aid supplies must be accessible. Post emergency numbers.</li>
+</ul>
+<h3>OSHA recordkeeping and reporting (29 CFR 1904) [OSHA]</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Deadline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Work-related <strong>fatality</strong></td>
+<td>Report to OSHA within <strong>8 hours</strong></td>
+</tr>
+<tr>
+<td>In-patient <strong>hospitalization</strong>, <strong>amputation</strong>, or <strong>loss of an eye</strong></td>
+<td>Within <strong>24 hours</strong></td>
+</tr>
+<tr>
+<td>OSHA 300 log entry</td>
+<td>Within <strong>7 calendar days</strong> of learning of a recordable case</td>
+</tr>
+<tr>
+<td><strong>300A summary</strong></td>
+<td>Posted <strong>Feb 1 – Apr 30</strong></td>
+</tr>
+<tr>
+<td>Retention</td>
+<td>Records kept <strong>5 years</strong></td>
+</tr>
+<tr>
+<td>Small-employer exemption</td>
+<td>≤ <strong>10 employees</strong> at all times in the prior calendar year (roofing contractors are <em>not</em> in the partially exempt industry list)</td>
+</tr>
+</tbody>
+</table></div>
+<h3>OSHA inspection priorities and citations (general) [OSHA]</h3>
+<ul>
+<li>Priorities: imminent danger → fatality/catastrophe → complaints/referrals → targeted → follow-up.</li>
+<li>Citation classes: <strong>willful, serious, other-than-serious, repeat, failure to abate</strong>. Maximum penalties are inflation-adjusted each January. <strong>Don't memorize dollar figures</strong> for this exam unless your reference gives them.</li>
+<li>Employees have the right to report hazards <strong>without retaliation</strong> (OSH Act §11(c)).</li>
+<li><strong>Illinois:</strong> private roofers are under <strong>federal OSHA (Region 5)</strong>.</li>
+</ul>
+<hr />
+<h2>1.13 Quick comparison tables (easy to confuse)</h2>
+<h3>Thresholds</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Thing</th>
+<th>Number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Roof / edge fall protection</td>
+<td>6 ft</td>
+</tr>
+<tr>
+<td>Scaffold fall protection</td>
+<td>10 ft</td>
+</tr>
+<tr>
+<td>Ladder/stair required</td>
+<td>19 in break</td>
+</tr>
+<tr>
+<td>Ladder extension</td>
+<td>3 ft</td>
+</tr>
+<tr>
+<td>Debris chute required</td>
+<td>&gt; 20 ft drop</td>
+</tr>
+<tr>
+<td>Barricade for dropped debris</td>
+<td>42 in high, 6 ft back</td>
+</tr>
+<tr>
+<td>Materials from roof edge (roofing)</td>
+<td>6 ft unless guardrail</td>
+</tr>
+<tr>
+<td>Warning line</td>
+<td>6 ft (10 ft perpendicular to equipment)</td>
+</tr>
+<tr>
+<td>Monitor-only roof width</td>
+<td>≤ 50 ft</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Strength values</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PFAS anchorage</td>
+<td>5,000 lb per worker</td>
+</tr>
+<tr>
+<td>Positioning anchorage</td>
+<td>3,000 lb or 2× impact</td>
+</tr>
+<tr>
+<td>SRL (≤ 2 ft free fall)</td>
+<td>3,000 lb</td>
+</tr>
+<tr>
+<td>Guardrail top / mid / toeboard</td>
+<td>200 / 150 / 50 lb</td>
+</tr>
+<tr>
+<td>Warning line stanchion / line</td>
+<td>16 lb / 500 lb</td>
+</tr>
+<tr>
+<td>Covers</td>
+<td>2× imposed load</td>
+</tr>
+</tbody>
+</table></div>
+<!-- box -->
+
+<aside class="callout memorize">
+<p><strong>WHAT TO MEMORIZE (Section 1 summary)</strong>
+Everything in the two tables above, plus: 1,800 lb / 3.5 ft / 6 ft (PFAS) · 42 ± 3 in guardrail · 34–39 in warning line · 4:1 ladder · 4× ladder/scaffold load · 90 dBA/8 h, 5-dB exchange · GFCI 120 V 15/20 A · 10 ft from lines ≤ 50 kV · asbestos 0.1 f/cc &amp; 1.0 f/cc/30 min · silica 50/25 µg/m³ · lead 50/30 µg/m³ · CERTA fire watch 2 h · fatality 8 h / hospitalization 24 h · 300A Feb 1–Apr 30 · 5-yr retention</p>
+</aside>
+<!-- box -->
+
+<aside class="callout reason">
+<p><strong>HOW TO REASON THROUGH SAFETY ITEMS</strong>
+- "Required" or "permitted" means OSHA text; "recommended" or "best practice" means NRCA.
+- When two answers are both legal, the BEST answer usually <strong>eliminates</strong> the hazard (de-energize, guardrail) rather than relying on behavior (monitor, "be careful").
+- Always ask: <em>what comes first?</em> Usually <strong>stop the work / make it safe → inspect → then continue</strong>.</p>
+</aside></section>
+  </main>
+
+  <footer class="foot">Original study material. The mock exams are not CTS questions, and a mock score does not predict your result. More parts are added as they're written.</footer>
+</div>
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+  if (!tabs.length) return;
+
+  function show(id, scroll) {
+    var found = panels.some(function (p) { return p.id === id; });
+    if (!found) id = panels[0].id;
+    panels.forEach(function (p) { p.hidden = p.id !== id; });
+    tabs.forEach(function (t) {
+      var on = t.dataset.target === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      if (on && t.scrollIntoView) t.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
+    try { localStorage.setItem('il105-tab', id); } catch (e) {}
+    if (scroll) {
+      var nav = document.querySelector('nav.tabs');
+      window.scrollTo(0, nav.offsetTop);
+    }
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { show(t.dataset.target, true); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      var n = tabs[(i + d + tabs.length) % tabs.length];
+      n.focus(); show(n.dataset.target, false);
+    });
+  });
+
+  var start = (location.hash || '').slice(1);
+  if (!start) { try { start = localStorage.getItem('il105-tab') || ''; } catch (e) {} }
+  show(start || panels[0].id, false);
+
+  function daysUntil(y, m, d) {
+    var now = new Date(); now.setHours(0, 0, 0, 0);
+    return Math.round((new Date(y, m - 1, d) - now) / 86400000);
+  }
+  function label(n, what) {
+    if (n > 1) return n + ' days left ' + what;
+    if (n === 1) return '1 day left ' + what;
+    if (n === 0) return 'Today';
+    return 'Passed';
+  }
+  var r = document.getElementById('d-reg'), x = document.getElementById('d-exam');
+  if (r) r.textContent = label(daysUntil(2026, 10, 7), 'to register');
+  if (x) x.textContent = label(daysUntil(2026, 11, 4), '· Hillside or Springfield');
+})();
+</script>
